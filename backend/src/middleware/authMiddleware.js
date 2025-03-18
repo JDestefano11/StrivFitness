@@ -1,13 +1,13 @@
 require('dotenv').config();
 import jwt from 'jsonwebtoken';
-import User from '../models/User';
+import User from '../models/User.js';
 
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || 'your-refresh-secret-key';
 
 // generate JWT token
-export const generateToken = (userId) => {
+export const generateTokens = (userId) => {
     const accessToken = jwt.sign({ id: userId }, JWT_SECRET, { expiresIn: '15m' });
     const refreshToken = jwt.sign({ id: userId }, JWT_REFRESH_SECRET, { expiresIn: '7d' });
 
@@ -47,7 +47,7 @@ export const refreshAccessToken = async (req, res) => {
         if (!user || user.refreshToken !== refreshToken)
             return res.status(401).json({ message: 'Invalid refresh token.' });
 
-        const { accessToken, refreshToken: newRefreshToken } = generateToken(user._id);
+        const { accessToken, refreshToken: newRefreshToken } = generateTokens(user._id);
 
         await User.findByIdAndUpdate(user._id, { refreshToken: newRefreshToken });
 
