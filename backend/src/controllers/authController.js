@@ -36,6 +36,57 @@ export const signup = async (req, res) => {
     }
 };
 
+// Register new admin user
+export const signupAdmin = async (req, res) => {
+    try {
+        const { username, password, email, firstName, lastName, adminSecret } = req.body;
+
+        // Verify admin secret - in a real app, use a strong secret from env variables
+        const secretKey = process.env.ADMIN_SECRET_KEY || 'admin-secret-key';
+        if (adminSecret !== secretKey) {
+            return res.status(403).json({ message: 'Invalid admin secret key' });
+        }
+
+        // Check if user already exists
+        const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+
+        if (existingUser) {
+            return res.status(400).json({
+                message: existingUser.email === email ? 'Email already exists' : 'Username already exists'
+            });
+        }
+
+        // Create new admin user and save
+        const user = await new User({ 
+            username, 
+            password, 
+            email, 
+            firstName, 
+            lastName,
+            isAdmin: true // Set admin flag to true
+        }).save();
+
+        // Generate tokens
+        const { accessToken, refreshToken } = generateTokens(user._id);
+        user.refreshToken = refreshToken;
+        await user.save();
+
+        res.status(201).json({
+            message: 'Admin user registered successfully',
+            user: { 
+                id: user._id, 
+                username: user.username, 
+                email: user.email,
+                isAdmin: user.isAdmin 
+            },
+            accessToken,
+            refreshToken
+        });
+    } catch (error) {
+        res.status(500).json({ message: 'Error registering admin user', error: error.message });
+    }
+};
+
 // Login user 
 export const login = async (req, res) => {
     try {
@@ -59,7 +110,7 @@ export const login = async (req, res) => {
 
         res.status(200).json({
             message: 'Login successful',
-            user: { id: user._id, username: user.username, email: user.email },
+            user: { id: user._id, username: user.username, email: user.email, isAdmin: user.isAdmin },
             accessToken,
             refreshToken
         });
