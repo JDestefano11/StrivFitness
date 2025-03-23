@@ -8,6 +8,7 @@ import authRoutes from './routes/authRoutes.js';
 import recoveryRoutes from './routes/recoveryRoutes.js';
 import articleRoutes from './routes/articleRoutes.js';
 import adminProductRoutes from './routes/adminProductRoutes.js';
+import productRoutes from './routes/productRoutes.js';
 
 // Load environment variables
 dotenv.config();
@@ -39,6 +40,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/recovery', recoveryRoutes);
 app.use('/api/articles', articleRoutes);
 app.use('/api/admin/products', adminProductRoutes);
+app.use('/api/products', productRoutes);
 
 const PORT = process.env.PORT || 3001;
 
