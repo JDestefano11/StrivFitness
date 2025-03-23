@@ -7,6 +7,7 @@ import cors from 'cors';
 import authRoutes from './routes/authRoutes.js';
 import recoveryRoutes from './routes/recoveryRoutes.js';
 import articleRoutes from './routes/articleRoutes.js';
+import adminProductRoutes from './routes/adminProductRoutes.js';
 
 // Load environment variables
 dotenv.config();
@@ -37,6 +38,7 @@ connectDB();
 app.use('/api/auth', authRoutes);
 app.use('/api/recovery', recoveryRoutes);
 app.use('/api/articles', articleRoutes);
+app.use('/api/admin/products', adminProductRoutes);
 
 const PORT = process.env.PORT || 3001;
 
