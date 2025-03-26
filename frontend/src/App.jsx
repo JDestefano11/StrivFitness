@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import SaleTopBar from "./components/SaleTopBar";
+import HeroSection from "./components/HeroSection";
 
 const App = () => {
   return (
@@ -10,7 +11,8 @@ const App = () => {
       <SaleTopBar />
       <Navbar />
     
-      {/*Content will go here*/}
+      {/* Hero Section */}
+      <HeroSection />
     </div>
   );
 };

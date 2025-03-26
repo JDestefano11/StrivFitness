@@ -12,8 +12,8 @@ const SaleTopBar = () => {
   }, []);
 
   return (
-    <div className="w-full bg-gradient-to-r from-[#222222] to-[#333333] text-white relative overflow-hidden">
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB4PSIwIiB5PSIwIiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxsaW5lIHgxPSIwIiB5PSIwIiB4Mj0iMCIgeTI9IjEwIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjcGF0dGVybikiLz48L3N2Zz4=')]"></div>
+    <div className="w-full bg-[#0f0f0f] border-b border-[#efc75e]/20 text-white relative overflow-hidden">
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB4PSIwIiB5PSIwIiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxsaW5lIHgxPSIwIiB5PSIwIiB4Mj0iMCIgeTI9IjEwIiBzdHJva2U9IiNlZmM3NWUiIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjcGF0dGVybikiLz48L3N2Zz4=')]"></div>
       <div className="max-w-7xl mx-auto px-4 relative">
         <div className="grid grid-cols-3 h-10 relative">
           {/* Company Email - Left Side */}
@@ -22,7 +22,7 @@ const SaleTopBar = () => {
               href="mailto:support@strivfitness.com" 
               className="text-white hover:text-[#efc75e] transition-colors duration-200 flex items-center font-['Rajdhani'] text-sm"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 text-[#efc75e]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
               support@strivfitness.com
@@ -31,12 +31,12 @@ const SaleTopBar = () => {
           
           {/* Sale Announcement - Center */}
           <div className={`col-span-1 ${isGlowing ? 'animate-pulse scale-105' : ''} transition-all duration-700 hidden md:flex items-center justify-center`}>
-            <span className="font-['Rajdhani'] font-medium tracking-wide text-sm">
+            <span className="font-['Rajdhani'] font-medium tracking-wide text-sm text-white">
               FLASH SALE: 25% OFF EVERYTHING - CODE:{" "}
             </span>
-            <span className="font-['Bebas_Neue'] tracking-wider bg-white text-[#dc143c] px-2 py-0.5 rounded relative inline-flex items-center justify-center ml-1">
+            <span className="font-['Bebas_Neue'] tracking-wider bg-[#efc75e] text-black px-2 py-0.5 rounded relative inline-flex items-center justify-center ml-1">
               <span className="relative z-10">STRIV25</span>
-              <span className={`absolute inset-0 bg-white rounded ${isGlowing ? 'shadow-[0_0_10px_2px_rgba(255,255,255,0.7)]' : ''} transition-all duration-700`}></span>
+              <span className={`absolute inset-0 bg-[#efc75e] rounded ${isGlowing ? 'shadow-[0_0_10px_2px_rgba(239,199,94,0.7)]' : ''} transition-all duration-700`}></span>
             </span>
           </div>
           
