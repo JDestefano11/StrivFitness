@@ -53,29 +53,35 @@ const Navbar = () => {
               </div>
 
               {/* Mobile menu button and icons - Properly aligned */}
-              <div className="md:hidden flex items-center space-x-4">
+              <div className="md:hidden flex items-center space-x-5">
                 {/* Cart Icon - Mobile */}
                 <a
                   href="/cart"
                   className="relative text-[#ffffff] hover:text-[#efc75e] transition-colors duration-200 cursor-pointer hover:scale-110 transform flex items-center justify-center"
+                  aria-label="Shopping Cart"
                 >
+                  {/* Custom Fitness Cart Icon - Gym Bag Style */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className={`h-6 w-6 transition-all duration-300 ${
+                    className={`h-7 w-7 transition-all duration-300 ${
                       isScrolled
                         ? "filter drop-shadow-[0_0_2px_rgba(239,199,94,0.5)]"
                         : ""
                     }`}
-                    fill="none"
                     viewBox="0 0 24 24"
+                    fill="none"
                     stroke="currentColor"
+                    strokeWidth="1.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
+                    {/* Gym/Duffel Bag */}
+                    <path d="M20 8h-3V6c0-1.1-.9-2-2-2h-6c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z" />
+                    <path d="M9 6v2h6V6" />
+                    {/* Protein shaker */}
+                    <path d="M12 12v4" />
+                    <path d="M10 14h4" />
+                    <path d="M14 16c0 1.1-.9 2-2 2s-2-.9-2-2" />
                   </svg>
                   <span className="absolute -top-2 -right-2 bg-[#dc143c] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center font-['Rajdhani']">
                     0
@@ -86,31 +92,48 @@ const Navbar = () => {
                 <button
                   onClick={toggleMenu}
                   className="text-[#ffffff] hover:text-[#efc75e] focus:outline-none cursor-pointer hover:scale-110 transform transition-all duration-200 flex items-center justify-center"
+                  aria-label="Menu"
+                  aria-expanded={isMenuOpen}
                 >
+                  {/* Custom Fitness Menu Icon */}
                   <svg
-                    className={`h-6 w-6 transition-all duration-300 ${
+                    className={`h-7 w-7 transition-all duration-300 ${
                       isScrolled
                         ? "filter drop-shadow-[0_0_2px_rgba(239,199,94,0.5)]"
                         : ""
                     }`}
-                    fill="none"
                     viewBox="0 0 24 24"
+                    fill="none"
                     stroke="currentColor"
+                    strokeWidth="1.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
                     {isMenuOpen ? (
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M6 18L18 6M6 6l12 12"
-                      />
+                      <>
+                        {/* X close icon with dumbbell style */}
+                        <path d="M6 6l12 12" />
+                        <path d="M18 6L6 18" />
+                        <circle cx="6" cy="6" r="1.5" fill="currentColor" />
+                        <circle cx="18" cy="18" r="1.5" fill="currentColor" />
+                        <circle cx="6" cy="18" r="1.5" fill="currentColor" />
+                        <circle cx="18" cy="6" r="1.5" fill="currentColor" />
+                      </>
                     ) : (
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 6h16M4 12h16M4 18h16"
-                      />
+                      <>
+                        {/* Dumbbell-inspired menu */}
+                        <path d="M4 6h16" />
+                        <circle cx="4" cy="6" r="1.5" fill="currentColor" />
+                        <circle cx="20" cy="6" r="1.5" fill="currentColor" />
+                        
+                        <path d="M4 12h16" />
+                        <circle cx="4" cy="12" r="1.5" fill="currentColor" />
+                        <circle cx="20" cy="12" r="1.5" fill="currentColor" />
+                        
+                        <path d="M4 18h16" />
+                        <circle cx="4" cy="18" r="1.5" fill="currentColor" />
+                        <circle cx="20" cy="18" r="1.5" fill="currentColor" />
+                      </>
                     )}
                   </svg>
                 </button>
@@ -265,57 +288,41 @@ const Navbar = () => {
 
               {/* Right side icons - Desktop */}
               <div className="hidden md:flex items-center space-x-6">
-                {/* Join Now Button - Enhanced animated design */}
-                <div className="relative group">
-                  <a href="/login" className="relative block overflow-hidden">
-                    <div
-                      className="bg-gradient-to-r from-[#efc75e] to-[#f5d78e] text-[#222222] font-bold py-3 px-6 relative z-10 
-                      font-['Bebas_Neue'] tracking-widest text-lg flex items-center justify-center
-                      clip-path-join-button transform hover:scale-105 transition-all duration-300
-                      shadow-[0_4px_10px_rgba(239,199,94,0.3)] hover:shadow-[0_8px_20px_rgba(239,199,94,0.6)]
-                      group-hover:bg-gradient-to-r group-hover:from-[#f5d78e] group-hover:to-[#efc75e]
-                      group-hover:text-[#111111]"
-                    >
-                      <span className="relative z-10 flex items-center">
-                        JOIN NOW
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5 ml-2 transition-transform group-hover:translate-x-1 duration-300"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M14 5l7 7m0 0l-7 7m7-7H3"
-                          />
-                        </svg>
-                      </span>
-
-                      {/* Inner pulse effect */}
-                      <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 group-hover:animate-pulse-fast rounded-sm"></span>
-                    </div>
-
-                    {/* Enhanced animated border effect */}
-                    <div
-                      className="absolute -inset-[2px] bg-gradient-to-r from-[#efc75e] via-[#ffffff] to-[#efc75e] 
-                      opacity-70 blur-[2px] group-hover:opacity-100 group-hover:blur-[3px] transition-all duration-300 -z-10
-                      clip-path-join-button animate-gradient-x group-hover:animate-gradient-x-fast"
-                    ></div>
-
-                    {/* 3D lighting effect */}
-                    <div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-300
-                      bg-[linear-gradient(135deg,rgba(255,255,255,0.8)_0%,transparent_50%,transparent_100%)] z-20"
-                    ></div>
-
-                    {/* Bottom shadow for 3D effect */}
-                    <div
-                      className="absolute bottom-0 left-[10%] right-[10%] h-[6px] bg-black opacity-0 group-hover:opacity-20 
-                      blur-[3px] transition-all duration-300 transform group-hover:translate-y-[3px] rounded-full"
-                    ></div>
+                {/* Join Now Button - Premium rounded design */}
+                <div className="relative h-full flex items-center">
+                  <a href="/login" className="relative h-full flex items-center justify-center">
+                    <button className="relative group cursor-pointer overflow-hidden rounded-xl h-12 w-40 flex justify-center items-center">
+                      {/* Background and glow effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#efc75e] to-[#f5d78e] rounded-xl"></div>
+                      <div className="absolute -inset-[1px] bg-gradient-to-r from-[#efc75e] via-[#ffffff] to-[#efc75e] rounded-xl opacity-0 group-hover:opacity-70 blur-[2px] transition-all duration-300 group-hover:duration-200 animate-gradient-x group-hover:animate-gradient-x-fast"></div>
+                      
+                      {/* Shine effect */}
+                      <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300 bg-[linear-gradient(135deg,rgba(255,255,255,0.8)_0%,transparent_50%,transparent_100%)]"></div>
+                      
+                      {/* Content with hover animation */}
+                      <div className="relative z-10 flex items-center justify-center w-full h-full px-4 py-2 font-['Bebas_Neue'] tracking-widest text-lg text-[#222222] group-hover:text-[#111111] transition-all duration-300 group-hover:scale-105">
+                        <span className="flex items-center">
+                          JOIN NOW
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5 ml-2 transition-transform group-hover:translate-x-1 duration-300"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M14 5l7 7m0 0l-7 7m7-7H3"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                      
+                      {/* Shadow for 3D effect */}
+                      <div className="absolute -bottom-2 left-[10%] right-[10%] h-[6px] bg-black opacity-0 group-hover:opacity-20 blur-[3px] transition-all duration-300 transform group-hover:translate-y-[2px] rounded-full"></div>
+                    </button>
                   </a>
                 </div>
 
@@ -323,24 +330,30 @@ const Navbar = () => {
                 <a
                   href="/cart"
                   className="relative text-[#ffffff] hover:text-[#efc75e] transition-colors duration-200 cursor-pointer hover:scale-110 transform flex items-center justify-center"
+                  aria-label="Shopping Cart"
                 >
+                  {/* Custom Fitness Cart Icon - Gym Bag Style */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className={`h-6 w-6 transition-all duration-300 ${
+                    className={`h-7 w-7 transition-all duration-300 ${
                       isScrolled
                         ? "filter drop-shadow-[0_0_2px_rgba(239,199,94,0.5)]"
                         : ""
                     }`}
-                    fill="none"
                     viewBox="0 0 24 24"
+                    fill="none"
                     stroke="currentColor"
+                    strokeWidth="1.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
+                    {/* Gym/Duffel Bag */}
+                    <path d="M20 8h-3V6c0-1.1-.9-2-2-2h-6c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z" />
+                    <path d="M9 6v2h6V6" />
+                    {/* Protein shaker */}
+                    <path d="M12 12v4" />
+                    <path d="M10 14h4" />
+                    <path d="M14 16c0 1.1-.9 2-2 2s-2-.9-2-2" />
                   </svg>
                   <span className="absolute -top-2 -right-2 bg-[#dc143c] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center font-['Rajdhani']">
                     0
