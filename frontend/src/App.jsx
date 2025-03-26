@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import SaleTopBar from "./components/SaleTopBar";
 import HeroSection from "./components/HeroSection";
+import FeaturedProducts from "./components/FeaturedProducts";
 
 
 const App = () => {
@@ -12,7 +13,7 @@ const App = () => {
       <SaleTopBar />
       <Navbar />
       <HeroSection />
-
+      <FeaturedProducts />
     </div>
   );
 };
