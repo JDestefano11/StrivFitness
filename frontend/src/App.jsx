@@ -29,7 +29,7 @@ const App = () => {
     const passive = passiveSupported() ? { passive: true } : false;
     
     // Apply scroll optimization styles
-    document.body.style.overscrollBehavior = 'none'; // Prevents bounce effects
+    document.body.style.overscrollBehavior = 'none'; 
     
     // Add passive event listeners to improve scroll performance
     document.addEventListener('wheel', () => {}, passive);

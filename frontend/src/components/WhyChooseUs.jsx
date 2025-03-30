@@ -91,6 +91,14 @@ const WhyChooseUs = () => {
     },
   ];
 
+  // Testimonial data
+  const testimonial = {
+    quote: "Striv Fitness has completely transformed my workout routine. The gear is amazing!",
+    name: "Mike D.",
+    title: "Fitness Enthusiast",
+    initials: "MD"
+  };
+
   return (
     <section
       className="py-20 md:py-24 relative overflow-hidden bg-gradient-to-b from-[#111111] to-[#0a0a0a]"
@@ -118,9 +126,7 @@ const WhyChooseUs = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
         {/* Section title */}
-        <div
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <div className="inline-flex items-center justify-center mb-3">
             <span className="h-[1px] w-10 bg-gradient-to-r from-transparent to-[#efc75e]"></span>
             <span className="mx-4 text-[#efc75e] text-sm font-bold tracking-widest uppercase font-['Rajdhani']">
@@ -178,7 +184,7 @@ const WhyChooseUs = () => {
             <div className="relative">
               {/* Main image container */}
               <div className="relative rounded-xl overflow-hidden shadow-[0_0_25px_rgba(0,0,0,0.3)] border border-gray-800 group h-[500px]">
-                {/* Background image */}
+                {/* Background video */}
                 <video
                   src={gear}
                   autoPlay
@@ -217,13 +223,12 @@ const WhyChooseUs = () => {
                   decoding="async"
                   width="400"
                   height="400"
+                  alt="Fitness equipment"
                 />
               </div>
 
               {/* Testimonial overlay - smaller and positioned */}
-              <div
-                className="absolute bottom-8 left-8 z-30 max-w-[220px] md:max-w-[260px]"
-              >
+              <div className="absolute bottom-8 left-8 z-30 max-w-[220px] md:max-w-[260px]">
                 <div className="bg-black/80 backdrop-blur-sm rounded-xl p-4 border border-[#efc75e]/30">
                   <svg
                     className="w-6 h-6 text-[#efc75e] mb-2"
@@ -233,17 +238,16 @@ const WhyChooseUs = () => {
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                   </svg>
                   <p className="text-white text-sm italic mb-2">
-                    "Striv Fitness has completely transformed my workout
-                    routine. The gear is amazing!"
+                    {testimonial.quote}
                   </p>
                   <div className="flex items-center">
                     <div className="w-7 h-7 rounded-full bg-[#efc75e] flex items-center justify-center text-black font-bold mr-2">
-                      MD
+                      {testimonial.initials}
                     </div>
                     <div>
-                      <p className="text-white font-bold text-xs">Mike D.</p>
+                      <p className="text-white font-bold text-xs">{testimonial.name}</p>
                       <p className="text-[#efc75e] text-xs">
-                        Fitness Enthusiast
+                        {testimonial.title}
                       </p>
                     </div>
                   </div>
