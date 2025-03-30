@@ -28,7 +28,7 @@ const ProductCard = memo(({ product }) => {
 
   return (
     <div 
-      className="bg-gradient-to-b from-black/60 to-black/80 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 hover:border-[#efc75e]/50 cursor-pointer group transition-all duration-300 relative h-full will-change-transform hover:shadow-[0_0_15px_rgba(239,199,94,0.3)] hover:-translate-y-1"
+      className="bg-gradient-to-b from-black/60 to-black/80 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 hover:border-[#efc75e] cursor-pointer group transition-all duration-300 relative h-full will-change-transform hover:shadow-[0_0_15px_rgba(239,199,94,0.3)] hover:-translate-y-1"
     >
       {/* Minimal background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -106,13 +106,12 @@ const ProductCard = memo(({ product }) => {
             )}
           </div>
           <button 
-            className="bg-[#efc75e] text-black p-2 rounded-full cursor-pointer hover:bg-black hover:text-[#efc75e] border-2 border-transparent hover:border-[#efc75e] transform hover:scale-110 transition-all duration-300 shadow-md hover:shadow-[0_0_10px_rgba(239,199,94,0.5)] relative overflow-hidden group-hover:scale-110"
+            className="bg-[#efc75e] text-black p-2 rounded-full cursor-pointer hover:bg-black hover:text-[#efc75e] border-2 border-[#efc75e] transform hover:scale-110 transition-all duration-300 shadow-md relative overflow-hidden"
             aria-label="Add to cart"
           >
-            <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
             </svg>
-            <span className="absolute inset-0 bg-gradient-to-r from-[#efc75e] to-[#f5d57b] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
           </button>
         </div>
       </div>
