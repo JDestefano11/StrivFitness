@@ -99,7 +99,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative w-full min-h-screen overflow-hidden bg-black font-['Inter']">
+    <section className="relative w-full min-h-screen overflow-hidden bg-black font-['Inter']" aria-label="Hero Section">
       {/* Full-screen video background */}
       <div className="absolute inset-0 w-full h-full z-0">
         <video
@@ -109,6 +109,7 @@ const HeroSection = () => {
           muted
           loop
           playsInline
+          aria-hidden="true"
         />
         {/* Video overlay for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30 md:from-black md:via-black/70 md:to-black/30"></div>
@@ -132,8 +133,9 @@ const HeroSection = () => {
             ref={brandBadgeRef}
             className="hidden md:inline-flex items-center space-x-2 bg-black/50 backdrop-blur-sm border border-[#efc75e]/20 rounded-full px-3 py-1 mb-4 md:mb-6"
             style={{ opacity: 0, transform: 'translateY(10px)' }}
+            aria-label="Striv Fitness Brand Badge"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#efc75e] animate-pulse"></span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#efc75e] animate-pulse" aria-hidden="true"></span>
             <span className="text-[#efc75e] text-xs font-bold tracking-widest font-['Rajdhani']">
               STRIV FITNESS
             </span>
@@ -170,20 +172,22 @@ const HeroSection = () => {
               className={`${
                 isMobile ? 'w-full text-center py-2.5' : ''
               } bg-[#efc75e] text-black font-bold px-5 sm:px-7 md:px-9 py-3 md:py-4 rounded-md relative overflow-hidden group transition-all duration-300 ease-out transform hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(239,199,94,0.5)] font-['Rajdhani'] tracking-wider uppercase text-sm md:text-base flex items-center justify-center`}
+              aria-label="Shop for fitness equipment"
             >
               <span className="relative z-10">Shop Equipment</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-[#f5d57b] to-[#efc75e] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-black group-hover:w-full transition-all duration-300 ease-out"></span>
+              <span className="absolute inset-0 bg-gradient-to-r from-[#f5d57b] to-[#efc75e] opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-black group-hover:w-full transition-all duration-300 ease-out" aria-hidden="true"></span>
             </a>
             <a
               href="/articles"
               className={`${
                 isMobile ? 'w-full text-center py-2.5' : ''
               } bg-black/30 backdrop-blur-sm border-2 border-[#efc75e] text-white font-bold px-5 sm:px-7 md:px-9 py-3 md:py-4 rounded-md relative overflow-hidden group transition-all duration-300 ease-out transform hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(239,199,94,0.3)] font-['Rajdhani'] tracking-wider uppercase text-sm md:text-base flex items-center justify-center`}
+              aria-label="Read fitness articles"
             >
               <span className="relative z-10">Read Articles</span>
-              <span className="absolute inset-0 bg-[#efc75e]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#efc75e] group-hover:w-full transition-all duration-300 ease-out"></span>
+              <span className="absolute inset-0 bg-[#efc75e]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#efc75e] group-hover:w-full transition-all duration-300 ease-out" aria-hidden="true"></span>
             </a>
           </div>
 
@@ -192,6 +196,7 @@ const HeroSection = () => {
             ref={trustIndicatorsRef}
             className="grid grid-cols-2 gap-3 md:gap-5 will-change-transform"
             style={{ opacity: 0, transform: 'translateY(10px)' }}
+            aria-label="Our benefits"
           >
             <div className="flex items-center">
               <svg
@@ -200,6 +205,7 @@ const HeroSection = () => {
                 stroke="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
@@ -219,6 +225,7 @@ const HeroSection = () => {
                 stroke="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
@@ -236,6 +243,7 @@ const HeroSection = () => {
                 stroke="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
@@ -253,6 +261,7 @@ const HeroSection = () => {
                 stroke="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
