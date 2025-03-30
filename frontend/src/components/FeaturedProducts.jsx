@@ -28,18 +28,20 @@ const ProductCard = memo(({ product }) => {
 
   return (
     <div 
-      className="bg-gradient-to-b from-black/60 to-black/80 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 hover:border-[#efc75e]/30 cursor-pointer transition-all duration-300 relative h-full will-change-transform"
+      className="bg-gradient-to-b from-black/60 to-black/80 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 hover:border-[#efc75e]/50 cursor-pointer group transition-all duration-300 relative h-full will-change-transform hover:shadow-[0_0_15px_rgba(239,199,94,0.3)] hover:-translate-y-1"
     >
       {/* Minimal background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-32 h-32">
-          <div className="absolute top-0 right-0 w-full h-[1px] bg-gradient-to-l from-[#efc75e]/30 to-transparent"></div>
-          <div className="absolute top-0 right-0 h-full w-[1px] bg-gradient-to-b from-[#efc75e]/30 to-transparent"></div>
+          <div className="absolute top-0 right-0 w-full h-[1px] bg-gradient-to-l from-[#efc75e]/30 to-transparent group-hover:from-[#efc75e]/80"></div>
+          <div className="absolute top-0 right-0 h-full w-[1px] bg-gradient-to-b from-[#efc75e]/30 to-transparent group-hover:from-[#efc75e]/80"></div>
         </div>
         <div className="absolute bottom-0 left-0 w-32 h-32">
-          <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#efc75e]/30 to-transparent"></div>
-          <div className="absolute bottom-0 left-0 h-full w-[1px] bg-gradient-to-t from-[#efc75e]/30 to-transparent"></div>
+          <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#efc75e]/30 to-transparent group-hover:from-[#efc75e]/80"></div>
+          <div className="absolute bottom-0 left-0 h-full w-[1px] bg-gradient-to-t from-[#efc75e]/30 to-transparent group-hover:from-[#efc75e]/80"></div>
         </div>
+        {/* Add subtle radial gradient on hover */}
+        <div className="absolute inset-0 bg-radial-gradient from-[#efc75e]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </div>
       
       {/* Product tag */}
@@ -60,7 +62,7 @@ const ProductCard = memo(({ product }) => {
           loading="lazy"
           decoding="async"
           fetchpriority="low"
-          className="w-full h-full object-cover object-center transform-gpu"
+          className="w-full h-full object-cover object-center transform-gpu transition-transform duration-700 ease-out group-hover:scale-105"
           onError={(e) => {
             e.target.onerror = null;
             e.target.src = "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=500&auto=format&fit=crop";
@@ -70,10 +72,10 @@ const ProductCard = memo(({ product }) => {
 
       {/* Product details */}
       <div className="p-5">
-        <h3 className="text-white font-bold text-lg mb-2 line-clamp-2 font-['Rajdhani'] tracking-wide">
+        <h3 className="text-white font-bold text-lg mb-2 line-clamp-2 font-['Rajdhani'] tracking-wide group-hover:text-[#efc75e] transition-colors duration-300">
           {product.name}
         </h3>
-        <p className="text-gray-400 text-sm mb-3 line-clamp-2">
+        <p className="text-gray-400 text-sm mb-3 line-clamp-2 group-hover:text-gray-300 transition-colors duration-300">
           {product.description}
         </p>
 
@@ -93,23 +95,24 @@ const ProductCard = memo(({ product }) => {
                 <span className="text-gray-400 text-sm line-through mr-2">
                   ${product.price.toFixed(2)}
                 </span>
-                <span className="text-[#efc75e] font-bold text-xl font-['Rajdhani']">
+                <span className="text-[#efc75e] font-bold text-xl font-['Rajdhani'] group-hover:text-white group-hover:drop-shadow-[0_0_3px_rgba(239,199,94,0.8)] transition-all duration-300">
                   ${calculateDiscountedPrice(product.price, product.discount).toFixed(2)}
                 </span>
               </div>
             ) : (
-              <span className="text-[#efc75e] font-bold text-xl font-['Rajdhani']">
+              <span className="text-[#efc75e] font-bold text-xl font-['Rajdhani'] group-hover:text-white group-hover:drop-shadow-[0_0_3px_rgba(239,199,94,0.8)] transition-all duration-300">
                 ${product.price.toFixed(2)}
               </span>
             )}
           </div>
           <button 
-            className="bg-[#efc75e] text-black p-2 rounded-full cursor-pointer hover:bg-black hover:text-[#efc75e] border-2 border-transparent hover:border-[#efc75e] transform hover:scale-110 transition-all duration-300 shadow-md hover:shadow-[0_0_10px_rgba(239,199,94,0.5)]"
+            className="bg-[#efc75e] text-black p-2 rounded-full cursor-pointer hover:bg-black hover:text-[#efc75e] border-2 border-transparent hover:border-[#efc75e] transform hover:scale-110 transition-all duration-300 shadow-md hover:shadow-[0_0_10px_rgba(239,199,94,0.5)] relative overflow-hidden group-hover:scale-110"
             aria-label="Add to cart"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
             </svg>
+            <span className="absolute inset-0 bg-gradient-to-r from-[#efc75e] to-[#f5d57b] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
           </button>
         </div>
       </div>

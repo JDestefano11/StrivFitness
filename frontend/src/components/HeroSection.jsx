@@ -1,9 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import heroVideo from "../../public/assets/1502318-hd_1920_1080_30fps.mp4";
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  
+  // Refs for elements we'll animate
+  const brandBadgeRef = useRef(null);
+  const headingRef = useRef(null);
+  const descriptionRef = useRef(null);
+  const ctaButtonsRef = useRef(null);
+  const trustIndicatorsRef = useRef(null);
+  
+  // Animation frame ID for cleanup
+  const animationRef = useRef(null);
 
   useEffect(() => {
     setIsVisible(true);
@@ -19,8 +29,73 @@ const HeroSection = () => {
     // Add event listener for window resize
     window.addEventListener('resize', checkMobile);
     
+    // Animation function using requestAnimationFrame
+    const animateElements = () => {
+      const startTime = performance.now();
+      const duration = 700; // Duration in ms (same as your original transitions)
+      
+      const animate = (currentTime) => {
+        const elapsedTime = currentTime - startTime;
+        const progress = Math.min(elapsedTime / duration, 1);
+        
+        // Easing function (ease-out)
+        const easeOutProgress = 1 - Math.pow(1 - progress, 3);
+        
+        // Apply animations with different delays
+        if (brandBadgeRef.current) {
+          const delayedProgress = elapsedTime > 0 ? easeOutProgress : 0;
+          brandBadgeRef.current.style.opacity = delayedProgress;
+          brandBadgeRef.current.style.transform = `translateY(${10 * (1 - delayedProgress)}px)`;
+        }
+        
+        if (headingRef.current) {
+          const delayedProgress = elapsedTime > 100 ? (elapsedTime - 100) / duration : 0;
+          const easedProgress = 1 - Math.pow(1 - Math.min(delayedProgress, 1), 3);
+          headingRef.current.style.opacity = easedProgress;
+          headingRef.current.style.transform = `translateY(${10 * (1 - easedProgress)}px)`;
+        }
+        
+        if (descriptionRef.current) {
+          const delayedProgress = elapsedTime > 200 ? (elapsedTime - 200) / duration : 0;
+          const easedProgress = 1 - Math.pow(1 - Math.min(delayedProgress, 1), 3);
+          descriptionRef.current.style.opacity = easedProgress;
+          descriptionRef.current.style.transform = `translateY(${10 * (1 - easedProgress)}px)`;
+        }
+        
+        if (ctaButtonsRef.current) {
+          const delayedProgress = elapsedTime > 300 ? (elapsedTime - 300) / duration : 0;
+          const easedProgress = 1 - Math.pow(1 - Math.min(delayedProgress, 1), 3);
+          ctaButtonsRef.current.style.opacity = easedProgress;
+          ctaButtonsRef.current.style.transform = `translateY(${10 * (1 - easedProgress)}px)`;
+        }
+        
+        if (trustIndicatorsRef.current) {
+          const delayedProgress = elapsedTime > 400 ? (elapsedTime - 400) / duration : 0;
+          const easedProgress = 1 - Math.pow(1 - Math.min(delayedProgress, 1), 3);
+          trustIndicatorsRef.current.style.opacity = easedProgress;
+          trustIndicatorsRef.current.style.transform = `translateY(${10 * (1 - easedProgress)}px)`;
+        }
+        
+        // Continue animation if not complete
+        if (elapsedTime < duration + 400) { // 400 is the max delay
+          animationRef.current = requestAnimationFrame(animate);
+        }
+      };
+      
+      // Start the animation
+      animationRef.current = requestAnimationFrame(animate);
+    };
+    
+    // Start animation when component mounts
+    animateElements();
+    
     // Cleanup
-    return () => window.removeEventListener('resize', checkMobile);
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
   }, []);
 
   return (
@@ -57,11 +132,9 @@ const HeroSection = () => {
         <div className="w-full max-w-2xl px-4 sm:px-8 lg:px-12 py-6 md:py-8 mx-auto md:mx-0 md:ml-10 lg:ml-20">
           {/* Logo/Brand Badge - Hidden on mobile */}
           <div
-            className={`hidden md:inline-flex items-center space-x-2 bg-black/50 backdrop-blur-sm border border-[#efc75e]/20 rounded-full px-3 py-1 mb-4 md:mb-6 transition-all duration-700 ${
-              isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10"
-            }`}
+            ref={brandBadgeRef}
+            className="hidden md:inline-flex items-center space-x-2 bg-black/50 backdrop-blur-sm border border-[#efc75e]/20 rounded-full px-3 py-1 mb-4 md:mb-6"
+            style={{ opacity: 0, transform: 'translateY(10px)' }}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#efc75e] animate-pulse"></span>
             <span className="text-[#efc75e] text-xs font-bold tracking-widest font-['Rajdhani']">
@@ -71,11 +144,9 @@ const HeroSection = () => {
 
           {/* Main Heading */}
           <h1
-            className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-3 md:mb-4 transition-all duration-700 delay-100 font-['Rajdhani'] tracking-wide uppercase will-change-transform ${
-              isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10"
-            }`}
+            ref={headingRef}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-3 md:mb-4 font-['Rajdhani'] tracking-wide uppercase will-change-transform"
+            style={{ opacity: 0, transform: 'translateY(10px)' }}
           >
             Premium Fitness <span className="text-[#efc75e]">Equipment</span> &{" "}
             <span className="text-[#efc75e]">Articles</span>
@@ -83,11 +154,9 @@ const HeroSection = () => {
 
           {/* Simple Description */}
           <p
-            className={`text-base sm:text-lg md:text-xl text-gray-300 mb-6 md:mb-10 max-w-xl transition-all duration-700 delay-200 will-change-transform ${
-              isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10"
-            }`}
+            ref={descriptionRef}
+            className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 md:mb-10 max-w-xl will-change-transform"
+            style={{ opacity: 0, transform: 'translateY(10px)' }}
           >
             Everything you need for your fitness journey in one place. Quality
             equipment, expert articles, and personalized training plans.
@@ -95,11 +164,9 @@ const HeroSection = () => {
 
           {/* Main CTA Buttons */}
           <div
-            className={`flex ${isMobile ? 'flex-col w-full' : 'flex-row'} gap-3 md:gap-4 mb-6 md:mb-10 transition-all duration-700 delay-300 will-change-transform ${
-              isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10"
-            }`}
+            ref={ctaButtonsRef}
+            className={`flex ${isMobile ? 'flex-col w-full' : 'flex-row'} gap-3 md:gap-4 mb-6 md:mb-10 will-change-transform`}
+            style={{ opacity: 0, transform: 'translateY(10px)' }}
           >
             <a
               href="/shop"
@@ -125,11 +192,9 @@ const HeroSection = () => {
 
           {/* Trust Indicators */}
           <div
-            className={`grid grid-cols-2 gap-3 md:gap-5 transition-all duration-700 delay-400 will-change-transform ${
-              isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10"
-            }`}
+            ref={trustIndicatorsRef}
+            className="grid grid-cols-2 gap-3 md:gap-5 will-change-transform"
+            style={{ opacity: 0, transform: 'translateY(10px)' }}
           >
             <div className="flex items-center">
               <svg
@@ -137,12 +202,13 @@ const HeroSection = () => {
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d="M5 13l4 4L19 7"
+                  d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
                 ></path>
               </svg>
               <span className="text-white text-sm md:text-base font-['Rajdhani']">
@@ -155,12 +221,13 @@ const HeroSection = () => {
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d="M5 13l4 4L19 7"
+                  d="M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z"
                 ></path>
               </svg>
               <span className="text-white text-sm md:text-base font-['Rajdhani']">30-Day Returns</span>
@@ -171,12 +238,13 @@ const HeroSection = () => {
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d="M5 13l4 4L19 7"
+                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
                 ></path>
               </svg>
               <span className="text-white text-sm md:text-base font-['Rajdhani']">Expert Advice</span>
@@ -187,12 +255,13 @@ const HeroSection = () => {
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d="M5 13l4 4L19 7"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
                 ></path>
               </svg>
               <span className="text-white text-sm md:text-base font-['Rajdhani']">Secure Checkout</span>
