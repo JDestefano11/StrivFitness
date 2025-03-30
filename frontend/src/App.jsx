@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import SaleTopBar from "./components/SaleTopBar";
 import HeroSection from "./components/HeroSection";
 import FeaturedProducts from "./components/FeaturedProducts";
+import WhyChooseUs from "./components/WhyChooseUs";
 
 const App = () => {
   // Optimize scrolling performance when component mounts
@@ -34,6 +35,7 @@ const App = () => {
       <Navbar />
       <HeroSection />
       <FeaturedProducts />
+      <WhyChooseUs />
     </div>
   );
 };
