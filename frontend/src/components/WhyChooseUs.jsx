@@ -1,205 +1,108 @@
-import React, { useRef, useEffect, useMemo } from "react";
+import React from "react";
 import whyPhoto from "/assets/pexels-victorfreitas-791763.jpg";
 import gear from "../../public/assets/7674510-uhd_4096_2160_25fps.mp4";
 
 const WhyChooseUs = () => {
-  // Refs for animation elements
-  const sectionRef = useRef(null);
-  const headingRef = useRef(null);
-  const pointsRef = useRef([]);
-  const testimonialRef = useRef(null);
-
-  // Animation frame ID for cleanup
-  const animationRef = useRef(null);
-
-  useEffect(() => {
-    // Use Intersection Observer to trigger animations when section is visible
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry.isIntersecting) {
-          animateElements();
-          observer.unobserve(sectionRef.current);
-        }
-      },
-      {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.1,
-      }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    // Animation function using requestAnimationFrame
-    const animateElements = () => {
-      const startTime = performance.now();
-      const duration = 600;
-
-      const animate = (currentTime) => {
-        const elapsedTime = currentTime - startTime;
-        const progress = Math.min(elapsedTime / duration, 1);
-
-        // Easing function (ease-out)
-        const easeOutProgress = 1 - Math.pow(1 - progress, 3);
-
-        // Animate heading
-        if (headingRef.current) {
-          headingRef.current.style.opacity = easeOutProgress;
-          headingRef.current.style.transform = `translateY(${
-            20 * (1 - easeOutProgress)
-          }px)`;
-        }
-
-        // Animate points with staggered delay
-        pointsRef.current.forEach((point, index) => {
-          if (point) {
-            const delayedProgress =
-              elapsedTime > index * 120
-                ? (elapsedTime - index * 120) / duration
-                : 0;
-            const easedProgress =
-              1 - Math.pow(1 - Math.min(delayedProgress, 1), 3);
-
-            point.style.opacity = easedProgress;
-            point.style.transform = `translateX(${20 * (1 - easedProgress)}px)`;
-          }
-        });
-
-        // Animate testimonial
-        if (testimonialRef.current && elapsedTime > 600) {
-          const delayedProgress = (elapsedTime - 600) / duration;
-          const easedProgress =
-            1 - Math.pow(1 - Math.min(delayedProgress, 1), 3);
-
-          testimonialRef.current.style.opacity = easedProgress;
-          testimonialRef.current.style.transform = `translateY(${
-            20 * (1 - easedProgress)
-          }px)`;
-        }
-
-        // Continue animation if not complete
-        if (elapsedTime < duration + 600) {
-          animationRef.current = requestAnimationFrame(animate);
-        }
-      };
-
-      // Start the animation
-      animationRef.current = requestAnimationFrame(animate);
-    };
-
-    // Cleanup
-    return () => {
-      observer.disconnect();
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, []);
-
-  // Features data with icons - memoized to prevent recreating on each render
-  const features = useMemo(
-    () => [
-      {
-        icon: (
-          <svg
-            className="w-10 h-10 text-[#efc75e]"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
-            ></path>
-          </svg>
-        ),
-        title: "Expert-Designed Fitness Gear",
-        description:
-          "Our products are designed by fitness experts and athletes to provide top-tier performance, durability, and comfort. Every item is crafted to support your unique fitness journey.",
-      },
-      {
-        icon: (
-          <svg
-            className="w-10 h-10 text-[#efc75e]"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-              d="M13 10V3L4 14h7v7l9-11h-7z"
-            ></path>
-          </svg>
-        ),
-        title: "Proven Results",
-        description:
-          "Thousands of happy customers have experienced significant improvements in their workouts with our gear. Whether you're a beginner or a seasoned pro, our products are here to help you level up.",
-      },
-      {
-        icon: (
-          <svg
-            className="w-10 h-10 text-[#efc75e]"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-            ></path>
-          </svg>
-        ),
-        title: "Satisfaction Guaranteed",
-        description:
-          "We stand by the quality of our products. If you're not 100% satisfied with your purchase, return it within 30 days for a full refund. No questions asked.",
-      },
-      {
-        icon: (
-          <svg
-            className="w-10 h-10 text-[#efc75e]"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-              d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
-            ></path>
-          </svg>
-        ),
-        title: "Lightning-Fast Delivery, Risk-Free",
-        description:
-          "We ship at warp speed to your doorstep—100% FREE. Changed your mind? Send it back with zero hassle. Your satisfaction is our mission.",
-      },
-    ],
-    []
-  );
+  // Features data with icons
+  const features = [
+    {
+      icon: (
+        <svg
+          className="w-10 h-10 text-[#efc75e]"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.5"
+            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+          ></path>
+        </svg>
+      ),
+      title: "Expert-Designed Fitness Gear",
+      description:
+        "Our products are designed by fitness experts and athletes to provide top-tier performance, durability, and comfort. Every item is crafted to support your unique fitness journey.",
+    },
+    {
+      icon: (
+        <svg
+          className="w-10 h-10 text-[#efc75e]"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.5"
+            d="M13 10V3L4 14h7v7l9-11h-7z"
+          ></path>
+        </svg>
+      ),
+      title: "Proven Results",
+      description:
+        "Thousands of happy customers have experienced significant improvements in their workouts with our gear. Whether you're a beginner or a seasoned pro, our products are here to help you level up.",
+    },
+    {
+      icon: (
+        <svg
+          className="w-10 h-10 text-[#efc75e]"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.5"
+            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+          ></path>
+        </svg>
+      ),
+      title: "Satisfaction Guaranteed",
+      description:
+        "We stand by the quality of our products. If you're not 100% satisfied with your purchase, return it within 30 days for a full refund. No questions asked.",
+    },
+    {
+      icon: (
+        <svg
+          className="w-10 h-10 text-[#efc75e]"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.5"
+            d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
+          ></path>
+        </svg>
+      ),
+      title: "Lightning-Fast Delivery, Risk-Free",
+      description:
+        "We ship at warp speed to your doorstep—100% FREE. Changed your mind? Send it back with zero hassle. Your satisfaction is our mission.",
+    },
+  ];
 
   return (
     <section
-      ref={sectionRef}
-      className="py-20 md:py-24 relative overflow-hidden"
+      className="py-20 md:py-24 relative overflow-hidden bg-gradient-to-b from-[#111111] to-[#0a0a0a]"
     >
+      {/* Yellow separator line at the top */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-[#efc75e]"></div>
+
       {/* Background elements */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Animated gradient background */}
+        {/* Gradient background */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#efc75e]/10 via-transparent to-[#efc75e]/5 transform-gpu"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#efc75e]/10 via-transparent to-[#efc75e]/5"></div>
         </div>
 
         {/* Corner accents */}
@@ -216,9 +119,7 @@ const WhyChooseUs = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
         {/* Section title */}
         <div
-          ref={headingRef}
           className="text-center mb-16"
-          style={{ opacity: 0, transform: "translateY(20px)" }}
         >
           <div className="inline-flex items-center justify-center mb-3">
             <span className="h-[1px] w-10 bg-gradient-to-r from-transparent to-[#efc75e]"></span>
@@ -250,14 +151,12 @@ const WhyChooseUs = () => {
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  ref={(el) => (pointsRef.current[index] = el)}
                   className="flex gap-5 items-start"
-                  style={{ opacity: 0, transform: "translateX(20px)" }}
                 >
-                  {/* Icon with animated background */}
+                  {/* Icon with background */}
                   <div className="flex-shrink-0 relative">
                     <div className="absolute -inset-2 bg-black/50 rounded-full blur-sm group-hover:bg-[#efc75e]/10 transition-colors duration-300"></div>
-                    <div className="relative transform-gpu">{feature.icon}</div>
+                    <div className="relative">{feature.icon}</div>
                   </div>
 
                   {/* Content */}
@@ -286,9 +185,12 @@ const WhyChooseUs = () => {
                   loop
                   muted
                   playsInline
-                  className="absolute inset-0 w-full h-full object-cover object-center transform-gpu transition-transform duration-700 ease-out group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                   width="800"
                   height="500"
+                  preload="auto"
+                  disablePictureInPicture
+                  disableRemotePlayback
                 />
 
                 {/* Overlay gradients */}
@@ -306,7 +208,7 @@ const WhyChooseUs = () => {
               </div>
 
               {/* Overlapping second image */}
-              <div className="absolute -bottom-10 -right-10 w-48 h-48 md:w-64 md:h-64 rounded-xl overflow-hidden border-2 border-[#efc75e]/30 shadow-[0_0_15px_rgba(0,0,0,0.4)] z-20 transform-gpu">
+              <div className="absolute -bottom-10 -right-10 w-48 h-48 md:w-64 md:h-64 rounded-xl overflow-hidden border-2 border-[#efc75e]/30 shadow-[0_0_15px_rgba(0,0,0,0.4)] z-20">
                 <div className="absolute inset-0 bg-gradient-to-br from-black/20 to-black/50 z-10"></div>
                 <img
                   src={whyPhoto}
@@ -320,11 +222,9 @@ const WhyChooseUs = () => {
 
               {/* Testimonial overlay - smaller and positioned */}
               <div
-                ref={testimonialRef}
                 className="absolute bottom-8 left-8 z-30 max-w-[220px] md:max-w-[260px]"
-                style={{ opacity: 0, transform: "translateY(20px)" }}
               >
-                <div className="bg-black/80 backdrop-blur-sm rounded-xl p-4 border border-[#efc75e]/30 will-change-transform">
+                <div className="bg-black/80 backdrop-blur-sm rounded-xl p-4 border border-[#efc75e]/30">
                   <svg
                     className="w-6 h-6 text-[#efc75e] mb-2"
                     fill="currentColor"
@@ -365,8 +265,11 @@ const WhyChooseUs = () => {
           </a>
         </div>
       </div>
+      
+      {/* Yellow separator line at the bottom */}
+      <div className="absolute bottom-0 left-0 w-full h-1 bg-[#efc75e]"></div>
     </section>
   );
 };
 
-export default React.memo(WhyChooseUs);
+export default WhyChooseUs;

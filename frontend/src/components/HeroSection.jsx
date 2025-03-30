@@ -32,7 +32,7 @@ const HeroSection = () => {
     // Animation function using requestAnimationFrame
     const animateElements = () => {
       const startTime = performance.now();
-      const duration = 700; // Duration in ms (same as your original transitions)
+      const duration = 700; 
       
       const animate = (currentTime) => {
         const elapsedTime = currentTime - startTime;
@@ -99,19 +99,16 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative w-full min-h-screen overflow-hidden bg-black font-['Inter'] will-change-scroll">
+    <section className="relative w-full min-h-screen overflow-hidden bg-black font-['Inter']">
       {/* Full-screen video background */}
       <div className="absolute inset-0 w-full h-full z-0">
         <video
           src={heroVideo}
-          className="h-full w-full object-cover object-center transform-gpu"
+          className="h-full w-full object-cover object-center"
           autoPlay
           muted
           loop
           playsInline
-          preload="auto"
-          disablePictureInPicture
-          disableRemotePlayback
         />
         {/* Video overlay for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30 md:from-black md:via-black/70 md:to-black/30"></div>
