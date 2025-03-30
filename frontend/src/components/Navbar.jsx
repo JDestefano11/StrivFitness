@@ -26,15 +26,14 @@ const Navbar = () => {
   return (
     <>
       <nav className="w-full fixed top-0 z-50 font-['Inter']">
-        {/* Sale Top Bar with Social Media and Email */}
         <SaleTopBar />
 
         {/* Main Navigation */}
         <div
           className={`w-full transition-all duration-500 ${
             isScrolled
-              ? "bg-[#222222]/95 shadow-[0_4px_30px_rgba(0,0,0,0.3)] backdrop-blur-lg border-b border-[#efc75e]/10"
-              : "bg-gradient-to-r from-[#222222]/90 to-[#222222]/80 backdrop-blur-sm"
+              ? "bg-black/95 shadow-[0_4px_30px_rgba(0,0,0,0.5)] backdrop-blur-lg border-b border-[#efc75e]/20"
+              : "bg-gradient-to-r from-black/90 to-black/80 backdrop-blur-sm"
           }`}
         >
           <div className="max-w-7xl mx-auto px-4">
@@ -52,38 +51,40 @@ const Navbar = () => {
                 />
               </div>
 
-              {/* Mobile menu button and icons - Properly aligned */}
-              <div className="md:hidden flex items-center space-x-5">
-                {/* Cart Icon - Mobile */}
+              {/* Mobile menu button and icons - Improved alignment */}
+              <div className="md:hidden flex items-center justify-end space-x-6">
+                {/* Cart Icon - Mobile - Improved */}
                 <a
                   href="/cart"
-                  className="relative text-[#ffffff] hover:text-[#efc75e] transition-colors duration-200 cursor-pointer hover:scale-110 transform flex items-center justify-center"
+                  className="relative text-[#ffffff] hover:text-[#efc75e] transition-all duration-300 cursor-pointer transform hover:scale-110 flex items-center justify-center"
                   aria-label="Shopping Cart"
                 >
-                  {/* Custom Fitness Cart Icon - Gym Bag Style */}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className={`h-7 w-7 transition-all duration-300 ${
+                  {/* Improved Fitness Cart Icon */}
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    className={`h-6 w-6 transition-all duration-300 ${
                       isScrolled
-                        ? "filter drop-shadow-[0_0_2px_rgba(239,199,94,0.5)]"
+                        ? "filter drop-shadow-[0_0_3px_rgba(239,199,94,0.7)]"
                         : ""
                     }`}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.75"
-                    strokeLinecap="round"
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="1.75" 
+                    strokeLinecap="round" 
                     strokeLinejoin="round"
                   >
-                    {/* Gym/Duffel Bag */}
-                    <path d="M20 8h-3V6c0-1.1-.9-2-2-2h-6c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z" />
-                    <path d="M9 6v2h6V6" />
-                    {/* Protein shaker */}
-                    <path d="M12 12v4" />
-                    <path d="M10 14h4" />
-                    <path d="M14 16c0 1.1-.9 2-2 2s-2-.9-2-2" />
+                    {/* Base of the shopping bag */}
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                    {/* Handles of the bag */}
+                    <path d="M3 6h18" />
+                    <path d="M16 10a4 4 0 0 1-8 0" />
+                    {/* Fitness element - dumbbell icon inside bag */}
+                    <circle cx="9" cy="14" r="1" fill="currentColor" />
+                    <circle cx="15" cy="14" r="1" fill="currentColor" />
+                    <path d="M9 14h6" />
                   </svg>
-                  <span className="absolute -top-2 -right-2 bg-[#dc143c] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center font-['Rajdhani']">
+                  <span className="absolute -top-1.5 -right-1.5 bg-[#efc75e] text-black text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center font-['Rajdhani'] text-[10px]">
                     0
                   </span>
                 </a>
@@ -91,7 +92,7 @@ const Navbar = () => {
                 {/* Menu Button - Mobile */}
                 <button
                   onClick={toggleMenu}
-                  className="text-[#ffffff] hover:text-[#efc75e] focus:outline-none cursor-pointer hover:scale-110 transform transition-all duration-200 flex items-center justify-center"
+                  className="text-[#ffffff] hover:text-[#efc75e] focus:outline-none cursor-pointer transform hover:scale-110 transition-all duration-300 flex items-center justify-center"
                   aria-label="Menu"
                   aria-expanded={isMenuOpen}
                 >
@@ -99,7 +100,7 @@ const Navbar = () => {
                   <svg
                     className={`h-7 w-7 transition-all duration-300 ${
                       isScrolled
-                        ? "filter drop-shadow-[0_0_2px_rgba(239,199,94,0.5)]"
+                        ? "filter drop-shadow-[0_0_3px_rgba(239,199,94,0.7)]"
                         : ""
                     }`}
                     viewBox="0 0 24 24"
@@ -145,13 +146,13 @@ const Navbar = () => {
                   href="/"
                   onMouseEnter={() => handleHover("home")}
                   onMouseLeave={() => handleHover("")}
-                  className={`px-3 py-2 text-[#ffffff] hover:text-[#efc75e] hover:bg-[#333333]/50 rounded-md transition-all duration-300 text-sm font-medium cursor-pointer relative overflow-hidden flex items-center justify-center h-10 ${
+                  className={`px-3 py-2 text-[#ffffff] hover:text-[#efc75e] hover:bg-black/70 rounded-md transition-all duration-300 text-sm font-medium cursor-pointer relative overflow-hidden flex items-center justify-center h-10 ${
                     activeLink === "home" ? "scale-105" : ""
                   } font-['Rajdhani'] tracking-wide`}
                 >
                   <span className="relative z-10">HOME</span>
                   {activeLink === "home" && (
-                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#efc75e] to-[#efc75e]/50 animate-pulse"></span>
+                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#efc75e] animate-pulse"></span>
                   )}
                 </a>
 
@@ -159,7 +160,7 @@ const Navbar = () => {
                 <div className="relative group flex items-center">
                   <button
                     onMouseEnter={() => handleHover("articles")}
-                    className={`px-3 py-2 text-[#ffffff] hover:text-[#efc75e] hover:bg-[#333333]/50 rounded-md transition-all duration-300 text-sm font-medium flex items-center justify-center h-10 cursor-pointer relative overflow-hidden ${
+                    className={`px-3 py-2 text-[#ffffff] hover:text-[#efc75e] hover:bg-black/70 rounded-md transition-all duration-300 text-sm font-medium flex items-center justify-center h-10 cursor-pointer relative overflow-hidden ${
                       activeLink === "articles" ? "scale-105" : ""
                     } font-['Rajdhani'] tracking-wide`}
                   >
@@ -178,27 +179,27 @@ const Navbar = () => {
                       />
                     </svg>
                     {activeLink === "articles" && (
-                      <span className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#efc75e] to-[#efc75e]/50 animate-pulse"></span>
+                      <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#efc75e] animate-pulse"></span>
                     )}
                   </button>
-                  <div className="absolute left-0 mt-0 top-full w-48 bg-[#333333]/90 backdrop-blur-md rounded-md shadow-[0_5px_15px_rgba(0,0,0,0.3)] overflow-hidden z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-95 group-hover:scale-100 border border-[#efc75e]/10">
+                  <div className="absolute left-0 mt-0 top-full w-48 bg-black/90 backdrop-blur-md rounded-md shadow-[0_5px_15px_rgba(0,0,0,0.5)] overflow-hidden z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-95 group-hover:scale-100 border border-[#efc75e]/20">
                     <a
                       href="/articles/fitness"
-                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-[#222222] hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
+                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-black hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
                     >
                       <span className="relative z-10">FITNESS</span>
                       <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#efc75e]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
                     </a>
                     <a
                       href="/articles/nutrition"
-                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-[#222222] hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
+                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-black hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
                     >
                       <span className="relative z-10">NUTRITION</span>
                       <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#efc75e]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
                     </a>
                     <a
                       href="/articles/wellness"
-                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-[#222222] hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
+                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-black hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
                     >
                       <span className="relative z-10">WELLNESS</span>
                       <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#efc75e]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
@@ -210,7 +211,7 @@ const Navbar = () => {
                 <div className="relative group flex items-center">
                   <button
                     onMouseEnter={() => handleHover("shop")}
-                    className={`px-3 py-2 text-[#ffffff] hover:text-[#efc75e] hover:bg-[#333333]/50 rounded-md transition-all duration-300 text-sm font-medium flex items-center justify-center h-10 cursor-pointer relative overflow-hidden ${
+                    className={`px-3 py-2 text-[#ffffff] hover:text-[#efc75e] hover:bg-black/70 rounded-md transition-all duration-300 text-sm font-medium flex items-center justify-center h-10 cursor-pointer relative overflow-hidden ${
                       activeLink === "shop" ? "scale-105" : ""
                     } font-['Rajdhani'] tracking-wide`}
                   >
@@ -229,27 +230,27 @@ const Navbar = () => {
                       />
                     </svg>
                     {activeLink === "shop" && (
-                      <span className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#efc75e] to-[#efc75e]/50 animate-pulse"></span>
+                      <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#efc75e] animate-pulse"></span>
                     )}
                   </button>
-                  <div className="absolute left-0 mt-0 top-full w-48 bg-[#333333]/90 backdrop-blur-md rounded-md shadow-[0_5px_15px_rgba(0,0,0,0.3)] overflow-hidden z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-95 group-hover:scale-100 border border-[#efc75e]/10">
+                  <div className="absolute left-0 mt-0 top-full w-48 bg-black/90 backdrop-blur-md rounded-md shadow-[0_5px_15px_rgba(0,0,0,0.5)] overflow-hidden z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-95 group-hover:scale-100 border border-[#efc75e]/20">
                     <a
                       href="/shop/supplements"
-                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-[#222222] hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
+                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-black hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
                     >
                       <span className="relative z-10">SUPPLEMENTS</span>
                       <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#efc75e]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
                     </a>
                     <a
                       href="/shop/apparel"
-                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-[#222222] hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
+                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-black hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
                     >
                       <span className="relative z-10">APPAREL</span>
                       <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#efc75e]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
                     </a>
                     <a
                       href="/shop/equipment"
-                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-[#222222] hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
+                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-black hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
                     >
                       <span className="relative z-10">EQUIPMENT</span>
                       <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#efc75e]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
@@ -261,13 +262,13 @@ const Navbar = () => {
                   href="/about"
                   onMouseEnter={() => handleHover("about")}
                   onMouseLeave={() => handleHover("")}
-                  className={`px-3 py-2 text-[#ffffff] hover:text-[#efc75e] hover:bg-[#333333]/50 rounded-md transition-all duration-300 text-sm font-medium cursor-pointer relative overflow-hidden flex items-center justify-center h-10 ${
+                  className={`px-3 py-2 text-[#ffffff] hover:text-[#efc75e] hover:bg-black/70 rounded-md transition-all duration-300 text-sm font-medium cursor-pointer relative overflow-hidden flex items-center justify-center h-10 ${
                     activeLink === "about" ? "scale-105" : ""
                   } font-['Rajdhani'] tracking-wide`}
                 >
                   <span className="relative z-10">ABOUT</span>
                   {activeLink === "about" && (
-                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#efc75e] to-[#efc75e]/50 animate-pulse"></span>
+                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#efc75e] animate-pulse"></span>
                   )}
                 </a>
 
@@ -275,13 +276,13 @@ const Navbar = () => {
                   href="/contact"
                   onMouseEnter={() => handleHover("contact")}
                   onMouseLeave={() => handleHover("")}
-                  className={`px-3 py-2 text-[#ffffff] hover:text-[#efc75e] hover:bg-[#333333]/50 rounded-md transition-all duration-300 text-sm font-medium cursor-pointer relative overflow-hidden flex items-center justify-center h-10 ${
+                  className={`px-3 py-2 text-[#ffffff] hover:text-[#efc75e] hover:bg-black/70 rounded-md transition-all duration-300 text-sm font-medium cursor-pointer relative overflow-hidden flex items-center justify-center h-10 ${
                     activeLink === "contact" ? "scale-105" : ""
                   } font-['Rajdhani'] tracking-wide`}
                 >
                   <span className="relative z-10">CONTACT</span>
                   {activeLink === "contact" && (
-                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#efc75e] to-[#efc75e]/50 animate-pulse"></span>
+                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#efc75e] animate-pulse"></span>
                   )}
                 </a>
               </div>
@@ -326,36 +327,38 @@ const Navbar = () => {
                   </a>
                 </div>
 
-                {/* Cart Icon - Desktop */}
+                {/* Cart Icon - Desktop - Improved */}
                 <a
                   href="/cart"
-                  className="relative text-[#ffffff] hover:text-[#efc75e] transition-colors duration-200 cursor-pointer hover:scale-110 transform flex items-center justify-center"
+                  className="relative text-[#ffffff] hover:text-[#efc75e] transition-all duration-300 cursor-pointer transform hover:scale-110 flex items-center justify-center"
                   aria-label="Shopping Cart"
                 >
-                  {/* Custom Fitness Cart Icon - Gym Bag Style */}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className={`h-7 w-7 transition-all duration-300 ${
+                  {/* Improved Fitness Cart Icon */}
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    className={`h-6 w-6 transition-all duration-300 ${
                       isScrolled
-                        ? "filter drop-shadow-[0_0_2px_rgba(239,199,94,0.5)]"
+                        ? "filter drop-shadow-[0_0_3px_rgba(239,199,94,0.7)]"
                         : ""
                     }`}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.75"
-                    strokeLinecap="round"
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="1.75" 
+                    strokeLinecap="round" 
                     strokeLinejoin="round"
                   >
-                    {/* Gym/Duffel Bag */}
-                    <path d="M20 8h-3V6c0-1.1-.9-2-2-2h-6c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z" />
-                    <path d="M9 6v2h6V6" />
-                    {/* Protein shaker */}
-                    <path d="M12 12v4" />
-                    <path d="M10 14h4" />
-                    <path d="M14 16c0 1.1-.9 2-2 2s-2-.9-2-2" />
+                    {/* Base of the shopping bag */}
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                    {/* Handles of the bag */}
+                    <path d="M3 6h18" />
+                    <path d="M16 10a4 4 0 0 1-8 0" />
+                    {/* Fitness element - dumbbell icon inside bag */}
+                    <circle cx="9" cy="14" r="1" fill="currentColor" />
+                    <circle cx="15" cy="14" r="1" fill="currentColor" />
+                    <path d="M9 14h6" />
                   </svg>
-                  <span className="absolute -top-2 -right-2 bg-[#dc143c] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center font-['Rajdhani']">
+                  <span className="absolute -top-1.5 -right-1.5 bg-[#efc75e] text-black text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center font-['Rajdhani'] text-[10px]">
                     0
                   </span>
                 </a>

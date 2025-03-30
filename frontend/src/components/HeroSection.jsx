@@ -24,16 +24,19 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative w-full min-h-screen overflow-hidden bg-black">
+    <section className="relative w-full min-h-screen overflow-hidden bg-black font-['Inter'] will-change-scroll">
       {/* Full-screen video background */}
       <div className="absolute inset-0 w-full h-full z-0">
         <video
           src={heroVideo}
-          className="h-full w-full object-cover object-center"
+          className="h-full w-full object-cover object-center transform-gpu"
           autoPlay
           muted
           loop
           playsInline
+          preload="auto"
+          disablePictureInPicture
+          disableRemotePlayback
         />
         {/* Video overlay for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30 md:from-black md:via-black/70 md:to-black/30"></div>
@@ -49,9 +52,9 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Content Section - Moved to the left */}
-      <div className="relative z-10 flex items-center justify-start h-full min-h-screen">
-        <div className="w-full max-w-2xl px-4 sm:px-8 lg:px-16 py-6 md:py-8 mx-auto md:mx-0 md:ml-20 lg:ml-36">
+      {/* Content Section - Moved further to the left */}
+      <div className="relative z-10 flex items-center justify-start h-full min-h-screen content-visibility-auto">
+        <div className="w-full max-w-2xl px-4 sm:px-8 lg:px-12 py-6 md:py-8 mx-auto md:mx-0 md:ml-10 lg:ml-20">
           {/* Logo/Brand Badge - Hidden on mobile */}
           <div
             className={`hidden md:inline-flex items-center space-x-2 bg-black/50 backdrop-blur-sm border border-[#efc75e]/20 rounded-full px-3 py-1 mb-4 md:mb-6 transition-all duration-700 ${
@@ -61,14 +64,14 @@ const HeroSection = () => {
             }`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#efc75e] animate-pulse"></span>
-            <span className="text-[#efc75e] text-xs font-bold tracking-widest">
+            <span className="text-[#efc75e] text-xs font-bold tracking-widest font-['Rajdhani']">
               STRIV FITNESS
             </span>
           </div>
 
           {/* Main Heading */}
           <h1
-            className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-3 md:mb-4 transition-all duration-700 delay-100 ${
+            className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-3 md:mb-4 transition-all duration-700 delay-100 font-['Rajdhani'] tracking-wide uppercase will-change-transform ${
               isVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-10"
@@ -80,7 +83,7 @@ const HeroSection = () => {
 
           {/* Simple Description */}
           <p
-            className={`text-base sm:text-lg md:text-xl text-gray-300 mb-6 md:mb-10 max-w-xl transition-all duration-700 delay-200 ${
+            className={`text-base sm:text-lg md:text-xl text-gray-300 mb-6 md:mb-10 max-w-xl transition-all duration-700 delay-200 will-change-transform ${
               isVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-10"
@@ -92,7 +95,7 @@ const HeroSection = () => {
 
           {/* Main CTA Buttons */}
           <div
-            className={`flex ${isMobile ? 'flex-col w-full' : 'flex-row'} gap-3 md:gap-4 mb-6 md:mb-10 transition-all duration-700 delay-300 ${
+            className={`flex ${isMobile ? 'flex-col w-full' : 'flex-row'} gap-3 md:gap-4 mb-6 md:mb-10 transition-all duration-700 delay-300 will-change-transform ${
               isVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-10"
@@ -100,7 +103,9 @@ const HeroSection = () => {
           >
             <a
               href="/shop"
-              className={`${isMobile ? 'w-full text-center text-sm py-2.5' : ''} bg-[#efc75e] text-black font-bold px-4 sm:px-6 md:px-8 py-3 md:py-4 rounded-lg relative overflow-hidden group transition-all duration-300 ease-out transform hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(239,199,94,0.5)]`}
+              className={`${
+                isMobile ? 'w-full text-center py-2.5' : ''
+              } bg-[#efc75e] text-black font-bold px-5 sm:px-7 md:px-9 py-3 md:py-4 rounded-md relative overflow-hidden group transition-all duration-300 ease-out transform hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(239,199,94,0.5)] font-['Rajdhani'] tracking-wider uppercase text-sm md:text-base flex items-center justify-center`}
             >
               <span className="relative z-10">Shop Equipment</span>
               <span className="absolute inset-0 bg-gradient-to-r from-[#f5d57b] to-[#efc75e] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
@@ -108,7 +113,9 @@ const HeroSection = () => {
             </a>
             <a
               href="/articles"
-              className={`${isMobile ? 'w-full text-center text-sm py-2.5' : ''} bg-black/30 backdrop-blur-sm border-2 border-[#efc75e] text-white font-bold px-4 sm:px-6 md:px-8 py-3 md:py-4 rounded-lg relative overflow-hidden group transition-all duration-300 ease-out transform hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(239,199,94,0.3)]`}
+              className={`${
+                isMobile ? 'w-full text-center py-2.5' : ''
+              } bg-black/30 backdrop-blur-sm border-2 border-[#efc75e] text-white font-bold px-5 sm:px-7 md:px-9 py-3 md:py-4 rounded-md relative overflow-hidden group transition-all duration-300 ease-out transform hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(239,199,94,0.3)] font-['Rajdhani'] tracking-wider uppercase text-sm md:text-base flex items-center justify-center`}
             >
               <span className="relative z-10">Read Articles</span>
               <span className="absolute inset-0 bg-[#efc75e]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
@@ -118,7 +125,7 @@ const HeroSection = () => {
 
           {/* Trust Indicators */}
           <div
-            className={`grid grid-cols-2 gap-3 md:gap-5 transition-all duration-700 delay-400 ${
+            className={`grid grid-cols-2 gap-3 md:gap-5 transition-all duration-700 delay-400 will-change-transform ${
               isVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-10"
@@ -138,7 +145,7 @@ const HeroSection = () => {
                   d="M5 13l4 4L19 7"
                 ></path>
               </svg>
-              <span className="text-white text-sm md:text-base">
+              <span className="text-white text-sm md:text-base font-['Rajdhani']">
                 Free Shipping Over $50
               </span>
             </div>
@@ -156,7 +163,7 @@ const HeroSection = () => {
                   d="M5 13l4 4L19 7"
                 ></path>
               </svg>
-              <span className="text-white text-sm md:text-base">30-Day Returns</span>
+              <span className="text-white text-sm md:text-base font-['Rajdhani']">30-Day Returns</span>
             </div>
             <div className="flex items-center">
               <svg
@@ -172,7 +179,7 @@ const HeroSection = () => {
                   d="M5 13l4 4L19 7"
                 ></path>
               </svg>
-              <span className="text-white text-sm md:text-base">Expert Advice</span>
+              <span className="text-white text-sm md:text-base font-['Rajdhani']">Expert Advice</span>
             </div>
             <div className="flex items-center">
               <svg
@@ -188,7 +195,7 @@ const HeroSection = () => {
                   d="M5 13l4 4L19 7"
                 ></path>
               </svg>
-              <span className="text-white text-sm md:text-base">Secure Checkout</span>
+              <span className="text-white text-sm md:text-base font-['Rajdhani']">Secure Checkout</span>
             </div>
           </div>
         </div>
