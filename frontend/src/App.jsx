@@ -1,52 +1,112 @@
-import React, { useEffect } from "react";
+import React, { useEffect, lazy, Suspense } from "react";
 import Navbar from "./components/Navbar";
 import SaleTopBar from "./components/SaleTopBar";
 import HeroSection from "./components/HeroSection";
-import FeaturedProducts from "./components/FeaturedProducts";
-import WhyChooseUs from "./components/WhyChooseUs";
-import DiscountBanner from "./components/DiscountBanner";
-import ArticlesSection from "./components/ArticlesSection";
+
+// Lazy load non-critical components
+const FeaturedProducts = lazy(() => import("./components/FeaturedProducts"));
+const WhyChooseUs = lazy(() => import("./components/WhyChooseUs"));
+const DiscountBanner = lazy(() => import("./components/DiscountBanner"));
+const ArticlesSection = lazy(() => import("./components/ArticlesSection"));
+const TrustBadgeSection = lazy(() => import("./components/TrustBadgeSection"));
+
+// Simple loading fallback that doesn't cause layout shifts
+const LoadingFallback = () => <div className="h-96 bg-black"></div>;
+
+// Critical CSS styles for immediate rendering
+const criticalStyles = `
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  
+  /* Typography System */
+  h1, h2, h3, h4, h5, h6, .heading-font {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    margin-top: 0;
+  }
+  
+  p, .body-font {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 400;
+  }
+  
+  button, .button-font, .accent-font {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  
+  .hero-heading {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #fff;
+  }
+  
+  .hero-accent {
+    color: #efc75e;
+  }
+  
+  @media (min-width: 768px) {
+    .hero-heading {
+      font-size: 4rem;
+    }
+  }
+`;
 
 const App = () => {
-  // Optimize scrolling performance when component mounts
+  // Inject critical CSS and optimize initial load
   useEffect(() => {
-    // Set passive event listeners for better scroll performance
-    const passiveSupported = () => {
-      let passive = false;
-      try {
-        const options = {
-          get passive() {
-            passive = true;
-            return true;
-          }
-        };
-        window.addEventListener("test", null, options);
-        window.removeEventListener("test", null, options);
-      } catch (err) {
-        passive = false;
-      }
-      return passive;
+    // Inject critical CSS
+    const style = document.createElement('style');
+    style.innerHTML = criticalStyles;
+    document.head.appendChild(style);
+    
+    // Add preconnect for domains
+    const addPreconnect = (url) => {
+      const link = document.createElement('link');
+      link.rel = 'preconnect';
+      link.href = url;
+      link.crossOrigin = 'anonymous';
+      document.head.appendChild(link);
     };
 
-    const passive = passiveSupported() ? { passive: true } : false;
+    // Add preload for critical resources
+    const addPreload = (url, as, type = '') => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.href = url;
+      link.as = as;
+      if (type) link.type = type;
+      document.head.appendChild(link);
+    };
+
+    // Add preconnect for API domain
+    addPreconnect('http://localhost:3001');
     
-    // Apply scroll optimization styles - but don't use overscrollBehavior as it can cause weird scrolling
-    document.documentElement.style.scrollBehavior = 'auto';
+    // Preload hero static image for immediate display
+    addPreload('/assets/hero-static.jpg', 'image');
+    
+    // Preload fonts
+    addPreload('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap', 'style');
     
     // Apply GPU acceleration to the body for smoother scrolling
     document.body.style.transform = 'translateZ(0)';
     document.body.style.backfaceVisibility = 'hidden';
-    document.body.style.perspective = '1000px';
     
-    // Reduce paint workload during scrolling
-    document.body.style.willChange = 'transform';
-    
-    // Prevent layout thrashing by batching DOM reads/writes
+    // Optimize scroll behavior
     let ticking = false;
     const scrollHandler = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          // Any scroll-dependent calculations would go here
           ticking = false;
         });
         ticking = true;
@@ -54,34 +114,51 @@ const App = () => {
     };
     
     // Add passive event listeners with proper handler
-    window.addEventListener('scroll', scrollHandler, passive);
+    window.addEventListener('scroll', scrollHandler, { passive: true });
+    
+    // Load non-critical resources after initial render
+    const timer = setTimeout(() => {
+      // Preload video after initial render
+      const videoLink = document.createElement('link');
+      videoLink.rel = 'preload';
+      videoLink.href = '/assets/1502318-hd_1920_1080_30fps.mp4';
+      videoLink.as = 'video';
+      document.head.appendChild(videoLink);
+    }, 2000);
     
     // Clean up function
     return () => {
-      document.documentElement.style.scrollBehavior = '';
-      document.body.style.transform = '';
-      document.body.style.backfaceVisibility = '';
-      document.body.style.perspective = '';
-      document.body.style.willChange = '';
-      window.removeEventListener('scroll', scrollHandler, passive);
+      document.head.removeChild(style);
+      window.removeEventListener('scroll', scrollHandler);
+      clearTimeout(timer);
     };
   }, []);
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#2f4550] via-[#1a1a1a] to-[#2d2d2d] relative overflow-x-hidden">
-      {/* Background elements with GPU acceleration */}
-      <div className="fixed inset-0 bg-radial-gradient from-[#ff6b3505] via-transparent to-transparent opacity-80 pointer-events-none transform-gpu"></div>
-      <div className="fixed inset-0 bg-gradient-to-t from-transparent via-[#efc75e10] to-transparent opacity-70 mix-blend-overlay pointer-events-none transform-gpu"></div>
-      
+    <div className="min-h-screen w-full bg-black relative overflow-x-hidden">
       {/* Main content */}
       <SaleTopBar />
       <Navbar />
-      <main className="relative z-10">
+      <main>
+        {/* Critical path components loaded immediately */}
         <HeroSection />
-        <FeaturedProducts />
-        <WhyChooseUs />
-        <DiscountBanner />
-        <ArticlesSection />
+        
+        {/* Non-critical components lazy loaded */}
+        <Suspense fallback={<LoadingFallback />}>
+          <FeaturedProducts />
+        </Suspense>
+        <Suspense fallback={<LoadingFallback />}>
+          <WhyChooseUs />
+        </Suspense>
+        <Suspense fallback={<LoadingFallback />}>
+          <DiscountBanner />
+        </Suspense>
+        <Suspense fallback={<LoadingFallback />}>
+          <ArticlesSection />
+        </Suspense>
+        <Suspense fallback={<LoadingFallback />}>
+          <TrustBadgeSection />
+        </Suspense>
       </main>
     </div>
   );

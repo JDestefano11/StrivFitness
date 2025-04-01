@@ -75,10 +75,10 @@ const ProductCard = memo(({ product }) => {
 
       {/* Product details */}
       <div className="p-5">
-        <h3 className="text-white font-bold text-lg mb-2 line-clamp-2 font-['Rajdhani'] tracking-wide group-hover:text-[#efc75e] transition-colors duration-300">
+        <h3 className="text-white font-bold text-lg mb-2 line-clamp-2 heading-font tracking-wide group-hover:text-[#efc75e] transition-colors duration-300">
           {product.name}
         </h3>
-        <p className="text-gray-400 text-sm mb-3 line-clamp-2 group-hover:text-gray-300 transition-colors duration-300">
+        <p className="text-gray-400 text-sm mb-3 line-clamp-2 body-font group-hover:text-gray-300 transition-colors duration-300">
           {product.description}
         </p>
 
@@ -96,10 +96,10 @@ const ProductCard = memo(({ product }) => {
           <div>
             {product.discount > 0 ? (
               <div>
-                <span className="text-gray-400 text-sm line-through mr-2">
+                <span className="text-gray-400 text-sm line-through mr-2 body-font">
                   ${product.price.toFixed(2)}
                 </span>
-                <span className="text-[#efc75e] font-bold text-xl font-['Rajdhani'] group-hover:text-white group-hover:drop-shadow-[0_0_3px_rgba(239,199,94,0.8)] transition-all duration-300">
+                <span className="text-[#efc75e] font-bold text-xl heading-font group-hover:text-white group-hover:drop-shadow-[0_0_3px_rgba(239,199,94,0.8)] transition-all duration-300">
                   $
                   {calculateDiscountedPrice(
                     product.price,
@@ -108,7 +108,7 @@ const ProductCard = memo(({ product }) => {
                 </span>
               </div>
             ) : (
-              <span className="text-[#efc75e] font-bold text-xl font-['Rajdhani'] group-hover:text-white group-hover:drop-shadow-[0_0_3px_rgba(239,199,94,0.8)] transition-all duration-300">
+              <span className="text-[#efc75e] font-bold text-xl heading-font group-hover:text-white group-hover:drop-shadow-[0_0_3px_rgba(239,199,94,0.8)] transition-all duration-300">
                 ${product.price.toFixed(2)}
               </span>
             )}
@@ -156,11 +156,11 @@ const ProductSkeleton = memo(() => (
 // Error component
 const ErrorMessage = memo(({ error, onRetry }) => (
   <div className="text-center py-10">
-    <p className="text-red-400 mb-4">
+    <p className="text-red-400 mb-4 body-font">
       {error || "Failed to load products. Please try again later."}
     </p>
     <button
-      className="bg-[#efc75e] text-black px-4 py-2 rounded-lg font-medium cursor-pointer hover:bg-[#efc75e]/90 transition-colors font-['Rajdhani'] tracking-wide"
+      className="bg-[#efc75e] text-black px-4 py-2 rounded-lg font-medium cursor-pointer hover:bg-[#efc75e]/90 transition-colors button-font tracking-wide"
       onClick={onRetry}
     >
       Try Again
@@ -183,14 +183,14 @@ const SectionBackground = memo(() => (
 // Section header component
 const SectionHeader = memo(() => (
   <div className="text-center mb-12">
-    <span className="inline-block px-4 py-1 bg-[#efc75e]/20 text-[#efc75e] text-sm font-semibold rounded-full mb-3 border border-[#efc75e]/30 font-['Rajdhani'] tracking-wide">
+    <span className="inline-block px-4 py-1 bg-[#efc75e]/20 text-[#efc75e] text-sm font-semibold rounded-full mb-3 border border-[#efc75e]/30 accent-font tracking-wide">
       TOP SELLERS
     </span>
-    <h2 className="text-4xl md:text-5xl font-bold mb-3 font-['Rajdhani'] tracking-wide">
+    <h2 className="text-4xl md:text-5xl font-bold mb-3 heading-font tracking-wide">
       <span className="text-white">Elevate Your </span>
       <span className="text-[#efc75e]">Fitness</span>
     </h2>
-    <p className="text-gray-400 max-w-2xl mx-auto">
+    <p className="text-gray-400 max-w-2xl mx-auto body-font">
       Discover our handpicked selection of premium fitness equipment and
       supplements
     </p>
@@ -312,7 +312,7 @@ const FeaturedProducts = () => {
         <div className="text-center mt-12">
           <a
             href="/products"
-            className="inline-block border border-[#efc75e] text-[#efc75e] px-6 py-3 rounded-lg font-medium hover:bg-[#efc75e] hover:text-black cursor-pointer transition-colors font-['Rajdhani'] tracking-wide uppercase"
+            className="inline-block border border-[#efc75e] text-[#efc75e] px-6 py-3 rounded-lg font-medium hover:bg-[#efc75e] hover:text-black cursor-pointer transition-colors button-font tracking-wide uppercase"
           >
             View All Products
           </a>

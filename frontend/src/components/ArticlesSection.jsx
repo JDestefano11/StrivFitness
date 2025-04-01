@@ -12,15 +12,14 @@ const formatDate = (dateString) => {
 
 // Memorized Article Card component to prevent unnecessary re-renders
 const ArticleCard = memo(({ article }) => (
-  <article 
-    className="bg-[#111] rounded-lg overflow-hidden transition-transform duration-300 hover:transform hover:scale-[1.02] hover:shadow-lg group will-change-transform cursor-pointer"
-  >
-    {/* Article Image */}
-    <div className="relative w-full pt-[56.25%] bg-gray-900 overflow-hidden">
+  <div className="group relative overflow-hidden rounded-xl bg-gradient-to-b from-black/60 to-black/80 backdrop-blur-sm border border-gray-800 hover:border-[#efc75e] transition-all duration-300 h-full flex flex-col hover:shadow-[0_0_15px_rgba(239,199,94,0.3)] hover:-translate-y-1">
+    {/* Article image */}
+    <div className="relative h-48 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent z-10"></div>
       <img 
         src={article.image} 
         alt={article.title} 
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        className="w-full h-full object-cover object-center transform-gpu transition-transform duration-700 ease-out group-hover:scale-105"
         loading="lazy"
         decoding="async"
         width="400"
@@ -31,68 +30,72 @@ const ArticleCard = memo(({ article }) => (
           e.target.src = 'https://via.placeholder.com/400x225?text=StrivFitness';
         }}
       />
-      <div className="absolute top-0 left-0 m-3">
-        <span className="bg-[#efc75e] text-black text-xs font-bold px-2 py-1 rounded">
+      
+      {/* Category tag */}
+      <div className="absolute top-3 left-3 z-20">
+        <span className="bg-[#efc75e]/90 text-black text-xs px-2 py-1 rounded-md font-medium accent-font">
           {article.category}
         </span>
       </div>
     </div>
     
-    {/* Article Content */}
-    <div className="p-5 flex flex-col h-[220px]">
-      <div className="flex items-center text-xs text-gray-500 mb-2">
-        <span>{article.date}</span>
-        <span className="mx-2">•</span>
-        <span>{article.author}</span>
-      </div>
-      <h3 className="text-white text-lg font-bold mb-2 line-clamp-2 group-hover:text-[#efc75e] transition-colors duration-300">
+    {/* Content */}
+    <div className="p-5 flex-grow flex flex-col">
+      <h3 className="text-white font-bold text-lg mb-2 group-hover:text-[#efc75e] transition-colors duration-300 heading-font">
         {article.title}
       </h3>
-      <p className="text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">
+      
+      <p className="text-gray-400 text-sm mb-4 line-clamp-3 flex-grow body-font">
         {article.excerpt}
       </p>
-      <a 
-        href={`/articles/${article.id}`} 
-        className="inline-flex items-center text-[#efc75e] font-bold text-sm group-hover:underline mt-auto"
-        onClick={(e) => e.stopPropagation()}
-      >
-        Read More
-        <svg className="w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
-      </a>
+      
+      {/* Author and date */}
+      <div className="flex items-center justify-between mt-auto">
+        <div className="flex items-center">
+          <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center text-[#efc75e] text-xs font-bold mr-2">
+            {article.author.split(' ').map(name => name[0]).join('')}
+          </div>
+          <div>
+            <p className="text-white text-xs font-medium heading-font">{article.author}</p>
+            <p className="text-gray-500 text-xs body-font">{article.date}</p>
+          </div>
+        </div>
+        
+        <div className="text-[#efc75e] text-xs flex items-center">
+          <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+          </svg>
+          <span className="body-font">{article.readTime} min read</span>
+        </div>
+      </div>
     </div>
-  </article>
+    
+    {/* Hover overlay for better UX */}
+    <div className="absolute inset-0 bg-[#efc75e]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+  </div>
 ));
 
 // Memorized loading skeleton component
 const LoadingSkeleton = memo(() => (
-  <section className="py-16 bg-black">
-    <div className="container mx-auto px-4">
-      <div className="text-center mb-12">
-        {/* Skeleton for section header */}
-        <div className="inline-block h-8 w-32 bg-[#efc75e]/20 rounded-full mb-4"></div>
-        <div className="h-10 bg-[#efc75e]/20 rounded w-3/4 max-w-xl mx-auto mb-4"></div>
-        <div className="h-4 bg-[#efc75e]/20 rounded w-full max-w-2xl mx-auto"></div>
-      </div>
-      
-      {/* Grid skeleton with fixed dimensions */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-        {[...Array(4)].map((_, index) => (
-          <div key={index} className="bg-[#111] rounded-lg overflow-hidden h-[400px]">
-            {/* Image placeholder  */}
-            <div className="relative w-full pt-[56.25%] bg-[#efc75e]/10"></div>
-            <div className="p-5 space-y-4">
-              <div className="h-4 bg-[#efc75e]/20 rounded w-1/2"></div>
-              <div className="h-6 bg-[#efc75e]/20 rounded w-3/4"></div>
-              <div className="h-4 bg-[#efc75e]/20 rounded w-full"></div>
-              <div className="h-4 bg-[#efc75e]/20 rounded w-1/3"></div>
-            </div>
+  <div className="rounded-xl bg-gradient-to-b from-black/60 to-black/80 border border-gray-800 h-[350px] relative">
+    <div className="h-48 bg-gray-800/50"></div>
+    <div className="p-5">
+      <div className="h-4 bg-gray-700/50 rounded w-3/4 mb-3"></div>
+      <div className="h-3 bg-gray-700/50 rounded w-full mb-2"></div>
+      <div className="h-3 bg-gray-700/50 rounded w-5/6 mb-2"></div>
+      <div className="h-3 bg-gray-700/50 rounded w-4/5 mb-4"></div>
+      <div className="flex justify-between items-center">
+        <div className="flex items-center">
+          <div className="w-8 h-8 rounded-full bg-gray-700/50 mr-2"></div>
+          <div>
+            <div className="h-2 bg-gray-700/50 rounded w-16 mb-1"></div>
+            <div className="h-2 bg-gray-700/50 rounded w-12"></div>
           </div>
-        ))}
+        </div>
+        <div className="h-2 bg-gray-700/50 rounded w-16"></div>
       </div>
     </div>
-  </section>
+  </div>
 ));
 
 // Memorized error component
@@ -115,16 +118,19 @@ const ErrorDisplay = memo(({ error, onRetry }) => (
 // Memorized section header component
 const SectionHeader = memo(() => (
   <div className="text-center mb-12">
-    <div className="inline-flex items-center space-x-2 bg-black/50 backdrop-blur-sm border border-[#efc75e]/20 rounded-full px-3 py-1 mb-4">
-      <span className="w-1.5 h-1.5 rounded-full bg-[#efc75e]"></span>
-      <span className="text-[#efc75e] text-xs font-bold tracking-widest font-['Rajdhani']">
+    <div className="inline-flex items-center justify-center mb-3">
+      <span className="h-[1px] w-8 bg-gradient-to-r from-transparent to-[#efc75e]"></span>
+      <span className="text-[#efc75e] text-xs font-bold tracking-widest accent-font uppercase mx-3">
         LATEST ARTICLES
       </span>
+      <span className="h-[1px] w-8 bg-gradient-to-l from-transparent to-[#efc75e]"></span>
     </div>
-    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-['Rajdhani']">
-      Fitness Knowledge <span className="text-[#efc75e]">Hub</span>
+    
+    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 heading-font">
+      Fitness <span className="text-[#efc75e]">Knowledge Hub</span>
     </h2>
-    <p className="text-gray-400 max-w-2xl mx-auto">
+    
+    <p className="text-gray-400 max-w-2xl mx-auto body-font">
       Expert advice, training tips, and in-depth guides to help you achieve your fitness goals and optimize your performance.
     </p>
   </div>
@@ -146,7 +152,8 @@ const ArticlesSection = () => {
       date: formatDate(articleData.publishDate || articleData.createdAt),
       author: articleData.author?.firstName ? 
         `${articleData.author.firstName} ${articleData.author.lastName}` : 
-        (articleData.author?.username || 'StrivFitness Team')
+        (articleData.author?.username || 'StrivFitness Team'),
+      readTime: 5
     };
   }, []);
 
@@ -253,8 +260,15 @@ const ArticlesSection = () => {
   }
 
   return (
-    <section className="py-16 bg-black" id="articles">
-      <div className="container mx-auto px-4">
+    <section className="py-16 bg-black relative">
+      {/* Background elements */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
+        backgroundImage: "radial-gradient(#efc75e 1px, transparent 1px)",
+        backgroundSize: "40px 40px",
+        backgroundPosition: "20px 20px",
+      }}></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         {/* Section Header with minimum height to prevent layout shifts */}
         <div className="min-h-[150px] flex flex-col justify-center">
           <SectionHeader />
@@ -267,10 +281,10 @@ const ArticlesSection = () => {
         <div className="text-center mt-12 h-[60px]">
           <a 
             href="/articles" 
-            className="inline-flex items-center justify-center bg-transparent border-2 border-[#efc75e] text-[#efc75e] px-6 py-3 rounded-md font-bold transition-all duration-300 hover:bg-[#efc75e]/10 font-['Rajdhani'] tracking-wider uppercase"
+            className="inline-flex items-center justify-center bg-transparent border-2 border-[#efc75e] text-[#efc75e] px-6 py-3 rounded-md font-bold transition-all duration-300 hover:bg-[#efc75e]/10 button-font tracking-wider uppercase"
           >
             View All Articles
-            <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </a>

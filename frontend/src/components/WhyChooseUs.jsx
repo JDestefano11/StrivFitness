@@ -1,5 +1,4 @@
 import React from "react";
-import whyPhoto from "/assets/pexels-victorfreitas-791763.jpg";
 import gear from "../../public/assets/7674510-uhd_4096_2160_25fps.mp4";
 
 const WhyChooseUs = () => {
@@ -129,13 +128,13 @@ const WhyChooseUs = () => {
         <div className="text-center mb-16">
           <div className="inline-flex items-center justify-center mb-3">
             <span className="h-[1px] w-10 bg-gradient-to-r from-transparent to-[#efc75e]"></span>
-            <span className="mx-4 text-[#efc75e] text-sm font-bold tracking-widest uppercase font-['Rajdhani']">
+            <span className="mx-4 text-[#efc75e] text-sm font-bold tracking-widest uppercase accent-font">
               Why Choose Us
             </span>
             <span className="h-[1px] w-10 bg-gradient-to-l from-transparent to-[#efc75e]"></span>
           </div>
 
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 font-['Rajdhani'] tracking-wide uppercase">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 heading-font tracking-wide uppercase">
             Transform Your{" "}
             <span className="text-[#efc75e] relative">
               Fitness Journey
@@ -143,7 +142,7 @@ const WhyChooseUs = () => {
             </span>
           </h2>
 
-          <p className="text-gray-300 max-w-3xl mx-auto text-base md:text-lg">
+          <p className="text-gray-300 max-w-3xl mx-auto text-base md:text-lg body-font">
             At Striv Fitness, we're committed to helping you achieve your
             fitness goals with premium equipment and expert guidance.
           </p>
@@ -167,10 +166,10 @@ const WhyChooseUs = () => {
 
                   {/* Content */}
                   <div>
-                    <h3 className="text-xl font-bold text-white mb-2 font-['Rajdhani'] tracking-wide">
+                    <h3 className="text-xl font-bold text-white mb-2 heading-font tracking-wide">
                       {feature.title}
                     </h3>
-                    <p className="text-gray-400 text-base">
+                    <p className="text-gray-400 text-base body-font">
                       {feature.description}
                     </p>
                   </div>
@@ -213,43 +212,27 @@ const WhyChooseUs = () => {
                 </div>
               </div>
 
-              {/* Overlapping second image */}
-              <div className="absolute -bottom-10 -right-10 w-48 h-48 md:w-64 md:h-64 rounded-xl overflow-hidden border-2 border-[#efc75e]/30 shadow-[0_0_15px_rgba(0,0,0,0.4)] z-20">
-                <div className="absolute inset-0 bg-gradient-to-br from-black/20 to-black/50 z-10"></div>
-                <img
-                  src={whyPhoto}
-                  className="absolute inset-0 w-full h-full object-cover object-center"
-                  loading="lazy"
-                  decoding="async"
-                  width="400"
-                  height="400"
-                  alt="Fitness equipment"
-                />
-              </div>
-
-              {/* Testimonial overlay - smaller and positioned */}
-              <div className="absolute bottom-8 left-8 z-30 max-w-[220px] md:max-w-[260px]">
-                <div className="bg-black/80 backdrop-blur-sm rounded-xl p-4 border border-[#efc75e]/30">
-                  <svg
-                    className="w-6 h-6 text-[#efc75e] mb-2"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                  </svg>
-                  <p className="text-white text-sm italic mb-2">
-                    {testimonial.quote}
-                  </p>
-                  <div className="flex items-center">
-                    <div className="w-7 h-7 rounded-full bg-[#efc75e] flex items-center justify-center text-black font-bold mr-2">
-                      {testimonial.initials}
-                    </div>
-                    <div>
-                      <p className="text-white font-bold text-xs">{testimonial.name}</p>
-                      <p className="text-[#efc75e] text-xs">
-                        {testimonial.title}
-                      </p>
-                    </div>
+              {/* Enhanced Testimonial in place of the image */}
+              <div className="absolute -bottom-10 -right-10 w-48 h-48 md:w-64 md:h-64 rounded-xl overflow-hidden border-2 border-[#efc75e]/30 shadow-[0_0_15px_rgba(0,0,0,0.4)] z-20 bg-black/80 backdrop-blur-sm flex flex-col justify-center p-6">
+                <svg
+                  className="w-10 h-10 text-[#efc75e] mb-3"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                </svg>
+                <p className="text-white text-sm md:text-base italic mb-4 font-medium">
+                  {testimonial.quote}
+                </p>
+                <div className="flex items-center">
+                  <div className="w-8 h-8 rounded-full bg-[#efc75e] flex items-center justify-center text-black font-bold mr-3">
+                    {testimonial.initials}
+                  </div>
+                  <div>
+                    <p className="text-white font-bold text-sm">{testimonial.name}</p>
+                    <p className="text-[#efc75e] text-xs">
+                      {testimonial.title}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -261,7 +244,7 @@ const WhyChooseUs = () => {
         <div className="mt-16 text-center">
           <a
             href="/shop"
-            className="inline-flex items-center justify-center bg-[#efc75e] text-black font-bold px-8 py-3 rounded-md relative overflow-hidden group transition-all duration-300 ease-out transform hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(239,199,94,0.5)] font-['Rajdhani'] tracking-wider uppercase text-sm md:text-base"
+            className="inline-flex items-center justify-center bg-[#efc75e] text-black font-bold px-8 py-3 rounded-md relative overflow-hidden group transition-all duration-300 ease-out transform hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(239,199,94,0.5)] button-font tracking-wider uppercase text-sm md:text-base"
           >
             <span className="relative z-10">Shop Premium Fitness Gear</span>
             <span className="absolute inset-0 bg-gradient-to-r from-[#f5d57b] to-[#efc75e] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
