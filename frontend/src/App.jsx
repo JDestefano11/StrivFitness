@@ -30,55 +30,48 @@ const App = () => {
 
     const passive = passiveSupported() ? { passive: true } : false;
     
-    // Apply scroll optimization styles
-    document.body.style.overscrollBehavior = 'none'; 
+    // Apply scroll optimization styles - but don't use overscrollBehavior as it can cause weird scrolling
+    document.documentElement.style.scrollBehavior = 'auto';
     
-    // Add passive event listeners to improve scroll performance
-    document.addEventListener('wheel', () => {}, passive);
-    document.addEventListener('touchstart', () => {}, passive);
-    document.addEventListener('touchmove', () => {}, passive);
+    // Apply GPU acceleration to the body for smoother scrolling
+    document.body.style.transform = 'translateZ(0)';
+    document.body.style.backfaceVisibility = 'hidden';
+    document.body.style.perspective = '1000px';
     
-    // Optimize rendering with content-visibility
-    const optimizeOffscreenContent = () => {
-      const elements = document.querySelectorAll('section');
-      if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.target && entry.target.style) {
-              // When element is not in viewport, hint to the browser it can skip rendering
-              if (!entry.isIntersecting) {
-                entry.target.style.contentVisibility = 'auto';
-              } else {
-                entry.target.style.contentVisibility = 'visible';
-              }
-            }
-          });
-        }, { rootMargin: '200px' }); // Start loading before element is in view
-        
-        elements.forEach(el => observer.observe(el));
-        
-        return () => elements.forEach(el => observer.unobserve(el));
+    // Reduce paint workload during scrolling
+    document.body.style.willChange = 'transform';
+    
+    // Prevent layout thrashing by batching DOM reads/writes
+    let ticking = false;
+    const scrollHandler = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // Any scroll-dependent calculations would go here
+          ticking = false;
+        });
+        ticking = true;
       }
-      return () => {};
     };
     
-    const cleanup = optimizeOffscreenContent();
+    // Add passive event listeners with proper handler
+    window.addEventListener('scroll', scrollHandler, passive);
     
     // Clean up function
     return () => {
-      document.body.style.overscrollBehavior = 'auto';
-      document.removeEventListener('wheel', () => {}, passive);
-      document.removeEventListener('touchstart', () => {}, passive);
-      document.removeEventListener('touchmove', () => {}, passive);
-      cleanup();
+      document.documentElement.style.scrollBehavior = '';
+      document.body.style.transform = '';
+      document.body.style.backfaceVisibility = '';
+      document.body.style.perspective = '';
+      document.body.style.willChange = '';
+      window.removeEventListener('scroll', scrollHandler, passive);
     };
   }, []);
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#2f4550] via-[#1a1a1a] to-[#2d2d2d] relative overflow-x-hidden will-change-transform">
+    <div className="min-h-screen w-full bg-gradient-to-br from-[#2f4550] via-[#1a1a1a] to-[#2d2d2d] relative overflow-x-hidden">
       {/* Background elements with GPU acceleration */}
-      <div className="absolute inset-0 bg-radial-gradient from-[#ff6b3505] via-transparent to-transparent opacity-80 pointer-events-none transform-gpu"></div>
-      <div className="absolute inset-0 bg-gradient-to-t from-transparent via-[#efc75e10] to-transparent opacity-70 mix-blend-overlay pointer-events-none transform-gpu"></div>
+      <div className="fixed inset-0 bg-radial-gradient from-[#ff6b3505] via-transparent to-transparent opacity-80 pointer-events-none transform-gpu"></div>
+      <div className="fixed inset-0 bg-gradient-to-t from-transparent via-[#efc75e10] to-transparent opacity-70 mix-blend-overlay pointer-events-none transform-gpu"></div>
       
       {/* Main content */}
       <SaleTopBar />
