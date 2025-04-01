@@ -12,7 +12,6 @@
   "dependencies": {
     "@tailwindcss/cli": "^4.0.16",
     "@tailwindcss/vite": "^4.0.16",
-    "axios": "^1.8.4",
     "framer-motion": "^12.6.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

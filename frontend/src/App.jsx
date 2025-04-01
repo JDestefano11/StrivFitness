@@ -5,6 +5,7 @@ import HeroSection from "./components/HeroSection";
 import FeaturedProducts from "./components/FeaturedProducts";
 import WhyChooseUs from "./components/WhyChooseUs";
 import DiscountBanner from "./components/DiscountBanner";
+import ArticlesSection from "./components/ArticlesSection";
 
 const App = () => {
   // Optimize scrolling performance when component mounts
@@ -87,6 +88,7 @@ const App = () => {
         <FeaturedProducts />
         <WhyChooseUs />
         <DiscountBanner />
+        <ArticlesSection />
       </main>
     </div>
   );
