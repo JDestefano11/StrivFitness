@@ -240,6 +240,7 @@ const FeaturedProducts = () => {
   if (loading) {
     return (
       <section id="featured-products" className="py-16 relative">
+        <div className="gold-accent-top"></div>
         <div className="container mx-auto px-4 relative z-10">
           <SectionHeader />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 content-visibility-auto">
@@ -248,6 +249,7 @@ const FeaturedProducts = () => {
             ))}
           </div>
         </div>
+        <div className="gold-accent-bottom"></div>
       </section>
     );
   }
@@ -256,10 +258,12 @@ const FeaturedProducts = () => {
   if (error) {
     return (
       <section id="featured-products" className="py-16 relative">
+        <div className="gold-accent-top"></div>
         <div className="container mx-auto px-4 relative z-10">
           <SectionHeader />
           <ErrorMessage error={error} onRetry={fetchProducts} />
         </div>
+        <div className="gold-accent-bottom"></div>
       </section>
     );
   }
@@ -268,6 +272,7 @@ const FeaturedProducts = () => {
   if (!featuredProducts || featuredProducts.length === 0) {
     return (
       <section id="featured-products" className="py-16 relative">
+        <div className="gold-accent-top"></div>
         <div className="container mx-auto px-4 relative z-10">
           <SectionHeader />
           <div className="text-center py-10">
@@ -276,6 +281,7 @@ const FeaturedProducts = () => {
             </p>
           </div>
         </div>
+        <div className="gold-accent-bottom"></div>
       </section>
     );
   }
@@ -283,8 +289,11 @@ const FeaturedProducts = () => {
   // Render products
   return (
     <section id="featured-products" className="py-16 relative">
+      <div className="gold-accent-top"></div>
+
       <div className="container mx-auto px-4 relative z-10">
         <SectionHeader />
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 content-visibility-auto contain-intrinsic-size: auto 500px">
           {featuredProducts.map((product) => (
             <ProductCard key={product._id} product={product} />
@@ -300,6 +309,8 @@ const FeaturedProducts = () => {
           </a>
         </div>
       </div>
+      
+      <div className="gold-accent-bottom"></div>
     </section>
   );
 };

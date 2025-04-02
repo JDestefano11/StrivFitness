@@ -1,30 +1,21 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo } from 'react';
 
-// Optimized trust badge component with improved styling
+// Simple trust badge component
 const TrustBadge = memo(({ icon, text }) => (
-  <div className="flex flex-col items-center text-center p-4 rounded-lg transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 group">
-    <div className="text-[#efc75e] mb-4 relative">
-      <div className="w-16 h-16 flex items-center justify-center rounded-full bg-black/40 border border-[#efc75e]/20 group-hover:border-[#efc75e]/40 transition-all duration-300">
-        {icon}
-      </div>
-      <div className="absolute -inset-1 bg-[#efc75e]/10 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+  <div className="flex flex-col items-center text-center p-4">
+    <div className="text-[#efc75e] mb-3">
+      {icon}
     </div>
-    <h3 className="text-white text-sm md:text-base uppercase tracking-wide font-bold heading-font mb-1">
+    <p className="text-white text-sm uppercase tracking-wide font-bold heading-font">
       {text}
-    </h3>
-    <p className="text-gray-400 text-xs body-font mt-1 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
-      {text === 'Free Shipping Over $50' && 'On all domestic orders'}
-      {text === '30-Day Returns' && 'Hassle-free return policy'}
-      {text === '100% Satisfaction Guarantee' && 'Quality guaranteed on all products'}
-      {text === 'Secure Checkout' && 'Protected by 256-bit encryption'}
     </p>
   </div>
 ));
 
-// Main component with performance optimizations
+// Main component
 const TrustBadgeSection = () => {
-  // Badge data - memoized to prevent recreating on each render
-  const badges = useMemo(() => [
+  // Badge data
+  const badges = [
     {
       id: 'shipping',
       icon: (
@@ -61,12 +52,13 @@ const TrustBadgeSection = () => {
       ),
       text: 'Secure Checkout'
     }
-  ], []);
+  ];
 
   return (
-    <section className="py-12 border-t border-gray-800/30 backdrop-blur-sm bg-gray-900/10">
+    <section className="py-12 relative border-t border-gray-800">
+      <div className="gold-accent-top"></div>
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {badges.map(badge => (
             <TrustBadge 
               key={badge.id}
@@ -76,9 +68,9 @@ const TrustBadgeSection = () => {
           ))}
         </div>
       </div>
+      <div className="gold-accent-bottom"></div>
     </section>
   );
 };
 
-// Export with memo for performance
 export default memo(TrustBadgeSection);

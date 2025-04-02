@@ -100,28 +100,11 @@ const WhyChooseUs = () => {
 
   return (
     <section
-      className="py-20 md:py-24 relative overflow-hidden bg-gradient-to-b from-[#111111] to-[#0a0a0a]"
+      className="py-20 md:py-24 relative overflow-hidden"
     >
-      {/* Yellow separator line at the top */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-[#efc75e]"></div>
-
-      {/* Background elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Gradient background */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#efc75e]/10 via-transparent to-[#efc75e]/5"></div>
-        </div>
-
-        {/* Corner accents */}
-        <div className="absolute top-0 right-0 w-96 h-96 opacity-20">
-          <div className="absolute top-0 right-0 w-full h-[2px] bg-gradient-to-l from-[#efc75e] to-transparent"></div>
-          <div className="absolute top-0 right-0 h-full w-[2px] bg-gradient-to-b from-[#efc75e] to-transparent"></div>
-        </div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 opacity-20">
-          <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#efc75e] to-transparent"></div>
-          <div className="absolute bottom-0 left-0 h-full w-[2px] bg-gradient-to-t from-[#efc75e] to-transparent"></div>
-        </div>
-      </div>
+      {/* Gold accent lines */}
+      <div className="gold-accent-top"></div>
+      <div className="gold-accent-bottom"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
         {/* Section title */}
@@ -252,9 +235,6 @@ const WhyChooseUs = () => {
           </a>
         </div>
       </div>
-      
-      {/* Yellow separator line at the bottom */}
-      <div className="absolute bottom-0 left-0 w-full h-1 bg-[#efc75e]"></div>
     </section>
   );
 };

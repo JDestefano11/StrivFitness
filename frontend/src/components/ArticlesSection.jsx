@@ -261,6 +261,9 @@ const ArticlesSection = () => {
 
   return (
     <section className="py-16 relative">
+      {/* Gold accent lines */}
+      <div className="gold-accent-top"></div>
+      
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header with minimum height to prevent layout shifts */}
         <div className="min-h-[150px] flex flex-col justify-center">
@@ -283,6 +286,8 @@ const ArticlesSection = () => {
           </a>
         </div>
       </div>
+      
+      <div className="gold-accent-bottom"></div>
     </section>
   );
 };
