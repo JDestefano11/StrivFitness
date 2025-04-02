@@ -7,3 +7,96 @@ html {
 .smooth-scroll {
   transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
+
+:root {
+  --color-bg-black: #121212;
+  --color-bg-dark: #0a0a0a;
+  --color-primary: #efc75e;
+  --color-primary-dark: #d9b04d;
+  --color-primary-light: #f5d78b;
+  --color-text-white: #ffffff;
+  --color-text-light: #e0e0e0;
+  --color-text-gray: #a0a0a0;
+  --color-border-light: rgba(255, 255, 255, 0.1);
+}
+
+/* Apply the background directly to html and body */
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  width: 100%;
+  color: var(--color-text-white);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  background: 
+    linear-gradient(135deg, 
+      #000000 0%, 
+      #0a0a0a 40%,
+      #121212 60%,
+      #151515 75%,
+      rgba(33, 33, 33, 0.95) 85%,
+      rgba(239, 199, 94, 0.3) 100%);
+  background-attachment: fixed;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Add the gold corner accent */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    /* Top-left gold corner */
+    linear-gradient(135deg, rgba(239, 199, 94, 0.4) 0%, transparent 25%),
+    /* Bottom-right gold corner */
+    radial-gradient(circle at 90% 90%, rgba(239, 199, 94, 0.35) 0%, transparent 30%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Add additional gold accents */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    /* Top gold edge */
+    linear-gradient(to bottom, rgba(239, 199, 94, 0.2) 0%, transparent 10%),
+    /* Bottom gold edge */
+    linear-gradient(to top, rgba(239, 199, 94, 0.15) 0%, transparent 10%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Typography System */
+h1, h2, h3, h4, h5, h6, .heading-font {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  margin-top: 0;
+}
+
+p, .body-font {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+}
+
+.button-font {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.accent-font {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  letter-spacing: 0.1em;
+}

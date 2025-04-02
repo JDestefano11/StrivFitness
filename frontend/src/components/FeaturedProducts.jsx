@@ -168,18 +168,6 @@ const ErrorMessage = memo(({ error, onRetry }) => (
   </div>
 ));
 
-// Section background component
-const SectionBackground = memo(() => (
-  <div
-    className="absolute inset-0 opacity-10 pointer-events-none"
-    style={{
-      backgroundImage: "radial-gradient(#efc75e 1px, transparent 1px)",
-      backgroundSize: "40px 40px",
-      backgroundPosition: "20px 20px",
-    }}
-  />
-));
-
 // Section header component
 const SectionHeader = memo(() => (
   <div className="text-center mb-12">
@@ -251,8 +239,7 @@ const FeaturedProducts = () => {
   // Render loading state
   if (loading) {
     return (
-      <section id="featured-products" className="py-16 bg-black relative">
-        <SectionBackground />
+      <section id="featured-products" className="py-16 relative">
         <div className="container mx-auto px-4 relative z-10">
           <SectionHeader />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 content-visibility-auto">
@@ -268,8 +255,7 @@ const FeaturedProducts = () => {
   // Render error state
   if (error) {
     return (
-      <section id="featured-products" className="py-16 bg-black relative">
-        <SectionBackground />
+      <section id="featured-products" className="py-16 relative">
         <div className="container mx-auto px-4 relative z-10">
           <SectionHeader />
           <ErrorMessage error={error} onRetry={fetchProducts} />
@@ -281,8 +267,7 @@ const FeaturedProducts = () => {
   // Render empty state
   if (!featuredProducts || featuredProducts.length === 0) {
     return (
-      <section id="featured-products" className="py-16 bg-black relative">
-        <SectionBackground />
+      <section id="featured-products" className="py-16 relative">
         <div className="container mx-auto px-4 relative z-10">
           <SectionHeader />
           <div className="text-center py-10">
@@ -297,12 +282,9 @@ const FeaturedProducts = () => {
 
   // Render products
   return (
-    <section id="featured-products" className="py-16 bg-black relative">
-      <SectionBackground />
-
+    <section id="featured-products" className="py-16 relative">
       <div className="container mx-auto px-4 relative z-10">
         <SectionHeader />
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 content-visibility-auto contain-intrinsic-size: auto 500px">
           {featuredProducts.map((product) => (
             <ProductCard key={product._id} product={product} />

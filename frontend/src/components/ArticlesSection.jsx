@@ -260,14 +260,7 @@ const ArticlesSection = () => {
   }
 
   return (
-    <section className="py-16 bg-black relative">
-      {/* Background elements */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
-        backgroundImage: "radial-gradient(#efc75e 1px, transparent 1px)",
-        backgroundSize: "40px 40px",
-        backgroundPosition: "20px 20px",
-      }}></div>
-      
+    <section className="py-16 relative">
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header with minimum height to prevent layout shifts */}
         <div className="min-h-[150px] flex flex-col justify-center">
