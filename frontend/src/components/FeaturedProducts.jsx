@@ -32,7 +32,7 @@ const StarRating = memo(({ rating }) => (
 const ProductCard = memo(({ product }) => {
   return (
     <div className="bg-gradient-to-b from-black/60 to-black/80 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 hover:border-[#efc75e] cursor-pointer group transition-all duration-300 relative h-full will-change-transform hover:shadow-[0_0_15px_rgba(239,199,94,0.3)] hover:-translate-y-1">
-      {/* Minimal background elements */}
+      {/* Enhanced background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-32 h-32">
           <div className="absolute top-0 right-0 w-full h-[1px] bg-gradient-to-l from-[#efc75e]/30 to-transparent group-hover:from-[#efc75e]/80"></div>
@@ -42,20 +42,20 @@ const ProductCard = memo(({ product }) => {
           <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#efc75e]/30 to-transparent group-hover:from-[#efc75e]/80"></div>
           <div className="absolute bottom-0 left-0 h-full w-[1px] bg-gradient-to-t from-[#efc75e]/30 to-transparent group-hover:from-[#efc75e]/80"></div>
         </div>
-        {/* Add subtle radial gradient on hover */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out bg-[#efc75e]/5"></div>
+        {/* Enhanced radial gradient on hover */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out bg-gradient-to-br from-[#efc75e]/10 to-transparent"></div>
       </div>
 
-      {/* Discount badge */}
+      {/* Discount badge with enhanced styling */}
       {product.discount > 0 && (
         <div className="absolute top-3 left-3 z-20">
-          <span className="bg-[#efc75e] text-black text-xs font-bold px-2 py-1 rounded-md shadow-lg">
+          <span className="bg-[#efc75e] text-black text-xs font-bold px-2 py-1 rounded-md shadow-lg transform group-hover:scale-110 transition-transform duration-300">
             {product.discount}% OFF
           </span>
         </div>
       )}
 
-      {/* Product image with overlay */}
+      {/* Product image with enhanced overlay */}
       <div className="relative h-64 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10"></div>
         <img
@@ -73,7 +73,7 @@ const ProductCard = memo(({ product }) => {
         />
       </div>
 
-      {/* Product details */}
+      {/* Product details with enhanced styling */}
       <div className="p-5">
         <h3 className="text-white font-bold text-lg mb-2 line-clamp-2 heading-font tracking-wide group-hover:text-[#efc75e] transition-colors duration-300">
           {product.name}
@@ -82,7 +82,7 @@ const ProductCard = memo(({ product }) => {
           {product.description}
         </p>
 
-        {/* Rating */}
+        {/* Rating with enhanced styling */}
         <div className="flex items-center mb-3">
           <StarRating rating={product.rating || 4.8} />
           <span className="text-gray-400 text-xs">
@@ -91,11 +91,11 @@ const ProductCard = memo(({ product }) => {
           </span>
         </div>
 
-        {/* Price and button */}
+        {/* Price with enhanced styling - Add to Cart button removed */}
         <div className="flex items-center justify-between">
-          <div>
+          <div className="w-full">
             {product.discount > 0 ? (
-              <div>
+              <div className="flex items-center">
                 <span className="text-gray-400 text-sm line-through mr-2 body-font">
                   ${product.price.toFixed(2)}
                 </span>
@@ -106,31 +106,21 @@ const ProductCard = memo(({ product }) => {
                     product.discount
                   ).toFixed(2)}
                 </span>
+                <span className="ml-auto text-xs text-[#efc75e]/80 font-semibold bg-[#efc75e]/10 px-2 py-1 rounded border border-[#efc75e]/20">
+                  PREMIUM
+                </span>
               </div>
             ) : (
-              <span className="text-[#efc75e] font-bold text-xl heading-font group-hover:text-white group-hover:drop-shadow-[0_0_3px_rgba(239,199,94,0.8)] transition-all duration-300">
-                ${product.price.toFixed(2)}
-              </span>
+              <div className="flex items-center">
+                <span className="text-[#efc75e] font-bold text-xl heading-font group-hover:text-white group-hover:drop-shadow-[0_0_3px_rgba(239,199,94,0.8)] transition-all duration-300">
+                  ${product.price.toFixed(2)}
+                </span>
+                <span className="ml-auto text-xs text-[#efc75e]/80 font-semibold bg-[#efc75e]/10 px-2 py-1 rounded border border-[#efc75e]/20">
+                  PREMIUM
+                </span>
+              </div>
             )}
           </div>
-          <button
-            className="bg-[#efc75e] text-black p-2 rounded-full cursor-pointer hover:bg-black hover:text-[#efc75e] border-2 border-[#efc75e] transform hover:scale-110 transition-all duration-300 shadow-md relative overflow-hidden"
-            aria-label="Add to cart"
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-              />
-            </svg>
-          </button>
         </div>
       </div>
     </div>
