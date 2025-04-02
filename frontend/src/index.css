@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* Import performance-optimized Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500&family=Roboto+Condensed:wght@400;700&display=swap');
 
 html {
   scroll-behavior: smooth;
@@ -18,6 +20,11 @@ html {
   --color-text-light: #e0e0e0;
   --color-text-gray: #a0a0a0;
   --color-border-light: rgba(255, 255, 255, 0.1);
+  
+  /* Font family variables */
+  --font-heading: 'Montserrat', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-accent: 'Roboto Condensed', system-ui, sans-serif;
 }
 
 /* Apply the background directly to html and body */
@@ -27,7 +34,7 @@ html, body {
   min-height: 100%;
   width: 100%;
   color: var(--color-text-white);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--font-body);
   line-height: 1.5;
   background: 
     linear-gradient(135deg, 
@@ -40,6 +47,27 @@ html, body {
   background-attachment: fixed;
   position: relative;
   overflow-x: hidden;
+}
+
+/* Typography styles */
+h1, h2, h3, h4, h5, h6, .heading-font {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-top: 0;
+}
+
+p, .body-font {
+  font-family: var(--font-body);
+  font-weight: 400;
+}
+
+a, button, .button-font, .accent-font {
+  font-family: var(--font-accent);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 /* Add the gold corner accent */
@@ -74,29 +102,4 @@ body::after {
     linear-gradient(to top, rgba(239, 199, 94, 0.15) 0%, transparent 10%);
   pointer-events: none;
   z-index: 0;
-}
-
-/* Typography System */
-h1, h2, h3, h4, h5, h6, .heading-font {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  line-height: 1.2;
-  margin-top: 0;
-}
-
-p, .body-font {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  font-weight: 400;
-}
-
-.button-font {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-}
-
-.accent-font {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  letter-spacing: 0.1em;
 }
