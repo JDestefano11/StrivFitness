@@ -88,7 +88,7 @@ const HeroSection = () => {
               href="/shop"
               className={`${
                 isMobile ? 'w-full text-center py-2.5' : ''
-              } bg-[#efc75e] text-black font-bold px-5 sm:px-7 md:px-9 py-3 md:py-4 rounded-md accent-font text-sm md:text-base flex items-center justify-center`}
+              } bg-[#efc75e] text-black font-bold px-5 sm:px-7 md:px-9 py-3 md:py-4 rounded-md accent-font text-sm md:text-base flex items-center justify-center transition-all duration-300 hover:bg-[#efc75e]/90 hover:shadow-[0_4px_15px_rgba(239,199,94,0.4)] transform hover:scale-[1.02] cursor-pointer`}
               aria-label="Shop for fitness equipment"
             >
               <span className="relative z-10">Shop Equipment</span>
@@ -97,7 +97,7 @@ const HeroSection = () => {
               href="/articles"
               className={`${
                 isMobile ? 'w-full text-center py-2.5' : ''
-              } bg-black/30 backdrop-blur-sm border-2 border-[#efc75e] text-white font-bold px-5 sm:px-7 md:px-9 py-3 md:py-4 rounded-md accent-font text-sm md:text-base flex items-center justify-center`}
+              } bg-black/30 backdrop-blur-sm border-2 border-[#efc75e] text-white font-bold px-5 sm:px-7 md:px-9 py-3 md:py-4 rounded-md accent-font text-sm md:text-base flex items-center justify-center transition-all duration-300 hover:bg-black/50 hover:border-[#efc75e]/90 hover:shadow-[0_4px_15px_rgba(239,199,94,0.2)] transform hover:scale-[1.02] cursor-pointer`}
               aria-label="Read fitness articles"
             >
               <span className="relative z-10">Read Articles</span>

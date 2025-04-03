@@ -2,6 +2,7 @@ import React, { useEffect, lazy, Suspense } from "react";
 import Navbar from "./components/Navbar";
 import SaleTopBar from "./components/SaleTopBar";
 import HeroSection from "./components/HeroSection";
+import Footer from "./components/Footer";
 
 // Lazy load non-critical components
 const FeaturedProducts = lazy(() => import("./components/FeaturedProducts"));
@@ -105,6 +106,7 @@ const App = () => {
           <NewsletterSection />
         </Suspense>
       </main>
+      <Footer />
     </div>
   );
 };
