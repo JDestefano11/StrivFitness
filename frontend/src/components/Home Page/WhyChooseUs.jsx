@@ -1,5 +1,5 @@
 import React from "react";
-import gear from "../../public/assets/7674510-uhd_4096_2160_25fps.mp4";
+import gear from "../../../public/assets/7674510-uhd_4096_2160_25fps.mp4";
 
 const WhyChooseUs = () => {
   // Features data with icons
@@ -92,16 +92,15 @@ const WhyChooseUs = () => {
 
   // Testimonial data
   const testimonial = {
-    quote: "Striv Fitness has completely transformed my workout routine. The gear is amazing!",
+    quote:
+      "Striv Fitness has completely transformed my workout routine. The gear is amazing!",
     name: "Mike D.",
     title: "Fitness Enthusiast",
-    initials: "MD"
+    initials: "MD",
   };
 
   return (
-    <section
-      className="py-20 md:py-24 relative overflow-hidden"
-    >
+    <section className="py-20 md:py-24 relative overflow-hidden">
       {/* Gold accent lines */}
       <div className="gold-accent-top"></div>
       <div className="gold-accent-bottom"></div>
@@ -137,10 +136,7 @@ const WhyChooseUs = () => {
           <div className="w-full lg:w-1/2">
             <div className="space-y-8">
               {features.map((feature, index) => (
-                <div
-                  key={index}
-                  className="flex gap-5 items-start"
-                >
+                <div key={index} className="flex gap-5 items-start">
                   {/* Icon with background */}
                   <div className="flex-shrink-0 relative">
                     <div className="absolute -inset-2 bg-black/50 rounded-full blur-sm group-hover:bg-[#efc75e]/10 transition-colors duration-300"></div>
@@ -212,7 +208,9 @@ const WhyChooseUs = () => {
                     {testimonial.initials}
                   </div>
                   <div>
-                    <p className="text-white font-bold text-sm">{testimonial.name}</p>
+                    <p className="text-white font-bold text-sm">
+                      {testimonial.name}
+                    </p>
                     <p className="text-[#efc75e] text-xs">
                       {testimonial.title}
                     </p>

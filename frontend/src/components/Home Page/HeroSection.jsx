@@ -1,29 +1,32 @@
 import React, { useState, useEffect } from "react";
-import heroVideo from "../../public/assets/1502318-hd_1920_1080_30fps.mp4";
+import heroVideo from "../../../public/assets/1502318-hd_1920_1080_30fps.mp4";
 
 const HeroSection = () => {
   const [isMobile, setIsMobile] = useState(false);
-  
+
   useEffect(() => {
     // Check if the device is mobile
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     // Initial check
     checkMobile();
-    
+
     // Add event listener for window resize
-    window.addEventListener('resize', checkMobile);
-    
+    window.addEventListener("resize", checkMobile);
+
     // Cleanup
     return () => {
-      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener("resize", checkMobile);
     };
   }, []);
 
   return (
-    <section className="relative w-full min-h-screen overflow-hidden bg-black body-font" aria-label="Hero Section">
+    <section
+      className="relative w-full min-h-screen overflow-hidden bg-black body-font"
+      aria-label="Hero Section"
+    >
       {/* Full-screen video background */}
       <div className="absolute inset-0 w-full h-full z-0">
         <video
@@ -57,7 +60,10 @@ const HeroSection = () => {
             className="hidden md:inline-flex items-center space-x-2 bg-black/50 backdrop-blur-sm border border-[#efc75e]/20 rounded-full px-3 py-1 mb-4 md:mb-6"
             aria-label="Striv Fitness Brand Badge"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#efc75e]" aria-hidden="true"></span>
+            <span
+              className="w-1.5 h-1.5 rounded-full bg-[#efc75e]"
+              aria-hidden="true"
+            ></span>
             <span className="text-[#efc75e] text-xs font-bold tracking-widest heading-font uppercase">
               STRIV FITNESS
             </span>
@@ -73,21 +79,21 @@ const HeroSection = () => {
           </h1>
 
           {/* Simple Description */}
-          <p
-            className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 md:mb-10 max-w-xl body-font"
-          >
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 md:mb-10 max-w-xl body-font">
             Everything you need for your fitness journey in one place. Quality
             equipment, expert articles, and personalized training plans.
           </p>
 
           {/* Main CTA Buttons */}
           <div
-            className={`flex ${isMobile ? 'flex-col w-full' : 'flex-row'} gap-3 md:gap-4 mb-6 md:mb-10`}
+            className={`flex ${
+              isMobile ? "flex-col w-full" : "flex-row"
+            } gap-3 md:gap-4 mb-6 md:mb-10`}
           >
             <a
               href="/shop"
               className={`${
-                isMobile ? 'w-full text-center py-2.5' : ''
+                isMobile ? "w-full text-center py-2.5" : ""
               } bg-[#efc75e] text-black font-bold px-5 sm:px-7 md:px-9 py-3 md:py-4 rounded-md accent-font text-sm md:text-base flex items-center justify-center transition-all duration-300 hover:bg-[#efc75e]/90 hover:shadow-[0_4px_15px_rgba(239,199,94,0.4)] transform hover:scale-[1.02] cursor-pointer`}
               aria-label="Shop for fitness equipment"
             >
@@ -96,7 +102,7 @@ const HeroSection = () => {
             <a
               href="/articles"
               className={`${
-                isMobile ? 'w-full text-center py-2.5' : ''
+                isMobile ? "w-full text-center py-2.5" : ""
               } bg-black/30 backdrop-blur-sm border-2 border-[#efc75e] text-white font-bold px-5 sm:px-7 md:px-9 py-3 md:py-4 rounded-md accent-font text-sm md:text-base flex items-center justify-center transition-all duration-300 hover:bg-black/50 hover:border-[#efc75e]/90 hover:shadow-[0_4px_15px_rgba(239,199,94,0.2)] transform hover:scale-[1.02] cursor-pointer`}
               aria-label="Read fitness articles"
             >
@@ -145,7 +151,9 @@ const HeroSection = () => {
                   d="M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z"
                 ></path>
               </svg>
-              <span className="text-white text-sm md:text-base heading-font">30-Day Returns</span>
+              <span className="text-white text-sm md:text-base heading-font">
+                30-Day Returns
+              </span>
             </div>
             <div className="flex items-center">
               <svg
@@ -163,7 +171,9 @@ const HeroSection = () => {
                   d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
                 ></path>
               </svg>
-              <span className="text-white text-sm md:text-base heading-font">Expert Advice</span>
+              <span className="text-white text-sm md:text-base heading-font">
+                Expert Advice
+              </span>
             </div>
             <div className="flex items-center">
               <svg
@@ -181,7 +191,9 @@ const HeroSection = () => {
                   d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
                 ></path>
               </svg>
-              <span className="text-white text-sm md:text-base heading-font">Secure Checkout</span>
+              <span className="text-white text-sm md:text-base heading-font">
+                Secure Checkout
+              </span>
             </div>
           </div>
         </div>

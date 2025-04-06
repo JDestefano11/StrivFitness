@@ -57,14 +57,13 @@ const ProductCard = memo(({ product }) => {
 
       {/* Product image with enhanced overlay */}
       <div className="relative h-64 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10"></div>
         <img
           src={product.imageURL}
           alt={product.name}
           loading="lazy"
           decoding="async"
           fetchpriority="low"
-          className="w-full h-full object-cover object-center transform-gpu transition-transform duration-700 ease-out group-hover:scale-105"
+          className="w-full h-full object-cover object-center transform-gpu transition-all duration-500 ease-out group-hover:scale-125 group-hover:translate-x-4 group-hover:-translate-y-4"
           onError={(e) => {
             e.target.onerror = null;
             e.target.src =
