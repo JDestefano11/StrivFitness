@@ -31,7 +31,7 @@ const ProductCard = memo(({ product }) => {
   const reviewCount = product.reviewCount || Math.floor(Math.random() * 100) + 50;
   
   return (
-    <div className="bg-gradient-to-b from-black/60 to-black/80 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 hover:border-[#efc75e] cursor-pointer group transition-all duration-300 relative h-full will-change-transform hover:shadow-[0_0_15px_rgba(239,199,94,0.3)] hover:-translate-y-1">
+    <div className="bg-gradient-to-b from-black/60 to-black/80 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 hover:border-[#efc75e] cursor-pointer group transition-all duration-300 relative h-full will-change-transform hover:shadow-[0_0_15px_rgba(239,199,94,0.3)] hover:-translate-y-1" onClick={() => window.location.href = `/product/${product._id}`}>
       {/* Enhanced background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-32 h-32">
@@ -82,9 +82,12 @@ const ProductCard = memo(({ product }) => {
         
         {/* Hover overlay with view details button */}
         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-          <button className="bg-[#efc75e] text-black px-4 py-2 rounded-lg font-medium transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 cursor-pointer">
+          <a 
+            href={`/product/${product._id}`}
+            className="bg-[#efc75e] text-black px-4 py-2 rounded-lg font-medium transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 cursor-pointer"
+          >
             View Details
-          </button>
+          </a>
         </div>
       </div>
 

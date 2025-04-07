@@ -21,6 +21,7 @@ const NewsletterSection = lazy(() =>
 
 // Lazy load pages
 const Collections = lazy(() => import("./components/Collections/Collections"));
+const ProductDetail = lazy(() => import("./components/Product/ProductDetail"));
 
 // Simple loading fallback that doesn't cause layout shifts
 const LoadingFallback = () => <div className="h-96 bg-black"></div>;
@@ -97,6 +98,7 @@ const App = () => {
   // Get the current path from window.location
   const currentPath = window.location.pathname;
   const isShopPage = currentPath.startsWith('/shop/');
+  const isProductPage = currentPath.startsWith('/product/');
 
   return (
     <div className="min-h-screen w-full relative overflow-x-hidden">
@@ -107,6 +109,10 @@ const App = () => {
       {isShopPage ? (
         <Suspense fallback={<LoadingFallback />}>
           <Collections />
+        </Suspense>
+      ) : isProductPage ? (
+        <Suspense fallback={<LoadingFallback />}>
+          <ProductDetail />
         </Suspense>
       ) : (
         <main className="section-container">
