@@ -235,12 +235,13 @@ const Navbar = () => {
                   </button>
                   <div className="absolute left-0 mt-0 top-full w-48 bg-black/90 backdrop-blur-md rounded-md shadow-[0_5px_15px_rgba(0,0,0,0.5)] overflow-hidden z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-95 group-hover:scale-100 border border-[#efc75e]/20">
                     <a
-                      href="/shop/supplements"
-                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-black hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
+                      href="/shop/all-products"
+                      className="block px-4 py-4 text-base font-bold text-[#efc75e] hover:bg-black hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
                     >
-                      <span className="relative z-10">SUPPLEMENTS</span>
+                      <span className="relative z-10">ALL PRODUCTS</span>
                       <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#efc75e]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
                     </a>
+
                     <a
                       href="/shop/apparel"
                       className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-black hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
@@ -253,6 +254,13 @@ const Navbar = () => {
                       className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-black hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
                     >
                       <span className="relative z-10">EQUIPMENT</span>
+                      <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#efc75e]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
+                    </a>
+                    <a
+                      href="/shop/accessories"
+                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-black hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
+                    >
+                      <span className="relative z-10">ACCESSORIES</span>
                       <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#efc75e]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
                     </a>
                   </div>

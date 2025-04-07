@@ -19,6 +19,9 @@ const NewsletterSection = lazy(() =>
   import("./components/Home Page/NewsletterSection")
 );
 
+// Lazy load pages
+const Collections = lazy(() => import("./components/Collections/Collections"));
+
 // Simple loading fallback that doesn't cause layout shifts
 const LoadingFallback = () => <div className="h-96 bg-black"></div>;
 
@@ -91,32 +94,44 @@ const App = () => {
     };
   }, []);
 
+  // Get the current path from window.location
+  const currentPath = window.location.pathname;
+  const isShopPage = currentPath.startsWith('/shop/');
+
   return (
     <div className="min-h-screen w-full relative overflow-x-hidden">
       {/* Main content */}
       <SaleTopBar />
       <Navbar />
-      <main className="section-container">
-        {/* Critical path components loaded immediately */}
-        <HeroSection />
+      
+      {isShopPage ? (
+        <Suspense fallback={<LoadingFallback />}>
+          <Collections />
+        </Suspense>
+      ) : (
+        <main className="section-container">
+          {/* Critical path components loaded immediately */}
+          <HeroSection />
 
-        {/* Non-critical components lazy loaded */}
-        <Suspense fallback={<LoadingFallback />}>
-          <FeaturedProducts />
-        </Suspense>
-        <Suspense fallback={<LoadingFallback />}>
-          <WhyChooseUs />
-        </Suspense>
-        <Suspense fallback={<LoadingFallback />}>
-          <ArticlesSection />
-        </Suspense>
-        <Suspense fallback={<LoadingFallback />}>
-          <TrustBadgeSection />
-        </Suspense>
-        <Suspense fallback={<LoadingFallback />}>
-          <NewsletterSection />
-        </Suspense>
-      </main>
+          {/* Non-critical components lazy loaded */}
+          <Suspense fallback={<LoadingFallback />}>
+            <FeaturedProducts />
+          </Suspense>
+          <Suspense fallback={<LoadingFallback />}>
+            <WhyChooseUs />
+          </Suspense>
+          <Suspense fallback={<LoadingFallback />}>
+            <ArticlesSection />
+          </Suspense>
+          <Suspense fallback={<LoadingFallback />}>
+            <TrustBadgeSection />
+          </Suspense>
+          <Suspense fallback={<LoadingFallback />}>
+            <NewsletterSection />
+          </Suspense>
+        </main>
+      )}
+      
       <Footer />
     </div>
   );
