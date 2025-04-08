@@ -3,19 +3,19 @@ import React, { memo } from 'react';
 // Enhanced trust badge component
 const TrustBadge = memo(({ icon, text, description }) => (
   <div className="flex flex-col items-center text-center p-6 relative group">
-    {/* Gold accent hover effect */}
-    <div className="absolute inset-0 bg-gradient-to-b from-[#efc75e]/0 to-[#efc75e]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg"></div>
+    {/* Brand accent hover effect */}
+    <div className="absolute inset-0 bg-gradient-to-b from-[#00FF94]/0 to-[#00FF94]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg"></div>
     
     {/* Icon with enhanced styling */}
     <div className="relative mb-4 transform group-hover:scale-110 transition-transform duration-500">
-      <div className="absolute -inset-1 bg-gradient-to-r from-[#efc75e]/0 via-[#efc75e]/30 to-[#efc75e]/0 rounded-full blur opacity-0 group-hover:opacity-70 transition duration-500"></div>
-      <div className="relative bg-black/50 p-4 rounded-full border border-[#efc75e]/20 text-[#efc75e]">
+      <div className="absolute -inset-1 bg-gradient-to-r from-[#00FF94]/0 via-[#00FF94]/30 to-[#00FF94]/0 rounded-full blur opacity-0 group-hover:opacity-70 transition duration-500"></div>
+      <div className="relative bg-[#0A0F2C]/50 p-4 rounded-full border border-[#00FF94]/20 text-[#00FF94]">
         {icon}
       </div>
     </div>
     
     {/* Text with enhanced styling */}
-    <h3 className="text-white text-base uppercase tracking-wide font-bold heading-font mb-2 group-hover:text-[#efc75e] transition-colors duration-300">
+    <h3 className="text-white text-base uppercase tracking-wide font-bold heading-font mb-2 group-hover:text-[#00FF94] transition-colors duration-300">
       {text}
     </h3>
     
@@ -73,14 +73,26 @@ const TrustBadgeSection = () => {
   ];
 
   return (
-    <section className="py-14 relative border-t border-b border-gray-800 bg-black/30 backdrop-blur-sm">
+    <section className="py-14 relative border-t border-b border-gray-800 bg-[#0A0F2C]/30 backdrop-blur-sm">
+      {/* Background image with overlay */}
+      <div className="absolute inset-0 opacity-10 bg-cover bg-center" style={{ backgroundImage: "url('/assets/fitness-pattern.jpg')" }}></div>
       {/* Enhanced gold accents */}
-      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#efc75e]/30 to-transparent"></div>
-      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#efc75e]/30 to-transparent"></div>
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#00FF94]/30 to-transparent"></div>
+      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#1DD1A1]/30 to-transparent"></div>
       
       <div className="container mx-auto px-4">
         {/* Section title */}
         <div className="text-center mb-10">
+          <div className="inline-flex items-center justify-center mb-3">
+            <span className="h-[1px] w-8 bg-gradient-to-r from-transparent to-[#00FF94]"></span>
+            <span className="text-[#00FF94] text-xs font-bold tracking-widest accent-font uppercase mx-3">
+              WHY CHOOSE US
+            </span>
+            <span className="h-[1px] w-8 bg-gradient-to-l from-transparent to-[#00FF94]"></span>
+          </div>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 heading-font">
+            The <span className="text-[#1DD1A1]">Striv</span> Difference
+          </h2>
         </div>
         
         {/* Trust badges with enhanced styling */}

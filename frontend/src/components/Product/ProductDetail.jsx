@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { CartContext } from '../../App';
 
 // Calculate discounted price
 const calculateDiscountedPrice = (price, discount) => {
@@ -31,6 +32,9 @@ const ProductDetail = () => {
     hours: Math.floor(Math.random() * 24),
     minutes: Math.floor(Math.random() * 60)
   }); // Mock countdown timer
+  
+  // Get cart functions from context
+  const { addToCart } = useContext(CartContext);
 
   // Fetch product data
   useEffect(() => {
@@ -148,31 +152,10 @@ const ProductDetail = () => {
 
   // Add to cart
   const handleAddToCart = () => {
-    // Get existing cart from localStorage or initialize empty array
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    // Use the addToCart function from context
+    addToCart(product, quantity);
     
-    // Check if product already in cart
-    const existingItemIndex = cart.findIndex(item => item.id === product._id);
-    
-    if (existingItemIndex >= 0) {
-      // Update quantity if product already in cart
-      cart[existingItemIndex].quantity += quantity;
-    } else {
-      // Add new product to cart
-      cart.push({
-        id: product._id,
-        name: product.name,
-        price: product.discount ? calculateDiscountedPrice(product.price, product.discount) : product.price,
-        image: product.imageURL || product.imageUrl,
-        quantity: quantity,
-        category: product.category
-      });
-    }
-    
-    // Save updated cart to localStorage
-    localStorage.setItem('cart', JSON.stringify(cart));
-    
-    // Show success message (could be enhanced with a toast notification)
+    // Show success message
     alert('Product added to cart!');
   };
 
@@ -214,7 +197,7 @@ const ProductDetail = () => {
           <p>{error}</p>
           <button 
             onClick={() => window.history.back()} 
-            className="mt-4 bg-[#efc75e]/10 border border-[#efc75e]/30 text-[#efc75e] px-4 py-2 rounded-lg hover:bg-[#efc75e]/20 transition-colors"
+            className="mt-4 bg-[#00FF94]/10 border border-[#00FF94]/30 text-[#00FF94] px-4 py-2 rounded-lg hover:bg-[#00FF94]/20 transition-colors"
           >
             Go Back
           </button>
@@ -232,7 +215,7 @@ const ProductDetail = () => {
           <p className="text-gray-400 mb-6">The product you're looking for doesn't exist or has been removed.</p>
           <button 
             onClick={() => window.location.href = '/shop/all-products'} 
-            className="bg-[#efc75e] text-black px-6 py-3 rounded-lg font-medium hover:bg-[#efc75e]/90 transition-colors"
+            className="bg-gradient-to-r from-[#00FF94] to-[#1DD1A1] text-[#0A0F2C] px-6 py-3 rounded-lg font-medium hover:shadow-[0_0_15px_rgba(0,255,148,0.4)] transition-all duration-300"
           >
             Continue Shopping
           </button>
@@ -280,38 +263,71 @@ const ProductDetail = () => {
       {/* Override global styles */}
       <style jsx global>{`
         body {
-          background: #000 !important;
+          background: #050B20 !important;
         }
         body::before, body::after {
           display: none !important;
         }
       `}</style>
       
-      {/* Premium dark background with blue accents */}
-      <div className="absolute inset-0 z-0">
-        {/* Deep dark gradient base */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-[#111] to-black"></div>
+      {/* Premium background with circular green gradient */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {/* Rich dark blue base */}
+        <div className="absolute inset-0 bg-[#050B20]"></div>
         
-        {/* Subtle blue accent gradients */}
-        <div className="absolute inset-0 opacity-20" style={{
-          background: `
-            radial-gradient(circle at top right, rgba(37, 99, 235, 0.5) 0%, transparent 40%),
-            radial-gradient(circle at bottom left, rgba(37, 99, 235, 0.5) 0%, transparent 40%)
-          `
-        }}></div>
+        {/* Large central circular gradient */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[150vh] h-[150vh]">
+          <div className="w-full h-full rounded-full bg-[radial-gradient(circle,#1DD1A1/30_0%,transparent_60%)]" style={{animation: 'pulse 15s infinite alternate ease-in-out'}}></div>
+        </div>
         
-        {/* Vignette effect */}
+        {/* Secondary circular gradient for depth */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[120vh] h-[120vh]">
+          <div className="w-full h-full rounded-full bg-[radial-gradient(circle,#00FF94/25_0%,transparent_70%)]" style={{animation: 'pulse-delay 18s infinite alternate-reverse ease-in-out'}}></div>
+        </div>
+        
+        {/* Additional inner glow */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80vh] h-[80vh]">
+          <div className="w-full h-full rounded-full bg-[radial-gradient(circle,#1DD1A1/10_0%,transparent_70%)]" style={{animation: 'pulse-fast 12s infinite alternate ease-in-out'}}></div>
+        </div>
+        
+        {/* Top-right accent circle */}
+        <div className="absolute -top-20 -right-20 w-80 h-80">
+          <div className="w-full h-full rounded-full bg-[radial-gradient(circle,#00FF94/15_0%,transparent_70%)]"></div>
+        </div>
+        
+        {/* Bottom-left accent circle */}
+        <div className="absolute -bottom-20 -left-20 w-80 h-80">
+          <div className="w-full h-full rounded-full bg-[radial-gradient(circle,#1DD1A1/15_0%,transparent_70%)]"></div>
+        </div>
+        
+        {/* Custom animation keyframes */}
+        <style jsx global>{`
+          @keyframes pulse {
+            0% { opacity: 0.2; transform: scale(0.98); }
+            100% { opacity: 0.35; transform: scale(1.02); }
+          }
+          @keyframes pulse-delay {
+            0% { opacity: 0.15; transform: scale(0.95); }
+            100% { opacity: 0.3; transform: scale(1.05); }
+          }
+          @keyframes pulse-fast {
+            0% { opacity: 0.1; transform: scale(0.9); }
+            100% { opacity: 0.2; transform: scale(1.1); }
+          }
+        `}</style>
+        
+        {/* Subtle vignette effect */}
         <div className="absolute inset-0" style={{
-          background: 'radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.7) 100%)'
+          background: 'radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.3) 100%)'
         }}></div>
         
-        {/* Subtle blue accents */}
-        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue-900 to-transparent"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue-900 to-transparent"></div>
+        {/* Subtle green accents */}
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#1DD1A1] to-transparent opacity-60"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#00FF94] to-transparent opacity-60"></div>
       </div>
       
       {/* Clean product header */}
-      <div className="pt-16 pb-4 bg-gradient-to-b from-black/90 to-transparent">
+      <div className="pt-16 pb-4 bg-gradient-to-b from-[#1C1C1E]/90 to-transparent">
         <div className="container mx-auto px-4">
           <div className="flex items-center text-sm text-gray-400 mb-1">
             <a href="/" className="hover:text-white transition-colors">Home</a>
@@ -322,7 +338,6 @@ const ProductDetail = () => {
               {product.category}
             </a>
           </div>
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2">{product.name}</h1>
         </div>
       </div>
 
@@ -394,7 +409,7 @@ const ProductDetail = () => {
                   key={index}
                   onClick={() => setSelectedImage(index)}
                   className={`cursor-pointer rounded-lg overflow-hidden transition-all duration-300 ${selectedImage === index 
-                    ? 'ring-2 ring-[#efc75e] ring-offset-2 ring-offset-black scale-105 shadow-lg shadow-[#efc75e]/10' 
+                    ? 'ring-2 ring-[#00FF94] ring-offset-2 ring-offset-[#0A0F2C] scale-105 shadow-lg shadow-[#00FF94]/10' 
                     : 'border border-gray-800 hover:border-gray-600 hover:shadow-md hover:shadow-black/50'}`}
                   aria-label={`View product image ${index + 1}`}
                 >
@@ -419,19 +434,19 @@ const ProductDetail = () => {
             
             {/* Trust signals under photos - styled to match right content */}
             <div className="mt-13 mb-5">
-              <div className="inline-flex items-center justify-between w-full bg-gradient-to-r from-black/40 to-gray-800/20 rounded-lg py-5 px-6 backdrop-blur-sm border border-gray-800/50">
+              <div className="inline-flex items-center justify-between w-full bg-gradient-to-r from-[#1C1C1E]/70 to-[#0A0F2C]/60 rounded-lg py-5 px-6 backdrop-blur-sm border border-[#1DD1A1]/20 shadow-inner shadow-[#00FF94]/5">
                 <div className="flex items-center">
-                  <div className="w-12 h-12 rounded-full bg-black/50 flex items-center justify-center border border-[#efc75e]/30 mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#efc75e]" viewBox="0 0 20 20" fill="currentColor">
+                  <div className="w-12 h-12 rounded-full bg-[#0A0F2C]/70 flex items-center justify-center border border-[#1DD1A1]/40 mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#00FF94]" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                     </svg>
                   </div>
                   <span className="text-white text-lg font-medium">Secure Checkout</span>
                 </div>
                 
-                <div className="flex items-center pl-4 border-l border-gray-700/30">
-                  <div className="w-12 h-12 rounded-full bg-black/50 flex items-center justify-center border border-[#efc75e]/30 mx-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#efc75e]" viewBox="0 0 20 20" fill="currentColor">
+                <div className="flex items-center pl-4 border-l border-[#1DD1A1]/20">
+                  <div className="w-12 h-12 rounded-full bg-[#0A0F2C]/70 flex items-center justify-center border border-[#1DD1A1]/40 mx-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#00FF94]" viewBox="0 0 20 20" fill="currentColor">
                       <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
                       <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1v-1h5a1 1 0 001-1v-1h1a1 1 0 100-2h-1V6a1 1 0 00-1-1h-5a1 1 0 00-1 1v1H3V5a1 1 0 00-1-1z" />
                     </svg>
@@ -439,18 +454,18 @@ const ProductDetail = () => {
                   <span className="text-white text-lg font-medium">Free Shipping</span>
                 </div>
                 
-                <div className="flex items-center pl-4 border-l border-gray-700/30">
-                  <div className="w-12 h-12 rounded-full bg-black/50 flex items-center justify-center border border-[#efc75e]/30 mx-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#efc75e]" viewBox="0 0 20 20" fill="currentColor">
+                <div className="flex items-center pl-4 border-l border-[#1DD1A1]/20">
+                  <div className="w-12 h-12 rounded-full bg-[#0A0F2C]/70 flex items-center justify-center border border-[#1DD1A1]/40 mx-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#00FF94]" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clipRule="evenodd" />
                     </svg>
                   </div>
                   <span className="text-white text-lg font-medium">Easy Returns</span>
                 </div>
                 
-                <div className="flex items-center pl-4 border-l border-gray-700/30">
-                  <div className="w-12 h-12 rounded-full bg-black/50 flex items-center justify-center border border-[#efc75e]/30 mx-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#efc75e]" viewBox="0 0 20 20" fill="currentColor">
+                <div className="flex items-center pl-4 border-l border-[#1DD1A1]/20">
+                  <div className="w-12 h-12 rounded-full bg-[#0A0F2C]/70 flex items-center justify-center border border-[#1DD1A1]/40 mx-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#00FF94]" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clipRule="evenodd" />
                     </svg>
                   </div>
@@ -458,79 +473,41 @@ const ProductDetail = () => {
                 </div>
               </div>
             </div>
-            
-            {/* Product highlights */}
-            <div className="mt-6 mb-4 border-t border-gray-800 pt-4">
-              <h3 className="text-white font-semibold mb-3">Why Choose StrivFitness</h3>
-              <div className="grid grid-cols-1 gap-2">
-                <div className="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#efc75e] mr-2 mt-0.5 cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span className="text-gray-300">Premium quality materials for maximum durability</span>
-                </div>
-                <div className="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#efc75e] mr-2 mt-0.5 cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span className="text-gray-300">Designed by athletes for optimal performance</span>
-                </div>
-                <div className="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#efc75e] mr-2 mt-0.5 cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span className="text-gray-300">Exclusive StrivFitness design with premium finish</span>
-                </div>
-                <div className="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#efc75e] mr-2 mt-0.5 cursor-pointer" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span className="text-gray-300">Scientifically tested for enhanced workout results</span>
-                </div>
-              </div>
-            </div>
-            
-
           </div>
 
           {/* Product Info - Right Column */}
-          <div className="w-full lg:w-1/2 lg:sticky lg:top-24 self-start bg-black/60 backdrop-blur-sm p-6 rounded-xl border border-gray-800 shadow-xl shadow-black/30 relative" style={{height: "fit-content"}}>
+          <div className="w-full lg:w-1/2 lg:sticky lg:top-24 self-start bg-[#0A0F2C]/60 backdrop-blur-sm p-6 rounded-xl border border-gray-800 shadow-xl shadow-[#0A0F2C]/30 relative" style={{height: "fit-content"}}>
             {/* Favorite and share buttons - top right */}
             <div className="absolute top-4 right-4 flex space-x-3">
-              <button className="text-gray-400 hover:text-[#efc75e] transition-colors cursor-pointer" title="Add to Wishlist">
+              <button className="text-gray-400 hover:text-[#00FF94] transition-colors cursor-pointer" title="Add to Wishlist">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                 </svg>
               </button>
-              <button onClick={handleShareProduct} className="text-gray-400 hover:text-[#efc75e] transition-colors cursor-pointer" title="Share Product">
+              <button onClick={handleShareProduct} className="text-gray-400 hover:text-[#00FF94] transition-colors cursor-pointer" title="Share Product">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
                 </svg>
               </button>
             </div>
             
-            {/* Product badges and gender in one row */}
+            {/* Product title first */}
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 heading-font tracking-wide leading-tight">
+              {product.name}
+            </h1>
+            
+            {/* Product badges and gender in one row - discount removed */}
             <div className="flex flex-wrap gap-2 mb-2">
               {product.gender && product.gender !== 'all' && (
                 <span className="text-gray-300 text-sm capitalize bg-gray-800/50 px-2 py-0.5 rounded">{product.gender}</span>
               )}
-              {product.discount > 0 && (
-                <span className="bg-red-500/10 text-red-400 text-xs font-bold px-3 py-1.5 rounded-full border border-red-500/20 uppercase tracking-wider shadow-sm shadow-red-500/10 animate-pulse">
-                  {product.discount}% OFF
-                </span>
-              )}
             </div>
-            
-            {/* Product title - moved back down */}
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 heading-font tracking-wide leading-tight">
-              {product.name}
-            </h1>
             
             {/* Limited time offer countdown removed */}
             
             {/* Star ratings */}
             <div className="flex items-center mb-4">
-              <div className="flex text-[#efc75e]">
+              <div className="flex text-[#00FF94]">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <svg key={star} xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -547,15 +524,15 @@ const ProductDetail = () => {
                   <span className="text-gray-400 text-lg line-through mr-3">
                     ${product.price.toFixed(2)}
                   </span>
-                  <span className="text-[#efc75e] text-2xl md:text-3xl font-bold">
+                  <span className="text-[#00FF94] text-2xl md:text-3xl font-bold">
                     ${calculateDiscountedPrice(product.price, product.discount).toFixed(2)}
                   </span>
-                  <span className="ml-3 bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded">
+                  <span className="ml-3 bg-[#1DD1A1]/20 text-[#00FF94] text-xs font-bold px-2 py-1 rounded border border-[#1DD1A1]/30">
                     SAVE ${(product.price - calculateDiscountedPrice(product.price, product.discount)).toFixed(2)}
                   </span>
                 </div>
               ) : (
-                <span className="text-[#efc75e] text-2xl md:text-3xl font-bold">
+                <span className="text-[#00FF94] text-2xl md:text-3xl font-bold">
                   ${product.price.toFixed(2)}
                 </span>
               )}
@@ -573,19 +550,19 @@ const ProductDetail = () => {
               <h3 className="text-white font-semibold mb-3">Key Benefits</h3>
               <ul className="space-y-2">
                 <li className="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#efc75e] mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#00FF94] mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   <span className="text-gray-300">Premium quality materials for durability</span>
                 </li>
                 <li className="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#efc75e] mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#00FF94] mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   <span className="text-gray-300">Designed for optimal workout performance</span>
                 </li>
                 <li className="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#efc75e] mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#00FF94] mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   <span className="text-gray-300">Exclusive StrivFitness design</span>
@@ -596,51 +573,51 @@ const ProductDetail = () => {
             {/* Product specifications */}
             <div className="mb-6 border-t border-gray-800 pt-4">
               <h3 className="text-white font-semibold mb-3">Product Specifications</h3>
-              <div className="inline-flex items-center justify-between w-full bg-gradient-to-r from-black/40 to-gray-800/20 rounded-lg py-2 px-3 backdrop-blur-sm border border-gray-800/50">
+              <div className="inline-flex items-center justify-between w-full bg-gradient-to-r from-[#0A0F2C]/70 to-[#1C1C1E]/50 rounded-lg py-2 px-3 backdrop-blur-sm border border-[#1DD1A1]/20 shadow-inner shadow-[#00FF94]/5">
                 <div className="flex items-center mr-6">
-                  <div className="w-6 h-6 rounded-full bg-black/50 flex items-center justify-center border border-[#efc75e]/30 mr-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-[#efc75e]" viewBox="0 0 20 20" fill="currentColor">
+                  <div className="w-6 h-6 rounded-full bg-[#1C1C1E]/70 flex items-center justify-center border border-[#1DD1A1]/40 mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-[#00FF94]" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
                     </svg>
                   </div>
                   <div>
-                    <span className="text-[#efc75e] text-xs uppercase tracking-wide font-medium block">Material</span>
+                    <span className="text-[#00FF94] text-xs uppercase tracking-wide font-medium block">Material</span>
                     <p className="text-white text-sm font-medium">{product.material || 'Premium Blend'}</p>
                   </div>
                 </div>
                 
-                <div className="flex items-center mr-6 pl-6 border-l border-gray-700/30">
-                  <div className="w-6 h-6 rounded-full bg-black/50 flex items-center justify-center border border-[#efc75e]/30 mr-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-[#efc75e]" viewBox="0 0 20 20" fill="currentColor">
+                <div className="flex items-center mr-6 pl-6 border-l border-[#1DD1A1]/20">
+                  <div className="w-6 h-6 rounded-full bg-[#1C1C1E]/70 flex items-center justify-center border border-[#1DD1A1]/40 mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-[#00FF94]" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clipRule="evenodd" />
                     </svg>
                   </div>
                   <div>
-                    <span className="text-[#efc75e] text-xs uppercase tracking-wide font-medium block">Weight</span>
+                    <span className="text-[#00FF94] text-xs uppercase tracking-wide font-medium block">Weight</span>
                     <p className="text-white text-sm font-medium">{product.weight || '0.5 kg'}</p>
                   </div>
                 </div>
                 
-                <div className="flex items-center mr-6 pl-6 border-l border-gray-700/30">
-                  <div className="w-6 h-6 rounded-full bg-black/50 flex items-center justify-center border border-[#efc75e]/30 mr-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-[#efc75e]" viewBox="0 0 20 20" fill="currentColor">
+                <div className="flex items-center mr-6 pl-6 border-l border-[#1DD1A1]/20">
+                  <div className="w-6 h-6 rounded-full bg-[#1C1C1E]/70 flex items-center justify-center border border-[#1DD1A1]/40 mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-[#00FF94]" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clipRule="evenodd" />
                     </svg>
                   </div>
                   <div>
-                    <span className="text-[#efc75e] text-xs uppercase tracking-wide font-medium block">Color</span>
+                    <span className="text-[#00FF94] text-xs uppercase tracking-wide font-medium block">Color</span>
                     <p className="text-white text-sm font-medium">{product.color || 'Black/Gold'}</p>
                   </div>
                 </div>
                 
-                <div className="flex items-center pl-6 border-l border-gray-700/30">
-                  <div className="w-6 h-6 rounded-full bg-black/50 flex items-center justify-center border border-[#efc75e]/30 mr-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-[#efc75e]" viewBox="0 0 20 20" fill="currentColor">
+                <div className="flex items-center pl-6 border-l border-[#1DD1A1]/20">
+                  <div className="w-6 h-6 rounded-full bg-[#1C1C1E]/70 flex items-center justify-center border border-[#1DD1A1]/40 mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-[#00FF94]" viewBox="0 0 20 20" fill="currentColor">
                       <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
                     </svg>
                   </div>
                   <div>
-                    <span className="text-[#efc75e] text-xs uppercase tracking-wide font-medium block">Size</span>
+                    <span className="text-[#00FF94] text-xs uppercase tracking-wide font-medium block">Size</span>
                     <p className="text-white text-sm font-medium">{product.size || 'Universal'}</p>
                   </div>
                 </div>
@@ -661,9 +638,9 @@ const ProductDetail = () => {
                   <div className="flex items-center">
                     <button 
                       onClick={decrementQuantity}
-                      className="bg-gradient-to-r from-black/60 to-gray-900/60 border border-gray-700 text-white w-14 h-14 rounded-l-lg hover:bg-black/60 hover:border-[#efc75e]/50 transition-all active:bg-[#efc75e]/10 flex items-center justify-center shadow-inner shadow-black/50 group"
+                      className="bg-gradient-to-r from-[#0A0F2C]/60 to-[#1C1C1E]/60 border border-gray-700 text-white w-14 h-14 rounded-l-lg hover:bg-[#0A0F2C]/60 hover:border-[#00FF94]/50 transition-all active:bg-[#00FF94]/10 flex items-center justify-center shadow-inner shadow-black/50 group cursor-pointer"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400 group-hover:text-[#efc75e] transition-colors" viewBox="0 0 20 20" fill="currentColor">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400 group-hover:text-[#00FF94] transition-colors" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
                       </svg>
                     </button>
@@ -677,9 +654,9 @@ const ProductDetail = () => {
                     </div>
                     <button 
                       onClick={incrementQuantity}
-                      className="bg-gradient-to-r from-black/60 to-gray-900/60 border border-gray-700 text-white w-14 h-14 rounded-r-lg hover:bg-black/60 hover:border-[#efc75e]/50 transition-all active:bg-[#efc75e]/10 flex items-center justify-center shadow-inner shadow-black/50 group"
+                      className="bg-gradient-to-r from-[#0A0F2C]/60 to-[#1C1C1E]/60 border border-gray-700 text-white w-14 h-14 rounded-r-lg hover:bg-[#0A0F2C]/60 hover:border-[#00FF94]/50 transition-all active:bg-[#00FF94]/10 flex items-center justify-center shadow-inner shadow-black/50 group cursor-pointer"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400 group-hover:text-[#efc75e] transition-colors" viewBox="0 0 20 20" fill="currentColor">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400 group-hover:text-[#00FF94] transition-colors" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
                       </svg>
                     </button>
@@ -698,7 +675,7 @@ const ProductDetail = () => {
                 className={`w-full py-4 px-6 rounded-lg font-bold text-lg flex items-center justify-center transition-all duration-300 relative overflow-hidden ${
                   product.stock === 0 
                     ? 'bg-gray-700/30 text-gray-500 cursor-not-allowed' 
-                    : 'bg-[#efc75e] text-black hover:bg-[#efc75e]/90 hover:shadow-[0_5px_15px_rgba(239,199,94,0.4)]'
+                    : 'bg-gradient-to-r from-[#00FF94] to-[#1DD1A1] text-[#0A0F2C] hover:shadow-[0_5px_15px_rgba(0,255,148,0.4)] cursor-pointer'
                 }`}
               >
                 {product.stock > 0 && (
@@ -721,7 +698,7 @@ const ProductDetail = () => {
                     handleAddToCart();
                     // Navigate to checkout would go here
                   }}
-                  className="w-full py-4 px-6 rounded-lg font-bold text-lg flex items-center justify-center transition-all duration-300 bg-white/10 text-white border border-[#efc75e]/30 hover:bg-white/20 hover:border-[#efc75e]/50"
+                  className="w-full py-4 px-6 rounded-lg font-bold text-lg flex items-center justify-center transition-all duration-300 bg-white/10 text-white border border-[#00FF94]/30 hover:bg-white/20 hover:border-[#00FF94]/50 cursor-pointer"
                 >
                   <span className="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" viewBox="0 0 20 20" fill="currentColor">
@@ -734,7 +711,7 @@ const ProductDetail = () => {
               
               {/* Satisfaction guarantee */}
               <div className="flex items-center justify-center mt-4 text-gray-400 text-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#efc75e] mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#00FF94] mr-2" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span>30-Day Money-Back Guarantee</span>

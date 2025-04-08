@@ -1,8 +1,9 @@
-import React, { useEffect, lazy, Suspense } from "react";
+import React, { useEffect, lazy, Suspense, createContext } from "react";
 import Navbar from "./components/Navbar";
 import SaleTopBar from "./components/SaleTopBar";
 import HeroSection from "./components/Home Page/HeroSection";
 import Footer from "./components/Footer";
+import { useCart } from "./hooks/useCart";
 
 // Lazy load non-critical components
 const FeaturedProducts = lazy(() =>
@@ -22,9 +23,23 @@ const NewsletterSection = lazy(() =>
 // Lazy load pages
 const Collections = lazy(() => import("./components/Collections/Collections"));
 const ProductDetail = lazy(() => import("./components/Product/ProductDetail"));
+const CartPage = lazy(() => import("./components/Cart/CartPage"));
 
 // Simple loading fallback that doesn't cause layout shifts
 const LoadingFallback = () => <div className="h-96 bg-black"></div>;
+
+// Create CartContext
+export const CartContext = createContext();
+
+// Create CartProvider component
+const CartProvider = ({ children }) => {
+  const cartContext = useCart();
+  return (
+    <CartContext.Provider value={cartContext}>
+      {children}
+    </CartContext.Provider>
+  );
+};
 
 const App = () => {
   // Optimize initial load
@@ -99,12 +114,14 @@ const App = () => {
   const currentPath = window.location.pathname;
   const isShopPage = currentPath.startsWith('/shop/');
   const isProductPage = currentPath.startsWith('/product/');
+  const isCartPage = currentPath.startsWith('/cart');
 
   return (
-    <div className="min-h-screen w-full relative overflow-x-hidden">
-      {/* Main content */}
-      <SaleTopBar />
-      <Navbar />
+    <CartProvider>
+      <div className="min-h-screen w-full relative overflow-x-hidden">
+        {/* Main content */}
+        <SaleTopBar />
+        <Navbar />
       
       {isShopPage ? (
         <Suspense fallback={<LoadingFallback />}>
@@ -113,6 +130,10 @@ const App = () => {
       ) : isProductPage ? (
         <Suspense fallback={<LoadingFallback />}>
           <ProductDetail />
+        </Suspense>
+      ) : isCartPage ? (
+        <Suspense fallback={<LoadingFallback />}>
+          <CartPage />
         </Suspense>
       ) : (
         <main className="section-container">
@@ -139,7 +160,8 @@ const App = () => {
       )}
       
       <Footer />
-    </div>
+      </div>
+    </CartProvider>
   );
 };
 

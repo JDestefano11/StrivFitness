@@ -59,12 +59,12 @@ const SortDropdown = ({ value, onChange }) => {
         onClick={toggleDropdown}
         type="button"
         ref={buttonRef}
-        className={`bg-black/40 border ${isOpen ? 'border-[#efc75e]' : 'border-gray-700'} rounded-lg py-2 px-4 text-white flex items-center justify-between min-w-[180px] hover:border-[#efc75e]/50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#efc75e]/30 relative cursor-pointer`}
+        className={`bg-gradient-to-r from-black to-[#111827] border ${isOpen ? 'border-[#1DD1A1]' : 'border-[#1DD1A1]/40'} rounded-lg py-2 px-4 text-white flex items-center justify-between min-w-[180px] hover:border-[#1DD1A1]/70 transition-colors focus:outline-none focus:ring-2 focus:ring-[#1DD1A1]/30 relative cursor-pointer shadow-inner shadow-black/20`}
         aria-haspopup="true"
         aria-expanded={isOpen}
       >
         <span className="flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 text-[#efc75e]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 text-[#1DD1A1]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
           </svg>
           <span className="font-medium">{selectedOption.label}</span>
@@ -87,12 +87,12 @@ const SortDropdown = ({ value, onChange }) => {
         >
           <div 
             ref={dropdownRef}
-            className={`absolute bg-black/95 backdrop-blur-md border border-[#efc75e]/50 rounded-lg shadow-xl z-[9999] overflow-hidden pointer-events-auto`}
+            className={`absolute bg-gradient-to-b from-black to-[#111827]/95 backdrop-blur-md border border-[#1DD1A1]/40 rounded-lg shadow-xl z-[9999] overflow-hidden pointer-events-auto`}
             style={{ 
               top: `${buttonPosition.top}px`,
               left: `${buttonPosition.left}px`,
               width: `${buttonPosition.width}px`,
-              boxShadow: '0 10px 25px rgba(0, 0, 0, 0.8), 0 0 10px rgba(239, 199, 94, 0.3)',
+              boxShadow: '0 10px 25px rgba(0, 0, 0, 0.8), 0 0 15px rgba(29, 209, 161, 0.3)',
               animation: 'dropdownFadeIn 0.2s ease-out'
             }}
             onClick={(e) => e.stopPropagation()}
@@ -104,12 +104,12 @@ const SortDropdown = ({ value, onChange }) => {
                   onClick={() => handleSelect(option.value)}
                   className={`w-full text-left px-4 py-2 text-sm ${
                     value === option.value
-                      ? "bg-[#efc75e]/20 text-[#efc75e] font-medium"
-                      : "text-gray-300 hover:bg-gray-800 hover:text-[#efc75e]/80"
+                      ? "bg-[#1DD1A1]/20 text-[#1DD1A1] font-medium"
+                      : "text-gray-300 hover:bg-black/50 hover:text-[#1DD1A1]"
                   } transition-colors duration-150 flex items-center`}
                 >
                   {value === option.value ? (
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 text-[#efc75e]" viewBox="0 0 20 20" fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 text-[#1DD1A1]" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   ) : (

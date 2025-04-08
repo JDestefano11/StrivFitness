@@ -7,7 +7,7 @@ const WhyChooseUs = () => {
     {
       icon: (
         <svg
-          className="w-10 h-10 text-[#efc75e]"
+          className="w-10 h-10 text-[#00FF94]"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -28,7 +28,7 @@ const WhyChooseUs = () => {
     {
       icon: (
         <svg
-          className="w-10 h-10 text-[#efc75e]"
+          className="w-10 h-10 text-[#00FF94]"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -49,7 +49,7 @@ const WhyChooseUs = () => {
     {
       icon: (
         <svg
-          className="w-10 h-10 text-[#efc75e]"
+          className="w-10 h-10 text-[#00FF94]"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -70,7 +70,7 @@ const WhyChooseUs = () => {
     {
       icon: (
         <svg
-          className="w-10 h-10 text-[#efc75e]"
+          className="w-10 h-10 text-[#00FF94]"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -101,7 +101,7 @@ const WhyChooseUs = () => {
 
   return (
     <section className="py-20 md:py-24 relative overflow-hidden">
-      {/* Gold accent lines */}
+      {/* Brand accent lines */}
       <div className="gold-accent-top"></div>
       <div className="gold-accent-bottom"></div>
 
@@ -109,18 +109,18 @@ const WhyChooseUs = () => {
         {/* Section title */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center justify-center mb-3">
-            <span className="h-[1px] w-10 bg-gradient-to-r from-transparent to-[#efc75e]"></span>
-            <span className="mx-4 text-[#efc75e] text-sm font-bold tracking-widest uppercase accent-font">
-              Why Choose Us
+            <span className="h-[1px] w-10 bg-gradient-to-r from-transparent to-[#00FF94]"></span>
+            <span className="mx-4 text-[#00FF94] text-sm font-bold tracking-widest uppercase accent-font">
+              Our Promise
             </span>
-            <span className="h-[1px] w-10 bg-gradient-to-l from-transparent to-[#efc75e]"></span>
+            <span className="h-[1px] w-10 bg-gradient-to-l from-transparent to-[#00FF94]"></span>
           </div>
 
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 heading-font tracking-wide uppercase">
             Transform Your{" "}
-            <span className="text-[#efc75e] relative">
+            <span className="text-[#00FF94] relative">
               Fitness Journey
-              <span className="absolute bottom-0 left-0 w-full h-[3px] bg-[#efc75e]/30"></span>
+              <span className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#00FF94]/30 to-[#1DD1A1]/30"></span>
             </span>
           </h2>
 
@@ -182,19 +182,19 @@ const WhyChooseUs = () => {
 
                 {/* Decorative elements */}
                 <div className="absolute -top-4 -right-4 w-24 h-24 md:w-32 md:h-32">
-                  <div className="absolute top-0 right-0 w-full h-[2px] bg-gradient-to-l from-[#efc75e] to-transparent"></div>
-                  <div className="absolute top-0 right-0 h-full w-[2px] bg-gradient-to-b from-[#efc75e] to-transparent"></div>
+                  <div className="absolute top-0 right-0 w-full h-[2px] bg-gradient-to-l from-[#00FF94] to-transparent"></div>
+                  <div className="absolute top-0 right-0 h-full w-[2px] bg-gradient-to-b from-[#00FF94] to-transparent"></div>
                 </div>
                 <div className="absolute -bottom-4 -left-4 w-24 h-24 md:w-32 md:h-32">
-                  <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#efc75e] to-transparent"></div>
-                  <div className="absolute bottom-0 left-0 h-full w-[2px] bg-gradient-to-t from-[#efc75e] to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#1DD1A1] to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 h-full w-[2px] bg-gradient-to-t from-[#1DD1A1] to-transparent"></div>
                 </div>
               </div>
 
               {/* Enhanced Testimonial in place of the image */}
-              <div className="absolute -bottom-10 -right-10 w-48 h-48 md:w-64 md:h-64 rounded-xl overflow-hidden border-2 border-[#efc75e]/30 shadow-[0_0_15px_rgba(0,0,0,0.4)] z-20 bg-black/80 backdrop-blur-sm flex flex-col justify-center p-6">
+              <div className="absolute -bottom-10 -right-10 w-48 h-48 md:w-64 md:h-64 rounded-xl overflow-hidden border-2 border-[#00FF94]/30 shadow-[0_0_15px_rgba(0,255,148,0.3)] z-20 bg-[#0A0F2C]/80 backdrop-blur-sm flex flex-col justify-center p-6">
                 <svg
-                  className="w-10 h-10 text-[#efc75e] mb-3"
+                  className="w-10 h-10 text-[#00FF94] mb-3"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -204,14 +204,14 @@ const WhyChooseUs = () => {
                   {testimonial.quote}
                 </p>
                 <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-[#efc75e] flex items-center justify-center text-black font-bold mr-3">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-[#00FF94] to-[#1DD1A1] flex items-center justify-center text-[#0A0F2C] font-bold mr-3">
                     {testimonial.initials}
                   </div>
                   <div>
                     <p className="text-white font-bold text-sm">
                       {testimonial.name}
                     </p>
-                    <p className="text-[#efc75e] text-xs">
+                    <p className="text-[#1DD1A1] text-xs">
                       {testimonial.title}
                     </p>
                   </div>
@@ -225,10 +225,10 @@ const WhyChooseUs = () => {
         <div className="mt-16 text-center">
           <a
             href="/shop"
-            className="inline-flex items-center justify-center bg-[#efc75e] text-black font-bold px-8 py-3 rounded-md relative overflow-hidden group transition-all duration-300 ease-out transform hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(239,199,94,0.5)] button-font tracking-wider uppercase text-sm md:text-base"
+            className="inline-flex items-center justify-center bg-gradient-to-r from-[#00FF94] to-[#1DD1A1] text-[#0A0F2C] font-bold px-8 py-3 rounded-md relative overflow-hidden group transition-all duration-300 ease-out transform hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(0,255,148,0.5)] button-font tracking-wider uppercase text-sm md:text-base"
           >
             <span className="relative z-10">Shop Premium Fitness Gear</span>
-            <span className="absolute inset-0 bg-gradient-to-r from-[#f5d57b] to-[#efc75e] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+            <span className="absolute inset-0 bg-gradient-to-r from-[#1DD1A1] to-[#00FF94] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-black group-hover:w-full transition-all duration-300 ease-out"></span>
           </a>
         </div>

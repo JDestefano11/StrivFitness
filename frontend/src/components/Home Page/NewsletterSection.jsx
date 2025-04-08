@@ -56,9 +56,9 @@ const NewsletterSection = () => {
   
   return (
     <section className="py-20 relative overflow-hidden">
-      {/* Gold accent lines */}
-      <div className="gold-accent-top"></div>
-      <div className="gold-accent-bottom"></div>
+      {/* Accent lines with new brand colors */}
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#00FF94]/30 to-transparent"></div>
+      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#1DD1A1]/30 to-transparent"></div>
       
       <div className="container mx-auto px-4 relative z-20">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10">
@@ -67,14 +67,14 @@ const NewsletterSection = () => {
             {/* Section heading - aligned left */}
             <div className="mb-8 text-left">
               <div className="inline-flex items-center mb-3">
-                <span className="text-[#efc75e] text-sm font-bold tracking-widest uppercase accent-font">
+                <span className="text-[#00FF94] text-sm font-bold tracking-widest uppercase accent-font">
                   Stay Updated
                 </span>
-                <span className="ml-4 h-[1px] w-10 bg-gradient-to-l from-[#efc75e] to-transparent"></span>
+                <span className="ml-4 h-[1px] w-10 bg-gradient-to-l from-[#00FF94] to-transparent"></span>
               </div>
               
               <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 heading-font tracking-wide uppercase">
-                Gain The <span className="text-[#efc75e]">Edge</span>
+                Gain The <span className="text-[#1DD1A1]">Edge</span>
               </h2>
               
               <p className="text-gray-300 text-base md:text-lg body-font mb-8">
@@ -115,7 +115,7 @@ const NewsletterSection = () => {
                 }
               ].map((benefit, index) => (
                 <div key={index} className="flex items-start space-x-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#efc75e]/10 flex items-center justify-center text-[#efc75e]">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#00FF94]/10 flex items-center justify-center text-[#00FF94]">
                     {benefit.icon}
                   </div>
                   <div>
@@ -134,7 +134,7 @@ const NewsletterSection = () => {
               className="relative transition-all duration-500 group"
             >
               {/* Form background with glow effect */}
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#efc75e]/0 via-[#efc75e]/30 to-[#efc75e]/0 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00FF94]/0 via-[#00FF94]/30 to-[#1DD1A1]/30 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
               
               <div className="relative bg-black/80 backdrop-blur-sm p-8 md:p-10 rounded-lg border border-gray-800 shadow-xl">
                 {isSuccess ? (
@@ -171,7 +171,7 @@ const NewsletterSection = () => {
                             onFocus={handleFocus}
                             onBlur={handleBlur}
                             placeholder="Your email address"
-                            className="w-full bg-black/50 border border-gray-700 focus:border-[#efc75e] text-white px-4 py-3 rounded-lg outline-none transition-all duration-300 body-font placeholder-gray-500"
+                            className="w-full bg-black/50 border border-gray-700 focus:border-[#00FF94] text-white px-4 py-3 rounded-lg outline-none transition-all duration-300 body-font placeholder-gray-500"
                             disabled={isSubmitting}
                           />
                           {isError && (
@@ -184,7 +184,7 @@ const NewsletterSection = () => {
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="relative px-6 py-3 bg-gradient-to-r from-[#efc75e] to-[#d9b04d] text-black font-bold rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(239,199,94,0.4)] disabled:opacity-70 disabled:cursor-not-allowed heading-font uppercase tracking-wider"
+                          className="relative px-6 py-3 bg-gradient-to-r from-[#00FF94] to-[#1DD1A1] text-[#0A0F2C] font-bold rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,255,148,0.4)] disabled:opacity-70 disabled:cursor-not-allowed heading-font uppercase tracking-wider"
                         >
                           {isSubmitting ? (
                             <span className="flex items-center justify-center">
@@ -213,12 +213,12 @@ const NewsletterSection = () => {
                 
                 {/* Decorative elements */}
                 <div className="absolute -top-4 -right-4 w-24 h-24 md:w-32 md:h-32 pointer-events-none">
-                  <div className="absolute top-0 right-0 w-full h-[2px] bg-gradient-to-l from-[#efc75e] to-transparent"></div>
-                  <div className="absolute top-0 right-0 h-full w-[2px] bg-gradient-to-b from-[#efc75e] to-transparent"></div>
+                  <div className="absolute top-0 right-0 w-full h-[2px] bg-gradient-to-l from-[#00FF94] to-transparent"></div>
+                  <div className="absolute top-0 right-0 h-full w-[2px] bg-gradient-to-b from-[#00FF94] to-transparent"></div>
                 </div>
                 <div className="absolute -bottom-4 -left-4 w-24 h-24 md:w-32 md:h-32 pointer-events-none">
-                  <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#efc75e] to-transparent"></div>
-                  <div className="absolute bottom-0 left-0 h-full w-[2px] bg-gradient-to-t from-[#efc75e] to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#1DD1A1] to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 h-full w-[2px] bg-gradient-to-t from-[#1DD1A1] to-transparent"></div>
                 </div>
               </div>
             </div>

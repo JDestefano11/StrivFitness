@@ -206,8 +206,8 @@ const Collections = () => {
   // Render loading state
   if (loading) {
     return (
-      <section className="py-16 relative bg-black min-h-screen">
-        <div className="gold-accent-top"></div>
+      <section className="py-16 relative bg-[#0A0F2C] min-h-screen">
+        <div className="accent-top"></div>
         <div className="container mx-auto px-4 relative z-10 pt-24">
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-white mb-4 heading-font tracking-wide">
@@ -232,7 +232,7 @@ const Collections = () => {
             </div>
           </div>
         </div>
-        <div className="gold-accent-bottom"></div>
+        <div className="accent-bottom"></div>
       </section>
     );
   }
@@ -240,8 +240,8 @@ const Collections = () => {
   // Render error state
   if (error) {
     return (
-      <section className="py-16 relative bg-black min-h-screen">
-        <div className="gold-accent-top"></div>
+      <section className="py-16 relative bg-[#0A0F2C] min-h-screen">
+        <div className="accent-top"></div>
         <div className="container mx-auto px-4 relative z-10 pt-24">
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-white mb-4 heading-font tracking-wide">
@@ -257,20 +257,81 @@ const Collections = () => {
             <p className="text-gray-400 mb-4">{error}</p>
             <button 
               onClick={fetchProducts}
-              className="bg-[#efc75e] text-black px-6 py-2 rounded-lg font-medium hover:bg-[#f5d78e] transition-colors"
+              className="bg-gradient-to-r from-[#00FF94] to-[#1DD1A1] text-[#0A0F2C] px-6 py-2 rounded-lg font-medium hover:shadow-[0_0_15px_rgba(0,255,148,0.4)] transition-all duration-300"
             >
               Try Again
             </button>
           </div>
         </div>
-        <div className="gold-accent-bottom"></div>
+        <div className="accent-bottom"></div>
       </section>
     );
   }
 
   return (
-    <section className="py-16 relative bg-black min-h-screen">
-      <div className="gold-accent-top"></div>
+    <section className="py-16 relative min-h-screen">
+      {/* Override global styles */}
+      <style jsx global>{`
+        body {
+          background: linear-gradient(135deg, #050B20 0%, #0A1428 100%) !important;
+        }
+        body::before, body::after {
+          display: none !important;
+        }
+        
+        @keyframes pulse {
+          0% { opacity: 0.8; transform: scale(0.98); }
+          100% { opacity: 1; transform: scale(1.02); }
+        }
+        
+        @keyframes float {
+          0% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+          100% { transform: translateY(0px); }
+        }
+      `}</style>
+      {/* Premium background with very prominent green gradient circle */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Rich dark blue base with gradient */}
+        <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#050B20] to-[#0A1428]"></div>
+        
+        {/* Main green gradient background */}
+        <div className="absolute inset-0 w-full h-full opacity-40"
+          style={{
+            background: 'linear-gradient(135deg, rgba(29, 209, 161, 0.1) 0%, rgba(0, 255, 148, 0.05) 100%)'
+          }}
+        ></div>
+        
+        {/* Large central gradient circle */}
+        <div 
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[150vh] h-[150vh]"
+          style={{
+            background: 'radial-gradient(circle, rgba(29, 209, 161, 0.2) 0%, rgba(0, 255, 148, 0.1) 40%, transparent 70%)',
+            animation: 'pulse 15s infinite alternate ease-in-out',
+            filter: 'blur(30px)'
+          }}
+        ></div>
+        
+        {/* Top-right floating accent */}
+        <div 
+          className="absolute top-[10%] right-[10%] w-[30vw] h-[30vw] max-w-[300px] max-h-[300px]"
+          style={{
+            background: 'radial-gradient(circle, rgba(0, 255, 148, 0.15) 0%, transparent 70%)',
+            filter: 'blur(20px)',
+            animation: 'float 20s infinite ease-in-out'
+          }}
+        ></div>
+        
+        {/* Bottom-left floating accent */}
+        <div 
+          className="absolute bottom-[10%] left-[10%] w-[25vw] h-[25vw] max-w-[250px] max-h-[250px]"
+          style={{
+            background: 'radial-gradient(circle, rgba(29, 209, 161, 0.15) 0%, transparent 70%)',
+            filter: 'blur(20px)',
+            animation: 'float 15s infinite ease-in-out reverse'
+          }}
+        ></div>
+      </div>
       <div className="container mx-auto px-4 relative z-10 pt-24">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-white mb-4 heading-font tracking-wide">
@@ -294,7 +355,7 @@ const Collections = () => {
           {/* Products grid */}
           <div className="w-full lg:w-3/4">
             {/* Sort and results info */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 bg-black/60 backdrop-blur-sm rounded-xl border border-gray-800 p-4 relative">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 bg-black/50 backdrop-blur-sm rounded-xl border border-[#1DD1A1]/30 p-4 relative">
               <div className="text-gray-400 mb-4 sm:mb-0">
                 Showing <span className="text-white font-medium">{filteredProducts.length}</span> of <span className="text-white font-medium">{products.length}</span> products
               </div>
@@ -308,7 +369,7 @@ const Collections = () => {
             
             {/* No results message */}
             {filteredProducts.length === 0 && (
-              <div className="bg-black/60 backdrop-blur-sm rounded-xl border border-gray-800 p-8 text-center">
+              <div className="bg-black/50 backdrop-blur-sm rounded-xl border border-[#1DD1A1]/30 p-8 text-center">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-gray-600 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -323,7 +384,7 @@ const Collections = () => {
                     featured: false,
                     searchQuery: "",
                   })}
-                  className="bg-[#efc75e] text-black px-6 py-2 rounded-lg font-medium hover:bg-[#f5d78e] transition-colors"
+                  className="bg-gradient-to-r from-[#1DD1A1] to-[#1DD1A1]/80 text-[#0A0F2C] px-6 py-2 rounded-lg font-medium hover:shadow-[0_0_15px_rgba(29,209,161,0.4)] transition-all duration-300"
                 >
                   Reset Filters
                 </button>
@@ -341,7 +402,7 @@ const Collections = () => {
           </div>
         </div>
       </div>
-      <div className="gold-accent-bottom"></div>
+      <div className="accent-bottom"></div>
     </section>
   );
 };

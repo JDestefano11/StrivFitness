@@ -12,15 +12,15 @@ const formatDate = (dateString) => {
 
 // Memorized Article Card component to prevent unnecessary re-renders
 const ArticleCard = memo(({ article }) => (
-  <div className="group relative overflow-hidden rounded-xl bg-gradient-to-b from-black/60 to-black/80 backdrop-blur-sm border border-gray-800/50 hover:border-[#efc75e] transition-all duration-300 h-full flex flex-col hover:shadow-[0_0_25px_rgba(239,199,94,0.2)] hover:-translate-y-1 cursor-pointer">
+  <div className="group relative overflow-hidden rounded-xl bg-gradient-to-b from-[#1C1C1E] to-[#111827] backdrop-blur-sm border border-[#1DD1A1]/30 hover:border-[#00FF94]/70 transition-all duration-300 h-full flex flex-col hover:shadow-[0_0_15px_rgba(0,255,148,0.3)] hover:-translate-y-1 cursor-pointer shadow-md shadow-black/30">
     {/* Animated corner accents */}
     <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-      <div className="absolute top-0 right-0 w-full h-[1px] bg-gradient-to-l from-[#efc75e] to-transparent transform origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-      <div className="absolute top-0 right-0 h-full w-[1px] bg-gradient-to-b from-[#efc75e] to-transparent transform origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500"></div>
+      <div className="absolute top-0 right-0 w-full h-[1px] bg-gradient-to-l from-[#00FF94] to-transparent transform origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+      <div className="absolute top-0 right-0 h-full w-[1px] bg-gradient-to-b from-[#00FF94] to-transparent transform origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500"></div>
     </div>
     <div className="absolute bottom-0 left-0 w-16 h-16 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#efc75e] to-transparent transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-      <div className="absolute bottom-0 left-0 h-full w-[1px] bg-gradient-to-t from-[#efc75e] to-transparent transform origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500"></div>
+      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#1DD1A1] to-transparent transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+      <div className="absolute bottom-0 left-0 h-full w-[1px] bg-gradient-to-t from-[#1DD1A1] to-transparent transform origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500"></div>
     </div>
     {/* Article image */}
     <div className="relative h-48 overflow-hidden">
@@ -41,7 +41,7 @@ const ArticleCard = memo(({ article }) => (
       
       {/* Category tag */}
       <div className="absolute top-3 left-3 z-20">
-        <span className="bg-[#efc75e] text-black text-xs px-3 py-1.5 rounded-md font-bold accent-font tracking-wide transform group-hover:scale-105 transition-transform duration-300 shadow-lg">
+        <span className="bg-gradient-to-r from-[#EF476F] to-[#FF4757] text-white text-xs px-3 py-1.5 rounded-md font-bold accent-font tracking-wide transform group-hover:scale-105 transition-transform duration-300 shadow-lg border border-white/10">
           {article.category}
         </span>
       </div>
@@ -49,7 +49,7 @@ const ArticleCard = memo(({ article }) => (
     
     {/* Content */}
     <div className="p-5 flex-grow flex flex-col">
-      <h3 className="text-white font-bold text-lg mb-3 group-hover:text-[#efc75e] transition-colors duration-300 heading-font leading-snug">
+      <h3 className="text-white font-bold text-lg mb-3 group-hover:text-[#00FF94] transition-colors duration-300 heading-font leading-snug">
         {article.title}
       </h3>
       
@@ -60,16 +60,16 @@ const ArticleCard = memo(({ article }) => (
       {/* Author and date */}
       <div className="flex items-center justify-between mt-auto">
         <div className="flex items-center">
-          <div className="w-8 h-8 rounded-full bg-[#efc75e]/10 border border-[#efc75e]/20 flex items-center justify-center text-[#efc75e] text-xs font-bold mr-2 group-hover:bg-[#efc75e]/20 group-hover:border-[#efc75e]/30 transition-all duration-300">
+          <div className="w-8 h-8 rounded-full bg-[#00FF94]/10 border border-[#00FF94]/20 flex items-center justify-center text-[#00FF94] text-xs font-bold mr-2 group-hover:bg-[#00FF94]/20 group-hover:border-[#00FF94]/30 transition-all duration-300">
             {article.author.split(' ').map(name => name[0]).join('')}
           </div>
           <div>
-            <p className="text-white text-xs font-medium heading-font group-hover:text-[#efc75e] transition-colors duration-300">{article.author}</p>
+            <p className="text-white text-xs font-medium heading-font group-hover:text-[#00FF94] transition-colors duration-300">{article.author}</p>
             <p className="text-gray-500 text-xs body-font group-hover:text-gray-400 transition-colors duration-300">{article.date}</p>
           </div>
         </div>
         
-        <div className="text-[#efc75e] text-xs flex items-center">
+        <div className="text-[#1DD1A1] text-xs flex items-center">
           <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
           </svg>
@@ -80,7 +80,7 @@ const ArticleCard = memo(({ article }) => (
     
     {/* Read More overlay */}
     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 bg-black/60 z-30">
-      <span className="px-6 py-2 border-2 border-[#efc75e] text-[#efc75e] rounded-md font-bold transform -translate-y-2 group-hover:translate-y-0 transition-transform duration-500 heading-font tracking-wide hover:bg-[#efc75e]/10">
+      <span className="px-6 py-2 border-2 border-[#00FF94] text-[#00FF94] rounded-md font-bold transform -translate-y-2 group-hover:translate-y-0 transition-transform duration-500 heading-font tracking-wide hover:bg-[#00FF94]/10">
         READ MORE
       </span>
     </div>
@@ -131,15 +131,15 @@ const ErrorDisplay = memo(({ error, onRetry }) => (
 const SectionHeader = memo(() => (
   <div className="text-center mb-12">
     <div className="inline-flex items-center justify-center mb-3">
-      <span className="h-[1px] w-8 bg-gradient-to-r from-transparent to-[#efc75e]"></span>
-      <span className="text-[#efc75e] text-xs font-bold tracking-widest accent-font uppercase mx-3">
+      <span className="h-[1px] w-8 bg-gradient-to-r from-transparent to-[#00FF94]"></span>
+      <span className="text-[#00FF94] text-xs font-bold tracking-widest accent-font uppercase mx-3">
         LATEST ARTICLES
       </span>
-      <span className="h-[1px] w-8 bg-gradient-to-l from-transparent to-[#efc75e]"></span>
+      <span className="h-[1px] w-8 bg-gradient-to-l from-transparent to-[#00FF94]"></span>
     </div>
     
     <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 heading-font">
-      Fitness <span className="text-[#efc75e]">Knowledge Hub</span>
+      Fitness <span className="text-[#1DD1A1]">Knowledge Hub</span>
     </h2>
     
     <p className="text-gray-400 max-w-2xl mx-auto body-font">
@@ -274,7 +274,7 @@ const ArticlesSection = () => {
   return (
     <section className="py-16 relative">
       {/* Gold accent lines */}
-      <div className="gold-accent-top"></div>
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#00FF94]/30 to-transparent"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header with minimum height to prevent layout shifts */}
@@ -289,7 +289,7 @@ const ArticlesSection = () => {
         <div className="text-center mt-12 h-[60px]">
           <a 
             href="/articles" 
-            className="inline-flex items-center justify-center bg-transparent border-2 border-[#efc75e] text-[#efc75e] px-6 py-3 rounded-md font-bold transition-all duration-300 hover:bg-[#efc75e]/10 button-font tracking-wider uppercase"
+            className="inline-flex items-center justify-center bg-transparent border-2 border-[#00FF94] text-[#00FF94] px-6 py-3 rounded-md font-bold transition-all duration-300 hover:bg-[#00FF94]/10 button-font tracking-wider uppercase"
           >
             View All Articles
             <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -299,7 +299,7 @@ const ArticlesSection = () => {
         </div>
       </div>
       
-      <div className="gold-accent-bottom"></div>
+      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#1DD1A1]/30 to-transparent"></div>
     </section>
   );
 };

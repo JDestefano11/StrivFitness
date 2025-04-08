@@ -17,7 +17,7 @@ const StarRating = memo(({ rating }) => (
       <svg
         key={i}
         className={`w-4 h-4 ${
-          i < Math.floor(rating) ? "text-[#efc75e]" : "text-gray-600"
+          i < Math.floor(rating) ? "text-[#00FF94]" : "text-gray-600"
         }`}
         fill="currentColor"
         viewBox="0 0 20 20"
@@ -30,26 +30,35 @@ const StarRating = memo(({ rating }) => (
 
 // Product Card component
 const ProductCard = memo(({ product }) => {
+  // Function to handle click on product card
+  const handleProductClick = () => {
+    // Navigate to the product detail page
+    window.location.href = `/product/${product._id}`;
+  };
+
   return (
-    <div className="bg-gradient-to-b from-black/60 to-black/80 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 hover:border-[#efc75e] cursor-pointer group transition-all duration-300 relative h-full will-change-transform hover:shadow-[0_0_15px_rgba(239,199,94,0.3)] hover:-translate-y-1">
+    <div 
+      onClick={handleProductClick}
+      className="bg-gradient-to-b from-[#1C1C1E] to-[#111827] backdrop-blur-sm rounded-xl overflow-hidden border border-[#1DD1A1]/30 hover:border-[#00FF94]/70 cursor-pointer group transition-all duration-300 relative h-full will-change-transform hover:shadow-[0_0_15px_rgba(0,255,148,0.3)] hover:-translate-y-1 shadow-md shadow-black/30"
+    >
       {/* Enhanced background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-32 h-32">
-          <div className="absolute top-0 right-0 w-full h-[1px] bg-gradient-to-l from-[#efc75e]/30 to-transparent group-hover:from-[#efc75e]/80"></div>
-          <div className="absolute top-0 right-0 h-full w-[1px] bg-gradient-to-b from-[#efc75e]/30 to-transparent group-hover:from-[#efc75e]/80"></div>
+          <div className="absolute top-0 right-0 w-full h-[1px] bg-gradient-to-l from-[#00FF94]/30 to-transparent group-hover:from-[#00FF94]/80"></div>
+          <div className="absolute top-0 right-0 h-full w-[1px] bg-gradient-to-b from-[#00FF94]/30 to-transparent group-hover:from-[#00FF94]/80"></div>
         </div>
         <div className="absolute bottom-0 left-0 w-32 h-32">
-          <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#efc75e]/30 to-transparent group-hover:from-[#efc75e]/80"></div>
-          <div className="absolute bottom-0 left-0 h-full w-[1px] bg-gradient-to-t from-[#efc75e]/30 to-transparent group-hover:from-[#efc75e]/80"></div>
+          <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#1DD1A1]/30 to-transparent group-hover:from-[#1DD1A1]/80"></div>
+          <div className="absolute bottom-0 left-0 h-full w-[1px] bg-gradient-to-t from-[#1DD1A1]/30 to-transparent group-hover:from-[#1DD1A1]/80"></div>
         </div>
         {/* Enhanced radial gradient on hover */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out bg-gradient-to-br from-[#efc75e]/10 to-transparent"></div>
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out bg-gradient-to-br from-[#00FF94]/10 to-transparent"></div>
       </div>
 
       {/* Discount badge with enhanced styling */}
       {product.discount > 0 && (
         <div className="absolute top-3 left-3 z-20">
-          <span className="bg-[#efc75e] text-black text-xs font-bold px-2 py-1 rounded-md shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+          <span className="bg-gradient-to-r from-[#EF476F] to-[#FF4757] text-white text-xs font-bold px-2 py-1 rounded-md shadow-lg transform group-hover:scale-110 transition-transform duration-300 border border-white/10">
             {product.discount}% OFF
           </span>
         </div>
@@ -74,7 +83,7 @@ const ProductCard = memo(({ product }) => {
 
       {/* Product details with enhanced styling */}
       <div className="p-5">
-        <h3 className="text-white font-bold text-lg mb-2 line-clamp-2 heading-font tracking-wide group-hover:text-[#efc75e] transition-colors duration-300">
+        <h3 className="text-white font-bold text-lg mb-2 line-clamp-2 heading-font tracking-wide group-hover:text-[#00FF94] transition-colors duration-300">
           {product.name}
         </h3>
         <p className="text-gray-400 text-sm mb-3 line-clamp-2 body-font group-hover:text-gray-300 transition-colors duration-300">
@@ -90,36 +99,34 @@ const ProductCard = memo(({ product }) => {
           </span>
         </div>
 
-        {/* Price with enhanced styling - Add to Cart button removed */}
+        {/* Price with enhanced styling - No buttons, PREMIUM badge in bottom right */}
         <div className="flex items-center justify-between">
-          <div className="w-full">
-            {product.discount > 0 ? (
-              <div className="flex items-center">
-                <span className="text-gray-400 text-sm line-through mr-2 body-font">
-                  ${product.price.toFixed(2)}
-                </span>
-                <span className="text-[#efc75e] font-bold text-xl heading-font group-hover:text-white group-hover:drop-shadow-[0_0_3px_rgba(239,199,94,0.8)] transition-all duration-300">
-                  $
-                  {calculateDiscountedPrice(
-                    product.price,
-                    product.discount
-                  ).toFixed(2)}
-                </span>
-                <span className="ml-auto text-xs text-[#efc75e]/80 font-semibold bg-[#efc75e]/10 px-2 py-1 rounded border border-[#efc75e]/20">
-                  PREMIUM
-                </span>
-              </div>
-            ) : (
-              <div className="flex items-center">
-                <span className="text-[#efc75e] font-bold text-xl heading-font group-hover:text-white group-hover:drop-shadow-[0_0_3px_rgba(239,199,94,0.8)] transition-all duration-300">
-                  ${product.price.toFixed(2)}
-                </span>
-                <span className="ml-auto text-xs text-[#efc75e]/80 font-semibold bg-[#efc75e]/10 px-2 py-1 rounded border border-[#efc75e]/20">
-                  PREMIUM
-                </span>
-              </div>
-            )}
-          </div>
+          {product.discount > 0 ? (
+            <div className="flex items-center w-full">
+              <span className="text-gray-400 text-sm line-through mr-2 body-font">
+                ${product.price.toFixed(2)}
+              </span>
+              <span className="text-[#EF476F] font-bold text-xl heading-font group-hover:text-white group-hover:drop-shadow-[0_0_3px_rgba(239,71,111,0.8)] transition-all duration-300">
+                $
+                {calculateDiscountedPrice(
+                  product.price,
+                  product.discount
+                ).toFixed(2)}
+              </span>
+              <span className="ml-auto text-xs text-[#1DD1A1]/80 font-semibold bg-[#0A0F2C]/70 px-2 py-1 rounded border border-[#1DD1A1]/30 uppercase tracking-wider shadow-inner shadow-[#00FF94]/5">
+                PREMIUM
+              </span>
+            </div>
+          ) : (
+            <div className="flex items-center w-full">
+              <span className="text-[#EF476F] font-bold text-xl heading-font group-hover:text-white group-hover:drop-shadow-[0_0_3px_rgba(239,71,111,0.8)] transition-all duration-300">
+                ${product.price.toFixed(2)}
+              </span>
+              <span className="ml-auto text-xs text-[#1DD1A1]/80 font-semibold bg-[#0A0F2C]/70 px-2 py-1 rounded border border-[#1DD1A1]/30 uppercase tracking-wider shadow-inner shadow-[#00FF94]/5">
+                PREMIUM
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -128,15 +135,15 @@ const ProductCard = memo(({ product }) => {
 
 // Loading skeleton component
 const ProductSkeleton = memo(() => (
-  <div className="bg-gradient-to-b from-black/60 to-black/80 rounded-xl overflow-hidden border border-gray-800 h-[400px] relative will-change-transform">
-    <div className="h-64 bg-gray-800/50"></div>
+  <div className="bg-gradient-to-b from-[#1C1C1E] to-[#111827] rounded-xl overflow-hidden border border-[#1DD1A1]/30 h-[400px] relative will-change-transform shadow-md shadow-black/30">
+    <div className="h-64 bg-[#0A0F2C] animate-pulse"></div>
     <div className="p-5">
-      <div className="h-4 bg-gray-700/50 rounded w-3/4 mb-3"></div>
-      <div className="h-3 bg-gray-700/50 rounded w-full mb-2"></div>
-      <div className="h-3 bg-gray-700/50 rounded w-5/6 mb-4"></div>
+      <div className="h-4 bg-[#1DD1A1]/20 rounded w-3/4 mb-3 animate-pulse"></div>
+      <div className="h-3 bg-[#1DD1A1]/20 rounded w-full mb-2 animate-pulse"></div>
+      <div className="h-3 bg-[#1DD1A1]/20 rounded w-5/6 mb-4 animate-pulse"></div>
       <div className="flex justify-between items-center">
-        <div className="h-6 bg-gray-700/50 rounded w-1/3"></div>
-        <div className="h-8 w-8 rounded-full bg-gray-700/50"></div>
+        <div className="h-6 bg-[#1DD1A1]/20 rounded w-1/3 animate-pulse"></div>
+        <div className="h-8 w-20 rounded bg-[#1DD1A1]/20 animate-pulse"></div>
       </div>
     </div>
   </div>
@@ -160,12 +167,12 @@ const ErrorMessage = memo(({ error, onRetry }) => (
 // Section header component
 const SectionHeader = memo(() => (
   <div className="text-center mb-12">
-    <span className="inline-block px-4 py-1 bg-[#efc75e]/20 text-[#efc75e] text-sm font-semibold rounded-full mb-3 border border-[#efc75e]/30 accent-font tracking-wide">
+    <span className="inline-block px-4 py-1 bg-[#00FF94]/20 text-[#00FF94] text-sm font-semibold rounded-full mb-3 border border-[#00FF94]/30 accent-font tracking-wide">
       TOP SELLERS
     </span>
     <h2 className="text-4xl md:text-5xl font-bold mb-3 heading-font tracking-wide">
       <span className="text-white">Elevate Your </span>
-      <span className="text-[#efc75e]">Fitness</span>
+      <span className="text-[#00FF94]">Fitness</span>
     </h2>
     <p className="text-gray-400 max-w-2xl mx-auto body-font">
       Discover our handpicked selection of premium fitness equipment and
@@ -292,7 +299,7 @@ const FeaturedProducts = () => {
         <div className="text-center mt-12">
           <a
             href="/products"
-            className="inline-block border border-[#efc75e] text-[#efc75e] px-6 py-3 rounded-lg font-medium hover:bg-[#efc75e] hover:text-black cursor-pointer transition-colors button-font tracking-wide uppercase"
+            className="inline-block border border-[#00FF94] text-[#00FF94] px-6 py-3 rounded-lg font-medium hover:bg-gradient-to-r hover:from-[#00FF94] hover:to-[#1DD1A1] hover:text-[#0A0F2C] cursor-pointer transition-colors button-font tracking-wide uppercase"
           >
             View All Products
           </a>

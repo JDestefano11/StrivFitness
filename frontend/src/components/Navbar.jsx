@@ -1,11 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import logo from "../../public/assets/STRIV FITNESS LABS (1).png";
 import SaleTopBar from "./SaleTopBar";
+import { CartContext } from "../App";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("");
+  const { cartCount } = useContext(CartContext);
+  
+  // Debug cart count
+  useEffect(() => {
+    console.log('Cart count in Navbar:', cartCount);
+  }, [cartCount]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,10 +39,13 @@ const Navbar = () => {
         <div
           className={`w-full transition-all duration-500 ${
             isScrolled
-              ? "bg-black/95 shadow-[0_4px_30px_rgba(0,0,0,0.5)] backdrop-blur-lg border-b border-[#efc75e]/20"
-              : "bg-gradient-to-r from-black/90 to-black/80 backdrop-blur-sm"
+              ? "bg-[#050B20]/95 shadow-[0_4px_30px_rgba(0,0,0,0.5)] backdrop-blur-lg border-b border-[#1DD1A1]/40"
+              : "bg-gradient-to-r from-black/90 to-[#050B20]/90 backdrop-blur-md border-b border-[#1DD1A1]/30"
           }`}
         >
+          {/* Premium navbar accent line */}
+          <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#00FF94]/70 to-transparent"></div>
+        
           <div className="max-w-7xl mx-auto px-4">
             <div className="flex items-center justify-between h-20">
               {/* Logo - Left aligned with consistent spacing */}
@@ -45,7 +55,7 @@ const Navbar = () => {
                   alt="Logo"
                   className={`h-20 w-auto object-contain transition-all duration-500 ${
                     isScrolled
-                      ? "filter drop-shadow-[0_0_3px_rgba(239,199,94,0.3)]"
+                      ? "filter drop-shadow-[0_0_3px_rgba(29,209,161,0.3)]"
                       : ""
                   }`}
                 />
@@ -56,7 +66,7 @@ const Navbar = () => {
                 {/* Cart Icon - Mobile - Improved */}
                 <a
                   href="/cart"
-                  className="relative text-[#ffffff] hover:text-[#efc75e] transition-all duration-300 cursor-pointer transform hover:scale-110 flex items-center justify-center"
+                  className="relative text-[#ffffff] hover:text-[#00FF94] transition-all duration-300 cursor-pointer transform hover:scale-110 flex items-center justify-center"
                   aria-label="Shopping Cart"
                 >
                   {/* Improved Fitness Cart Icon */}
@@ -64,7 +74,7 @@ const Navbar = () => {
                     xmlns="http://www.w3.org/2000/svg" 
                     className={`h-6 w-6 transition-all duration-300 ${
                       isScrolled
-                        ? "filter drop-shadow-[0_0_3px_rgba(239,199,94,0.7)]"
+                        ? "filter drop-shadow-[0_0_3px_rgba(0,255,148,0.7)]"
                         : ""
                     }`}
                     viewBox="0 0 24 24" 
@@ -84,15 +94,17 @@ const Navbar = () => {
                     <circle cx="15" cy="14" r="1" fill="currentColor" />
                     <path d="M9 14h6" />
                   </svg>
-                  <span className="absolute -top-1.5 -right-1.5 bg-[#efc75e] text-black text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center font-['Rajdhani'] text-[10px]">
-                    0
-                  </span>
+                  {cartCount > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-[#FF4757] text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center font-['Montserrat'] text-[11px] shadow-lg border border-white/20">
+                      {cartCount}
+                    </span>
+                  )}
                 </a>
 
                 {/* Menu Button - Mobile */}
                 <button
                   onClick={toggleMenu}
-                  className="text-[#ffffff] hover:text-[#efc75e] focus:outline-none cursor-pointer transform hover:scale-110 transition-all duration-300 flex items-center justify-center"
+                  className="text-[#ffffff] hover:text-[#1DD1A1] focus:outline-none cursor-pointer transform hover:scale-110 transition-all duration-300 flex items-center justify-center relative group"
                   aria-label="Menu"
                   aria-expanded={isMenuOpen}
                 >
@@ -100,7 +112,7 @@ const Navbar = () => {
                   <svg
                     className={`h-7 w-7 transition-all duration-300 ${
                       isScrolled
-                        ? "filter drop-shadow-[0_0_3px_rgba(239,199,94,0.7)]"
+                        ? "filter drop-shadow-[0_0_3px_rgba(29,209,161,0.7)]"
                         : ""
                     }`}
                     viewBox="0 0 24 24"
@@ -146,13 +158,13 @@ const Navbar = () => {
                   href="/"
                   onMouseEnter={() => handleHover("home")}
                   onMouseLeave={() => handleHover("")}
-                  className={`px-3 py-2 text-[#ffffff] hover:text-[#efc75e] hover:bg-black/70 rounded-md transition-all duration-300 text-sm font-medium cursor-pointer relative overflow-hidden flex items-center justify-center h-10 ${
+                  className={`px-3 py-2 text-[#ffffff] hover:text-[#00FF94] hover:bg-[#1C1C1E]/70 rounded-md transition-all duration-300 text-sm font-medium cursor-pointer relative overflow-hidden flex items-center justify-center h-10 ${
                     activeLink === "home" ? "scale-105" : ""
                   } font-['Rajdhani'] tracking-wide`}
                 >
                   <span className="relative z-10">HOME</span>
                   {activeLink === "home" && (
-                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#efc75e] animate-pulse"></span>
+                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#00FF94] animate-pulse"></span>
                   )}
                 </a>
 
@@ -160,7 +172,7 @@ const Navbar = () => {
                 <div className="relative group flex items-center">
                   <button
                     onMouseEnter={() => handleHover("articles")}
-                    className={`px-3 py-2 text-[#ffffff] hover:text-[#efc75e] hover:bg-black/70 rounded-md transition-all duration-300 text-sm font-medium flex items-center justify-center h-10 cursor-pointer relative overflow-hidden ${
+                    className={`px-3 py-2 text-[#ffffff] hover:text-[#1DD1A1] hover:bg-[#050B20]/70 rounded-md transition-all duration-300 text-sm font-medium flex items-center justify-center h-10 cursor-pointer relative overflow-hidden ${
                       activeLink === "articles" ? "scale-105" : ""
                     } font-['Rajdhani'] tracking-wide`}
                   >
@@ -179,30 +191,30 @@ const Navbar = () => {
                       />
                     </svg>
                     {activeLink === "articles" && (
-                      <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#efc75e] animate-pulse"></span>
+                      <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#1DD1A1] animate-pulse"></span>
                     )}
                   </button>
-                  <div className="absolute left-0 mt-0 top-full w-48 bg-black/90 backdrop-blur-md rounded-md shadow-[0_5px_15px_rgba(0,0,0,0.5)] overflow-hidden z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-95 group-hover:scale-100 border border-[#efc75e]/20">
+                  <div className="absolute left-0 mt-0 top-full w-48 bg-gradient-to-b from-[#050B20]/95 to-black/95 backdrop-blur-md rounded-md shadow-[0_5px_15px_rgba(0,0,0,0.5)] overflow-hidden z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-95 group-hover:scale-100 border border-[#1DD1A1]/30">
                     <a
                       href="/articles/fitness"
-                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-black hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
+                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-[#050B20]/80 hover:text-[#1DD1A1] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
                     >
                       <span className="relative z-10">FITNESS</span>
-                      <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#efc75e]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
+                      <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#00FF94]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
                     </a>
                     <a
                       href="/articles/nutrition"
-                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-black hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
+                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-[#050B20]/80 hover:text-[#1DD1A1] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
                     >
                       <span className="relative z-10">NUTRITION</span>
-                      <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#efc75e]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
+                      <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#00FF94]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
                     </a>
                     <a
                       href="/articles/wellness"
-                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-black hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
+                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-[#050B20]/80 hover:text-[#1DD1A1] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
                     >
                       <span className="relative z-10">WELLNESS</span>
-                      <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#efc75e]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
+                      <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#00FF94]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
                     </a>
                   </div>
                 </div>
@@ -211,7 +223,7 @@ const Navbar = () => {
                 <div className="relative group flex items-center">
                   <button
                     onMouseEnter={() => handleHover("shop")}
-                    className={`px-3 py-2 text-[#ffffff] hover:text-[#efc75e] hover:bg-black/70 rounded-md transition-all duration-300 text-sm font-medium flex items-center justify-center h-10 cursor-pointer relative overflow-hidden ${
+                    className={`px-3 py-2 text-[#ffffff] hover:text-[#1DD1A1] hover:bg-[#050B20]/70 rounded-md transition-all duration-300 text-sm font-medium flex items-center justify-center h-10 cursor-pointer relative overflow-hidden ${
                       activeLink === "shop" ? "scale-105" : ""
                     } font-['Rajdhani'] tracking-wide`}
                   >
@@ -230,38 +242,38 @@ const Navbar = () => {
                       />
                     </svg>
                     {activeLink === "shop" && (
-                      <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#efc75e] animate-pulse"></span>
+                      <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#1DD1A1] animate-pulse"></span>
                     )}
                   </button>
-                  <div className="absolute left-0 mt-0 top-full w-48 bg-black/90 backdrop-blur-md rounded-md shadow-[0_5px_15px_rgba(0,0,0,0.5)] overflow-hidden z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-95 group-hover:scale-100 border border-[#efc75e]/20">
+                  <div className="absolute left-0 mt-0 top-full w-48 bg-gradient-to-b from-[#050B20]/95 to-black/95 backdrop-blur-md rounded-md shadow-[0_5px_15px_rgba(0,0,0,0.5)] overflow-hidden z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-95 group-hover:scale-100 border border-[#1DD1A1]/30">
                     <a
                       href="/shop/all-products"
-                      className="block px-4 py-4 text-base font-bold text-[#efc75e] hover:bg-black hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
+                      className="block px-4 py-4 text-base font-bold text-[#1DD1A1] hover:bg-[#050B20]/80 hover:text-[#1DD1A1] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
                     >
                       <span className="relative z-10">ALL PRODUCTS</span>
-                      <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#efc75e]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
+                      <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#00FF94]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
                     </a>
 
                     <a
                       href="/shop/apparel"
-                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-black hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
+                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-[#050B20]/80 hover:text-[#1DD1A1] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
                     >
                       <span className="relative z-10">APPAREL</span>
-                      <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#efc75e]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
+                      <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#00FF94]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
                     </a>
                     <a
                       href="/shop/equipment"
-                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-black hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
+                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-[#050B20]/80 hover:text-[#1DD1A1] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
                     >
                       <span className="relative z-10">EQUIPMENT</span>
-                      <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#efc75e]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
+                      <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#00FF94]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
                     </a>
                     <a
                       href="/shop/accessories"
-                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-black hover:text-[#efc75e] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
+                      className="block px-4 py-3 text-sm text-[#ffffff] hover:bg-[#050B20]/80 hover:text-[#1DD1A1] w-full cursor-pointer transition-all duration-200 relative overflow-hidden group/item font-['Rajdhani'] tracking-wide flex items-center"
                     >
                       <span className="relative z-10">ACCESSORIES</span>
-                      <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#efc75e]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
+                      <span className="absolute left-0 w-0 h-full bg-gradient-to-r from-[#00FF94]/20 to-transparent top-0 group-hover/item:w-full transition-all duration-300"></span>
                     </a>
                   </div>
                 </div>
@@ -270,13 +282,13 @@ const Navbar = () => {
                   href="/about"
                   onMouseEnter={() => handleHover("about")}
                   onMouseLeave={() => handleHover("")}
-                  className={`px-3 py-2 text-[#ffffff] hover:text-[#efc75e] hover:bg-black/70 rounded-md transition-all duration-300 text-sm font-medium cursor-pointer relative overflow-hidden flex items-center justify-center h-10 ${
+                  className={`px-3 py-2 text-[#ffffff] hover:text-[#00FF94] hover:bg-[#1C1C1E]/70 rounded-md transition-all duration-300 text-sm font-medium cursor-pointer relative overflow-hidden flex items-center justify-center h-10 ${
                     activeLink === "about" ? "scale-105" : ""
                   } font-['Rajdhani'] tracking-wide`}
                 >
                   <span className="relative z-10">ABOUT</span>
                   {activeLink === "about" && (
-                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#efc75e] animate-pulse"></span>
+                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#00FF94] animate-pulse"></span>
                   )}
                 </a>
 
@@ -284,13 +296,13 @@ const Navbar = () => {
                   href="/contact"
                   onMouseEnter={() => handleHover("contact")}
                   onMouseLeave={() => handleHover("")}
-                  className={`px-3 py-2 text-[#ffffff] hover:text-[#efc75e] hover:bg-black/70 rounded-md transition-all duration-300 text-sm font-medium cursor-pointer relative overflow-hidden flex items-center justify-center h-10 ${
+                  className={`px-3 py-2 text-[#ffffff] hover:text-[#00FF94] hover:bg-[#1C1C1E]/70 rounded-md transition-all duration-300 text-sm font-medium cursor-pointer relative overflow-hidden flex items-center justify-center h-10 ${
                     activeLink === "contact" ? "scale-105" : ""
                   } font-['Rajdhani'] tracking-wide`}
                 >
                   <span className="relative z-10">CONTACT</span>
                   {activeLink === "contact" && (
-                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#efc75e] animate-pulse"></span>
+                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#00FF94] animate-pulse"></span>
                   )}
                 </a>
               </div>
@@ -302,8 +314,8 @@ const Navbar = () => {
                   <a href="/login" className="relative h-full flex items-center justify-center">
                     <button className="relative group cursor-pointer overflow-hidden rounded-xl h-12 w-40 flex justify-center items-center">
                       {/* Background and glow effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-[#efc75e] to-[#f5d78e] rounded-xl"></div>
-                      <div className="absolute -inset-[1px] bg-gradient-to-r from-[#efc75e] via-[#ffffff] to-[#efc75e] rounded-xl opacity-0 group-hover:opacity-70 blur-[2px] transition-all duration-300 group-hover:duration-200 animate-gradient-x group-hover:animate-gradient-x-fast"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#00FF94] to-[#1DD1A1] rounded-xl"></div>
+                      <div className="absolute -inset-[1px] bg-gradient-to-r from-[#00FF94] via-[#FFFFFF] to-[#1DD1A1] rounded-xl opacity-0 group-hover:opacity-70 blur-[2px] transition-all duration-300 group-hover:duration-200 animate-gradient-x group-hover:animate-gradient-x-fast"></div>
                       
                       {/* Shine effect */}
                       <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300 bg-[linear-gradient(135deg,rgba(255,255,255,0.8)_0%,transparent_50%,transparent_100%)]"></div>
@@ -338,7 +350,7 @@ const Navbar = () => {
                 {/* Cart Icon - Desktop - Improved */}
                 <a
                   href="/cart"
-                  className="relative text-[#ffffff] hover:text-[#efc75e] transition-all duration-300 cursor-pointer transform hover:scale-110 flex items-center justify-center"
+                  className="relative text-[#ffffff] hover:text-[#00FF94] transition-all duration-300 cursor-pointer transform hover:scale-110 flex items-center justify-center"
                   aria-label="Shopping Cart"
                 >
                   {/* Improved Fitness Cart Icon */}
@@ -346,7 +358,7 @@ const Navbar = () => {
                     xmlns="http://www.w3.org/2000/svg" 
                     className={`h-6 w-6 transition-all duration-300 ${
                       isScrolled
-                        ? "filter drop-shadow-[0_0_3px_rgba(239,199,94,0.7)]"
+                        ? "filter drop-shadow-[0_0_3px_rgba(0,255,148,0.7)]"
                         : ""
                     }`}
                     viewBox="0 0 24 24" 
@@ -366,9 +378,11 @@ const Navbar = () => {
                     <circle cx="15" cy="14" r="1" fill="currentColor" />
                     <path d="M9 14h6" />
                   </svg>
-                  <span className="absolute -top-1.5 -right-1.5 bg-[#efc75e] text-black text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center font-['Rajdhani'] text-[10px]">
-                    0
-                  </span>
+                  {cartCount > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-[#FF4757] text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center font-['Montserrat'] text-[11px] shadow-lg border border-white/20">
+                      {cartCount}
+                    </span>
+                  )}
                 </a>
               </div>
             </div>
@@ -377,40 +391,40 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`md:hidden bg-[#222222]/95 backdrop-blur-lg overflow-hidden transition-all duration-300 ${
+          className={`md:hidden bg-[#1C1C1E]/95 backdrop-blur-lg overflow-hidden transition-all duration-300 ${
             isMenuOpen
-              ? "max-h-[500px] border-b border-[#efc75e]/10 shadow-[0_4px_30px_rgba(0,0,0,0.3)]"
+              ? "max-h-[500px] border-b border-[#00FF94]/10 shadow-[0_4px_30px_rgba(0,0,0,0.3)]"
               : "max-h-0"
           }`}
         >
           <div className="px-4 py-2 space-y-1">
             <a
               href="/"
-              className="block px-3 py-2 text-[#ffffff] hover:text-[#efc75e] hover:bg-[#333333]/50 rounded-md transition-all duration-200 text-base font-medium cursor-pointer font-['Rajdhani'] tracking-wide flex items-center"
+              className="block px-3 py-2 text-[#ffffff] hover:text-[#00FF94] hover:bg-[#1C1C1E]/70 rounded-md transition-all duration-200 text-base font-medium cursor-pointer font-['Rajdhani'] tracking-wide flex items-center"
             >
               <span>HOME</span>
             </a>
             <a
               href="/articles"
-              className="block px-3 py-2 text-[#ffffff] hover:text-[#efc75e] hover:bg-[#333333]/50 rounded-md transition-all duration-200 text-base font-medium cursor-pointer font-['Rajdhani'] tracking-wide flex items-center"
+              className="block px-3 py-2 text-[#ffffff] hover:text-[#00FF94] hover:bg-[#1C1C1E]/70 rounded-md transition-all duration-200 text-base font-medium cursor-pointer font-['Rajdhani'] tracking-wide flex items-center"
             >
               <span>ARTICLES</span>
             </a>
             <a
               href="/shop"
-              className="block px-3 py-2 text-[#ffffff] hover:text-[#efc75e] hover:bg-[#333333]/50 rounded-md transition-all duration-200 text-base font-medium cursor-pointer font-['Rajdhani'] tracking-wide flex items-center"
+              className="block px-3 py-2 text-[#ffffff] hover:text-[#00FF94] hover:bg-[#1C1C1E]/70 rounded-md transition-all duration-200 text-base font-medium cursor-pointer font-['Rajdhani'] tracking-wide flex items-center"
             >
               <span>SHOP</span>
             </a>
             <a
               href="/about"
-              className="block px-3 py-2 text-[#ffffff] hover:text-[#efc75e] hover:bg-[#333333]/50 rounded-md transition-all duration-200 text-base font-medium cursor-pointer font-['Rajdhani'] tracking-wide flex items-center"
+              className="block px-3 py-2 text-[#ffffff] hover:text-[#00FF94] hover:bg-[#1C1C1E]/70 rounded-md transition-all duration-200 text-base font-medium cursor-pointer font-['Rajdhani'] tracking-wide flex items-center"
             >
               <span>ABOUT</span>
             </a>
             <a
               href="/contact"
-              className="block px-3 py-2 text-[#ffffff] hover:text-[#efc75e] hover:bg-[#333333]/50 rounded-md transition-all duration-200 text-base font-medium cursor-pointer font-['Rajdhani'] tracking-wide flex items-center"
+              className="block px-3 py-2 text-[#ffffff] hover:text-[#00FF94] hover:bg-[#1C1C1E]/70 rounded-md transition-all duration-200 text-base font-medium cursor-pointer font-['Rajdhani'] tracking-wide flex items-center"
             >
               <span>CONTACT</span>
             </a>
@@ -420,10 +434,10 @@ const Navbar = () => {
               className="block mt-4 relative overflow-hidden group"
             >
               <div
-                className="bg-gradient-to-r from-[#efc75e] to-[#f5d78e] text-[#222222] font-bold py-3 px-4 
+                className="bg-gradient-to-r from-[#00FF94] to-[#1DD1A1] text-[#0A0F2C] font-bold py-3 px-4 
                 relative z-10 font-['Bebas_Neue'] tracking-widest text-lg flex items-center justify-center
                 clip-path-join-button transform hover:scale-105 transition-all duration-300
-                shadow-[0_4px_10px_rgba(239,199,94,0.3)] hover:shadow-[0_6px_15px_rgba(239,199,94,0.5)]"
+                shadow-[0_4px_10px_rgba(0,255,148,0.3)] hover:shadow-[0_6px_15px_rgba(0,255,148,0.5)]"
               >
                 <span className="relative z-10 flex items-center justify-center w-full">
                   JOIN NOW
@@ -446,7 +460,7 @@ const Navbar = () => {
 
               {/* Animated border effect */}
               <div
-                className="absolute -inset-[2px] bg-gradient-to-r from-[#efc75e] via-[#ffffff] to-[#efc75e] 
+                className="absolute -inset-[2px] bg-gradient-to-r from-[#1DD1A1] via-[#ffffff] to-[#00FF94] 
                 opacity-70 blur-[2px] group-hover:opacity-100 group-hover:blur-[3px] transition-all duration-300 -z-10
                 clip-path-join-button animate-gradient-x"
               ></div>
@@ -512,6 +526,16 @@ const Navbar = () => {
         .animate-gradient-x-fast {
           animation: gradient-x-fast 2s ease infinite;
           background-size: 200% 200%;
+        }
+      
+        @keyframes pulse-once {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.2); }
+          100% { transform: scale(1); }
+        }
+        
+        .animate-pulse-once {
+          animation: pulse-once 0.5s ease-in-out;
         }
       `}</style>
     </>

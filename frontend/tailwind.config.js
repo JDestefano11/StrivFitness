@@ -14,6 +14,9 @@ export default {
         'gradient-x': 'gradient-x 3s ease infinite',
         'gradient-x-fast': 'gradient-x 1.5s ease infinite',
         'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'gradient-slow': 'gradient-y 8s ease infinite',
+        'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'pulse-slow-delayed': 'pulse 6s 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
         'gradient-x': {
@@ -22,6 +25,14 @@ export default {
           },
           '50%': {
             'background-position': '100% 50%',
+          },
+        },
+        'gradient-y': {
+          '0%, 100%': {
+            'background-position': '50% 0%',
+          },
+          '50%': {
+            'background-position': '50% 100%',
           },
         },
       },
