@@ -260,10 +260,15 @@ const ProductDetail = () => {
 
   return (
     <div className="product-detail-page min-h-screen relative overflow-hidden">
-      {/* Override global styles */}
+      {/* Enhanced global styles */}
       <style jsx global>{`
         body {
           background: #050B20 !important;
+          background-image: 
+            radial-gradient(circle at 20% 35%, rgba(29, 209, 161, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 75% 44%, rgba(0, 255, 148, 0.1) 0%, transparent 40%),
+            linear-gradient(to bottom, #050B20, #0A0F2C) !important;
+          background-attachment: fixed !important;
         }
         body::before, body::after {
           display: none !important;
@@ -434,7 +439,7 @@ const ProductDetail = () => {
             
             {/* Trust signals under photos - styled to match right content */}
             <div className="mt-13 mb-5">
-              <div className="inline-flex items-center justify-between w-full bg-gradient-to-r from-[#1C1C1E]/70 to-[#0A0F2C]/60 rounded-lg py-5 px-6 backdrop-blur-sm border border-[#1DD1A1]/20 shadow-inner shadow-[#00FF94]/5">
+              <div className="inline-flex items-center justify-between w-full bg-gradient-to-b from-[#111827] to-black/90 backdrop-blur-md rounded-lg py-5 px-6 border border-[#1DD1A1]/30 hover:border-[#00FF94]/50 transition-all duration-300 shadow-lg shadow-black/30">
                 <div className="flex items-center">
                   <div className="w-12 h-12 rounded-full bg-[#0A0F2C]/70 flex items-center justify-center border border-[#1DD1A1]/40 mr-3">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#00FF94]" viewBox="0 0 20 20" fill="currentColor">
@@ -476,7 +481,7 @@ const ProductDetail = () => {
           </div>
 
           {/* Product Info - Right Column */}
-          <div className="w-full lg:w-1/2 lg:sticky lg:top-24 self-start bg-[#0A0F2C]/60 backdrop-blur-sm p-6 rounded-xl border border-gray-800 shadow-xl shadow-[#0A0F2C]/30 relative" style={{height: "fit-content"}}>
+          <div className="w-full lg:w-1/2 lg:sticky lg:top-24 self-start bg-gradient-to-b from-[#111827] to-black/90 backdrop-blur-md p-6 rounded-xl border border-[#1DD1A1]/30 hover:border-[#00FF94]/50 overflow-hidden transition-all duration-300 shadow-lg shadow-black/30 relative" style={{height: "fit-content"}}>
             {/* Favorite and share buttons - top right */}
             <div className="absolute top-4 right-4 flex space-x-3">
               <button className="text-gray-400 hover:text-[#00FF94] transition-colors cursor-pointer" title="Add to Wishlist">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import logo from "../../public/assets/STRIV FITNESS LABS (1).png";
+import logo from "../../public/assets/STRIV FITNESS LABS (3).png";
 import SaleTopBar from "./SaleTopBar";
 import { CartContext } from "../App";
 
@@ -8,10 +8,10 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("");
   const { cartCount } = useContext(CartContext);
-  
+
   // Debug cart count
   useEffect(() => {
-    console.log('Cart count in Navbar:', cartCount);
+    console.log("Cart count in Navbar:", cartCount);
   }, [cartCount]);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const Navbar = () => {
         >
           {/* Premium navbar accent line */}
           <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#00FF94]/70 to-transparent"></div>
-        
+
           <div className="max-w-7xl mx-auto px-4">
             <div className="flex items-center justify-between h-20">
               {/* Logo - Left aligned with consistent spacing */}
@@ -70,18 +70,18 @@ const Navbar = () => {
                   aria-label="Shopping Cart"
                 >
                   {/* Improved Fitness Cart Icon */}
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
                     className={`h-6 w-6 transition-all duration-300 ${
                       isScrolled
                         ? "filter drop-shadow-[0_0_3px_rgba(0,255,148,0.7)]"
                         : ""
                     }`}
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="1.75" 
-                    strokeLinecap="round" 
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.75"
+                    strokeLinecap="round"
                     strokeLinejoin="round"
                   >
                     {/* Base of the shopping bag */}
@@ -138,11 +138,11 @@ const Navbar = () => {
                         <path d="M4 6h16" />
                         <circle cx="4" cy="6" r="1.5" fill="currentColor" />
                         <circle cx="20" cy="6" r="1.5" fill="currentColor" />
-                        
+
                         <path d="M4 12h16" />
                         <circle cx="4" cy="12" r="1.5" fill="currentColor" />
                         <circle cx="20" cy="12" r="1.5" fill="currentColor" />
-                        
+
                         <path d="M4 18h16" />
                         <circle cx="4" cy="18" r="1.5" fill="currentColor" />
                         <circle cx="20" cy="18" r="1.5" fill="currentColor" />
@@ -311,15 +311,18 @@ const Navbar = () => {
               <div className="hidden md:flex items-center space-x-6">
                 {/* Join Now Button - Premium rounded design */}
                 <div className="relative h-full flex items-center">
-                  <a href="/login" className="relative h-full flex items-center justify-center">
+                  <a
+                    href="/login"
+                    className="relative h-full flex items-center justify-center"
+                  >
                     <button className="relative group cursor-pointer overflow-hidden rounded-xl h-12 w-40 flex justify-center items-center">
                       {/* Background and glow effect */}
                       <div className="absolute inset-0 bg-gradient-to-r from-[#00FF94] to-[#1DD1A1] rounded-xl"></div>
                       <div className="absolute -inset-[1px] bg-gradient-to-r from-[#00FF94] via-[#FFFFFF] to-[#1DD1A1] rounded-xl opacity-0 group-hover:opacity-70 blur-[2px] transition-all duration-300 group-hover:duration-200 animate-gradient-x group-hover:animate-gradient-x-fast"></div>
-                      
+
                       {/* Shine effect */}
                       <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300 bg-[linear-gradient(135deg,rgba(255,255,255,0.8)_0%,transparent_50%,transparent_100%)]"></div>
-                      
+
                       {/* Content with hover animation */}
                       <div className="relative z-10 flex items-center justify-center w-full h-full px-4 py-2 font-['Bebas_Neue'] tracking-widest text-lg text-[#222222] group-hover:text-[#111111] transition-all duration-300 group-hover:scale-105">
                         <span className="flex items-center">
@@ -340,7 +343,7 @@ const Navbar = () => {
                           </svg>
                         </span>
                       </div>
-                      
+
                       {/* Shadow for 3D effect */}
                       <div className="absolute -bottom-2 left-[10%] right-[10%] h-[6px] bg-black opacity-0 group-hover:opacity-20 blur-[3px] transition-all duration-300 transform group-hover:translate-y-[2px] rounded-full"></div>
                     </button>
@@ -354,18 +357,18 @@ const Navbar = () => {
                   aria-label="Shopping Cart"
                 >
                   {/* Improved Fitness Cart Icon */}
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
                     className={`h-6 w-6 transition-all duration-300 ${
                       isScrolled
                         ? "filter drop-shadow-[0_0_3px_rgba(0,255,148,0.7)]"
                         : ""
                     }`}
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="1.75" 
-                    strokeLinecap="round" 
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.75"
+                    strokeLinecap="round"
                     strokeLinejoin="round"
                   >
                     {/* Base of the shopping bag */}
@@ -527,13 +530,19 @@ const Navbar = () => {
           animation: gradient-x-fast 2s ease infinite;
           background-size: 200% 200%;
         }
-      
+
         @keyframes pulse-once {
-          0% { transform: scale(1); }
-          50% { transform: scale(1.2); }
-          100% { transform: scale(1); }
+          0% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.2);
+          }
+          100% {
+            transform: scale(1);
+          }
         }
-        
+
         .animate-pulse-once {
           animation: pulse-once 0.5s ease-in-out;
         }
