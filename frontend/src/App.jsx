@@ -1,29 +1,16 @@
 import React, { useEffect, lazy, Suspense, createContext } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import SaleTopBar from "./components/SaleTopBar";
-import HeroSection from "./components/Home Page/HeroSection";
 import Footer from "./components/Footer";
 import { useCart } from "./hooks/useCart";
 
-// Lazy load non-critical components
-const FeaturedProducts = lazy(() =>
-  import("./components/Home Page/FeaturedProducts")
-);
-const WhyChooseUs = lazy(() => import("./components/Home Page/WhyChooseUs"));
-const ArticlesSection = lazy(() =>
-  import("./components/Home Page/ArticlesSection")
-);
-const TrustBadgeSection = lazy(() =>
-  import("./components/Home Page/TrustBadgeSection")
-);
-const NewsletterSection = lazy(() =>
-  import("./components/Home Page/NewsletterSection")
-);
-
 // Lazy load pages
+const Home = lazy(() => import("./pages/Home"));
 const Collections = lazy(() => import("./components/Collections/Collections"));
 const ProductDetail = lazy(() => import("./components/Product/ProductDetail"));
 const CartPage = lazy(() => import("./components/Cart/CartPage"));
+
 
 // Simple loading fallback that doesn't cause layout shifts
 const LoadingFallback = () => <div className="h-96 bg-black"></div>;
@@ -110,58 +97,50 @@ const App = () => {
     };
   }, []);
 
-  // Get the current path from window.location
-  const currentPath = window.location.pathname;
-  const isShopPage = currentPath.startsWith('/shop/');
-  const isProductPage = currentPath.startsWith('/product/');
-  const isCartPage = currentPath.startsWith('/cart');
-
   return (
-    <CartProvider>
-      <div className="min-h-screen w-full relative overflow-x-hidden">
-        {/* Main content */}
-        <SaleTopBar />
-        <Navbar />
+    <Router>
+      <CartProvider>
+        <div className="min-h-screen w-full relative overflow-x-hidden bg-[#0A0F2C]">
+          {/* Main content */}
+          <SaleTopBar />
+          <Navbar />
+          
+          <Routes>
+            {/* Home page route */}
+            <Route path="/" element={
+              <Suspense fallback={<LoadingFallback />}>
+                <Home />
+              </Suspense>
+            } />
+            
+            {/* Shop routes */}
+            <Route path="/shop/*" element={
+              <Suspense fallback={<LoadingFallback />}>
+                <Collections />
+              </Suspense>
+            } />
+            
+            {/* Product detail route */}
+            <Route path="/product/:productId" element={
+              <Suspense fallback={<LoadingFallback />}>
+                <ProductDetail />
+              </Suspense>
+            } />
+            
+            {/* Cart route */}
+            <Route path="/cart" element={
+              <Suspense fallback={<LoadingFallback />}>
+                <CartPage />
+              </Suspense>
+            } />
+            
       
-      {isShopPage ? (
-        <Suspense fallback={<LoadingFallback />}>
-          <Collections />
-        </Suspense>
-      ) : isProductPage ? (
-        <Suspense fallback={<LoadingFallback />}>
-          <ProductDetail />
-        </Suspense>
-      ) : isCartPage ? (
-        <Suspense fallback={<LoadingFallback />}>
-          <CartPage />
-        </Suspense>
-      ) : (
-        <main className="section-container">
-          {/* Critical path components loaded immediately */}
-          <HeroSection />
-
-          {/* Non-critical components lazy loaded */}
-          <Suspense fallback={<LoadingFallback />}>
-            <FeaturedProducts />
-          </Suspense>
-          <Suspense fallback={<LoadingFallback />}>
-            <WhyChooseUs />
-          </Suspense>
-          <Suspense fallback={<LoadingFallback />}>
-            <ArticlesSection />
-          </Suspense>
-          <Suspense fallback={<LoadingFallback />}>
-            <TrustBadgeSection />
-          </Suspense>
-          <Suspense fallback={<LoadingFallback />}>
-            <NewsletterSection />
-          </Suspense>
-        </main>
-      )}
-      
-      <Footer />
-      </div>
-    </CartProvider>
+          </Routes>
+          
+          <Footer />
+        </div>
+      </CartProvider>
+    </Router>
   );
 };
 
