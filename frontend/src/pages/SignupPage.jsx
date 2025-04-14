@@ -182,13 +182,6 @@ const SignupPage = () => {
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#00FF94]/40 to-transparent"></div>
       </div>
       
-      {/* Add these styles to tailwind.config.js */}
-      <style jsx>{`
-        .bg-gradient-radial {
-          background-image: radial-gradient(circle, var(--tw-gradient-stops));
-        }
-      `}</style>
-      
       <div className="flex flex-col lg:flex-row w-full max-w-[1200px] mx-auto px-4 py-8 md:py-12 lg:py-16 xl:py-20 pb-8 relative z-1 mt-12 md:mt-4 lg:mt-0">
         {/* Left Content Section - Hidden on mobile, visible on lg screens and up */}
         <div className="hidden lg:flex w-full lg:w-1/2 p-4 lg:p-8 xl:p-16 flex-col justify-center">

@@ -101,9 +101,7 @@ const WhyChooseUs = () => {
 
   return (
     <section className="py-20 md:py-24 relative overflow-hidden">
-      {/* Brand accent lines */}
-      <div className="gold-accent-top"></div>
-      <div className="gold-accent-bottom"></div>
+
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
         {/* Section title */}

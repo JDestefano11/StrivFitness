@@ -273,8 +273,7 @@ const ArticlesSection = () => {
 
   return (
     <section className="py-16 relative">
-      {/* Gold accent lines */}
-      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#00FF94]/30 to-transparent"></div>
+
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header with minimum height to prevent layout shifts */}
@@ -299,7 +298,7 @@ const ArticlesSection = () => {
         </div>
       </div>
       
-      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#1DD1A1]/30 to-transparent"></div>
+
     </section>
   );
 };

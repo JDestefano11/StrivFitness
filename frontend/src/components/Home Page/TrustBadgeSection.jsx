@@ -73,12 +73,10 @@ const TrustBadgeSection = () => {
   ];
 
   return (
-    <section className="py-14 relative border-t border-b border-gray-800 bg-[#0A0F2C]/30 backdrop-blur-sm">
+    <section className="py-14 relative bg-[#0A0F2C]/30 backdrop-blur-sm">
       {/* Background image with overlay */}
       <div className="absolute inset-0 opacity-10 bg-cover bg-center" style={{ backgroundImage: "url('/assets/fitness-pattern.jpg')" }}></div>
-      {/* Enhanced gold accents */}
-      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#00FF94]/30 to-transparent"></div>
-      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#1DD1A1]/30 to-transparent"></div>
+
       
       <div className="container mx-auto px-4">
         {/* Section title */}

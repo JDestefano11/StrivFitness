@@ -49,8 +49,8 @@ body {
   padding: 0;
   background: #050B20;
   background: 
-    linear-gradient(125deg, #050B20 0%, #0A0F2C 25%, rgba(10, 15, 44, 0.8) 50%, #0A0F2C 75%, #050B20 100%),
-    linear-gradient(235deg, transparent 0%, rgba(0, 255, 148, 0.15) 25%, rgba(0, 255, 148, 0.2) 50%, rgba(0, 255, 148, 0.15) 75%, transparent 100%);
+    linear-gradient(125deg, #050B20 0%, #0A0F2C 25%, rgba(10, 15, 44, 0.7) 50%, #0A0F2C 75%, #050B20 100%),
+    linear-gradient(to right, transparent 20%, rgba(0, 255, 148, 0.9) 50%, transparent 80%);
   background-attachment: fixed;
   color: #fff;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -147,8 +147,8 @@ button, .button-font, .accent-font {
   top: 0;
   left: 0;
   width: 100%;
-  height: 1px;
-  background: linear-gradient(to right, transparent, rgba(0, 255, 148, 0.5), transparent);
+  height: 0px; /* Changed from 1px to 0px to hide the line */
+  background: transparent;
   z-index: 10;
 }
 
@@ -157,8 +157,8 @@ button, .button-font, .accent-font {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 1px;
-  background: linear-gradient(to right, transparent, rgba(0, 255, 148, 0.5), transparent);
+  height: 0px; /* Changed from 1px to 0px to hide the line */
+  background: transparent;
   z-index: 10;
 }
 
