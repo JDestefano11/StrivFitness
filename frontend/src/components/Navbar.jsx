@@ -312,7 +312,7 @@ const Navbar = () => {
                 {/* Join Now Button - Premium rounded design */}
                 <div className="relative h-full flex items-center">
                   <a
-                    href="/login"
+                    href="/signup"
                     className="relative h-full flex items-center justify-center"
                   >
                     <button className="relative group cursor-pointer overflow-hidden rounded-xl h-12 w-40 flex justify-center items-center">
@@ -433,7 +433,7 @@ const Navbar = () => {
             </a>
             {/* Updated Mobile Join Now Button */}
             <a
-              href="/login"
+              href="/signup"
               className="block mt-4 relative overflow-hidden group"
             >
               <div

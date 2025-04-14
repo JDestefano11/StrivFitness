@@ -6,7 +6,7 @@ import { generateTokens } from '../middleware/authMiddleware.js';
 // Register new user
 export const signup = async (req, res) => {
     try {
-        const { username, password, email, firstName, lastName } = req.body;
+        const { username, password, confirmPassword, email, firstName, lastName } = req.body;
 
         // Check if user already exists
         const existingUser = await User.findOne({ $or: [{ username }, { email }] });
@@ -15,6 +15,11 @@ export const signup = async (req, res) => {
             return res.status(400).json({
                 message: existingUser.email === email ? 'Email already exists' : 'Username already exists'
             });
+        }
+
+        // Check if passwords match
+        if (password !== confirmPassword) {
+            return res.status(400).json({ message: 'Passwords do not match' });
         }
 
         // Create new user and save
@@ -39,7 +44,7 @@ export const signup = async (req, res) => {
 // Register new admin user
 export const signupAdmin = async (req, res) => {
     try {
-        const { username, password, email, firstName, lastName, adminSecret } = req.body;
+        const { username, password, confirmPassword, email, firstName, lastName, adminSecret } = req.body;
 
         // Verify admin secret - in a real app, use a strong secret from env variables
         const secretKey = process.env.ADMIN_SECRET_KEY || 'admin-secret-key';
@@ -54,6 +59,11 @@ export const signupAdmin = async (req, res) => {
             return res.status(400).json({
                 message: existingUser.email === email ? 'Email already exists' : 'Username already exists'
             });
+        }
+        
+        // Check if passwords match
+        if (password !== confirmPassword) {
+            return res.status(400).json({ message: 'Passwords do not match' });
         }
 
         // Create new admin user and save

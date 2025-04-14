@@ -17,6 +17,9 @@ export default {
         'gradient-slow': 'gradient-y 8s ease infinite',
         'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'pulse-slow-delayed': 'pulse 6s 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'pulse': 'pulse 15s infinite alternate',
+        'pulse-delay': 'pulse-delay 18s infinite alternate-reverse',
+        'pulse-fast-anim': 'pulse-fast 12s infinite alternate',
       },
       keyframes: {
         'gradient-x': {
@@ -34,6 +37,21 @@ export default {
           '50%': {
             'background-position': '50% 100%',
           },
+        },
+        'pulse': {
+          '0%': { opacity: '0.7' },
+          '50%': { opacity: '0.9' },
+          '100%': { opacity: '0.7' },
+        },
+        'pulse-delay': {
+          '0%': { opacity: '0.6', transform: 'scale(0.98)' },
+          '50%': { opacity: '0.8', transform: 'scale(1.02)' },
+          '100%': { opacity: '0.6', transform: 'scale(0.98)' },
+        },
+        'pulse-fast': {
+          '0%': { opacity: '0.5', transform: 'scale(0.96)' },
+          '50%': { opacity: '0.7', transform: 'scale(1.04)' },
+          '100%': { opacity: '0.5', transform: 'scale(0.96)' },
         },
       },
     },

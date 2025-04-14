@@ -10,6 +10,7 @@ const Home = lazy(() => import("./pages/Home"));
 const Collections = lazy(() => import("./components/Collections/Collections"));
 const ProductDetail = lazy(() => import("./components/Product/ProductDetail"));
 const CartPage = lazy(() => import("./components/Cart/CartPage"));
+const SignupPage = lazy(() => import("./pages/SignupPage"));
 
 
 // Simple loading fallback that doesn't cause layout shifts
@@ -100,7 +101,8 @@ const App = () => {
   return (
     <Router>
       <CartProvider>
-        <div className="min-h-screen w-full relative overflow-x-hidden bg-[#0A0F2C]">
+        <div className="min-h-screen w-full relative overflow-x-hidden">
+          
           {/* Main content */}
           <SaleTopBar />
           <Navbar />
@@ -131,6 +133,13 @@ const App = () => {
             <Route path="/cart" element={
               <Suspense fallback={<LoadingFallback />}>
                 <CartPage />
+              </Suspense>
+            } />
+            
+            {/* Signup route */}
+            <Route path="/signup" element={
+              <Suspense fallback={<LoadingFallback />}>
+                <SignupPage />
               </Suspense>
             } />
             
